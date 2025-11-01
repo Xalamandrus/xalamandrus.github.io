@@ -1,11 +1,456 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="pl">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>Xalamandrus | Portfolio</title>
+<style>
+:root{
+  --bg-dark:#0d1117; --bg-card:#161b22;
+  --blue:#58a6ff; --red:#ff4747;
+  --text:#c9d1d9; --border:#30363d;
+}
+*{box-sizing:border-box;margin:0;padding:0}
+html{scroll-behavior:smooth}
+body{
+  font-family:"Segoe UI",Arial,sans-serif;
+  background:radial-gradient(ellipse at top,#0d1117 0%,#050608 100%);
+  color:var(--text);
+  overflow-x:hidden;
+}
+
+/* Ambient glow */
+body::before{
+  content:""; position:fixed; inset:0; z-index:0; pointer-events:none;
+  background:
+    radial-gradient(600px circle at var(--x,50%) var(--y,50%), rgba(88,166,255,0.12), transparent 60%),
+    radial-gradient(400px circle at var(--x2,20%) var(--y2,80%), rgba(255,71,71,0.10), transparent 70%);
+  filter:blur(80px);
+}
+/* Grain/scan overlay (very subtle) */
+body::after{
+  content:""; position:fixed; inset:0; z-index:0; pointer-events:none;
+  background:
+    repeating-linear-gradient(0deg, rgba(255,255,255,0.015) 0 1px, transparent 1px 3px);
+  mix-blend-mode:soft-light; opacity:.35;
+}
+
+/* Scroll progress bar */
+.progress{
+  position:fixed; top:0; left:0; height:3px; width:0%;
+  background:linear-gradient(90deg,var(--blue),var(--red),var(--blue));
+  background-size:200% 100%;
+  animation:progflow 6s linear infinite;
+  z-index:1200; box-shadow:0 0 10px rgba(88,166,255,.6);
+}
+@keyframes progflow{0%{background-position:0 0}100%{background-position:200% 0}}
+
+/* Particles */
+#particles{position:fixed; inset:0; z-index:0; pointer-events:none; filter:blur(1px) brightness(.9);}
+
+/* Navbar */
+.navbar{
+  position:fixed; top:0; left:0; right:0; z-index:1000;
+  display:flex; align-items:center; justify-content:space-between;
+  gap:16px; padding:14px 22px;
+  background:rgba(22,27,34,0.3);
+  backdrop-filter:blur(20px) saturate(180%);
+  transition:background .25s ease, box-shadow .25s ease;
+  box-shadow:0 0 25px rgba(0,0,0,.4);
+  border-bottom:1px solid rgba(255,255,255,0.05);
+}
+.navbar.scrolled{background:rgba(22,27,34,.9); box-shadow:0 6px 18px rgba(0,0,0,.25);}
+.brand{display:flex; flex-direction:column; align-items:flex-start}
+.brand span:first-child{font-weight:600; font-size:1.1rem}
+.brand span:last-child{font-size:.8rem; color:var(--blue); opacity:.9; letter-spacing:.3px}
+.nav-links{display:flex; gap:14px; align-items:center}
+.nav-links a{
+  color:var(--text); text-decoration:none; font-size:.95rem;
+  padding:8px 10px; border-radius:10px; position:relative;
+  transition:transform .15s ease, background .15s ease, color .15s ease;
+}
+.nav-links a:hover{background:rgba(88,166,255,.08)}
+.nav-links a.active{color:var(--blue)}
+.nav-btn{display:none; width:40px; height:40px; align-items:center; justify-content:center;
+  border:1px solid var(--border); border-radius:10px; background:rgba(22,27,34,.6); color:#9da5b4; cursor:pointer}
+@media(max-width:900px){
+  .nav-btn{display:flex}
+  .nav-links{position:absolute; top:60px; right:12px; left:12px; display:none; flex-direction:column; gap:8px; padding:12px;
+    background:rgba(22,27,34,.8); backdrop-filter:blur(16px); border:1px solid var(--border); border-radius:12px}
+  .nav-links.open{display:flex}
+}
+
+/* Hero */
+.hero{position:relative; height:100vh; overflow:hidden; z-index:1}
+.slide{position:absolute; inset:0; background-size:cover; background-position:center;
+  opacity:0; transform:scale(1.2); animation:slideshow 16s infinite}
+.slide:nth-child(1){background-image:url("assets/img/slay.png"); animation-delay:0s}
+.slide:nth-child(2){background-image:url("assets/img/obeer.png"); animation-delay:8s}
+@keyframes slideshow{
+  0%{opacity:0; transform:scale(1.2)}
+  10%{opacity:1; transform:scale(1)}
+  40%{opacity:1}
+  50%{opacity:0; transform:scale(1.1)}
+  100%{opacity:0; transform:scale(1.1)}
+}
+.hero-overlay{
+  position:absolute; inset:0; display:flex; align-items:flex-end; justify-content:center; padding-bottom:100px;
+  background:linear-gradient(to bottom,rgba(13,17,23,.3),rgba(13,17,23,.9) 90%);
+  backdrop-filter:blur(10px);
+}
+.hero-title{text-align:center; opacity:0; animation:fadein 2s ease forwards 1.5s}
+.hero-title h1{font-size:3rem; margin-bottom:.3em; text-shadow:0 0 12px rgba(88,166,255,.4);}
+.hero-title p{
+  font-size:1.2rem; background:linear-gradient(270deg,var(--blue),var(--red),var(--blue));
+  -webkit-background-clip:text; -webkit-text-fill-color:transparent;
+  background-size:300%; animation:gradientFlow 6s linear infinite;
+}
+@keyframes gradientFlow{from{background-position:100% 0} to{background-position:0 0}}
+@keyframes fadein{to{opacity:1}}
+
+/* Sections */
+.wrapper{padding-top:80px}
+section{
+  position:relative; width:100%;
+  padding:110px 0 130px; text-align:center; overflow:hidden;
+  background:rgba(13,17,23,.45);
+  backdrop-filter:blur(16px) saturate(180%);
+  box-shadow:inset 0 0 40px rgba(0,0,0,.35);
+  opacity:0; transform:translateY(40px);
+  transition:opacity .8s ease, transform .8s ease;
+}
+section.visible{opacity:1; transform:translateY(0)}
+section + section{margin-top:80px}
+section::before{
+  content:""; position:absolute; top:0; left:0; width:100%; height:1px;
+  background:linear-gradient(90deg,rgba(255,255,255,0.08),transparent 80%);
+}
+/* Stable LED bottom line */
+section::after{
+  content:""; position:absolute; bottom:0; left:50%; transform:translateX(-50%);
+  width:70%; height:3px; border-radius:3px;
+  background:linear-gradient(90deg,var(--blue),var(--red),var(--blue));
+  background-size:200% 100%;
+  animation:glowpulse 5s ease-in-out infinite;
+  opacity:.75; filter:drop-shadow(0 0 8px rgba(88,166,255,.6));
+}
+@keyframes glowpulse{
+  0%,100%{background-position:0 0; opacity:.6; filter:drop-shadow(0 0 6px rgba(88,166,255,.5))}
+  50%{background-position:100% 0; opacity:1; filter:drop-shadow(0 0 14px rgba(88,166,255,.9))}
+}
+
+/* Headings */
+h2{
+  font-size:2rem; font-weight:600; margin-bottom:50px; position:relative; display:inline-block; color:var(--text);
+  text-shadow:0 0 10px rgba(88,166,255,.35);
+}
+h2::after{
+  content:""; position:absolute; bottom:-14px; left:50%; transform:translateX(-50%);
+  width:100px; height:4px; border-radius:2px;
+  background:linear-gradient(90deg,var(--blue),var(--red),var(--blue));
+  background-size:300%; animation:glowtitle 3s ease-in-out infinite;
+  box-shadow:0 0 12px rgba(88,166,255,.6);
+}
+@keyframes glowtitle{0%,100%{background-position:0% 50%} 50%{background-position:100% 50%}}
+
+/* About */
+.about-content{
+  display:flex; flex-wrap:wrap; align-items:center; justify-content:center; gap:60px;
+  max-width:1000px; margin:0 auto; text-align:left;
+}
+.avatar{flex:0 0 220px; width:220px; height:220px; border-radius:50%; overflow:hidden; box-shadow:0 0 25px rgba(88,166,255,.25);}
+.avatar img{width:100%; height:100%; object-fit:cover}
+.bio{flex:1; min-width:280px}
+.bio p{line-height:1.6; margin-bottom:20px}
+.tags{display:flex; flex-wrap:wrap; gap:10px}
+.tag{
+  background:rgba(88,166,255,.1); border:1px solid rgba(88,166,255,.2);
+  border-radius:8px; padding:6px 12px; font-size:.9rem; color:var(--blue); transition:.2s;
+}
+.tag:hover{background:rgba(88,166,255,.25)}
+
+/* Categories */
+.categories{
+  display:grid; grid-template-columns:repeat(auto-fit,minmax(260px,1fr));
+  gap:40px; max-width:1000px; margin:0 auto;
+}
+.category-card{
+  background:linear-gradient(145deg,#141820,#0d1117);
+  border:1px solid rgba(255,255,255,0.08);
+  border-radius:18px; box-shadow:0 10px 25px rgba(0,0,0,.3);
+  padding:60px 20px; transition:transform .25s ease, box-shadow .25s ease;
+  cursor:pointer; position:relative; overflow:hidden;
+  transform-style:preserve-3d; will-change:transform;
+}
+.category-card::before{
+  content:""; position:absolute; inset:0;
+  background:radial-gradient(circle at top left,rgba(88,166,255,0.20),transparent 60%);
+  opacity:0; transition:opacity .25s ease;
+}
+.category-card:hover::before{opacity:1}
+.category-card:hover{box-shadow:0 0 35px rgba(88,166,255,0.25)}
+.category-icon{font-size:2rem; margin-bottom:20px; color:var(--blue)}
+.category-card h3{font-size:1.4rem; margin-bottom:12px}
+.category-card p{color:#9da5b4; font-size:.95rem}
+
+/* Tools */
+#tools{padding-top:120px; padding-bottom:120px}
+.tools-wrap{
+  display:flex; align-items:center; justify-content:center; gap:80px; flex-wrap:wrap;
+  text-align:left; max-width:1100px; margin:0 auto;
+}
+.tools-desc{flex:1; min-width:280px; max-width:420px; font-size:1rem; line-height:1.6}
+.tools-slider{
+  position:relative; width:460px; overflow:hidden; height:120px;
+  display:flex; align-items:center; justify-content:center;
+  border-radius:20px; background:rgba(22,27,34,0.35);
+  box-shadow:inset 0 0 25px rgba(0,0,0,.4), 0 10px 25px rgba(0,0,0,.25);
+  transition:transform .3s ease, box-shadow .3s ease;
+}
+.tools-slider:hover{transform:translateY(-4px); box-shadow:0 15px 35px rgba(88,166,255,0.25)}
+.tools-track{display:flex; align-items:center; gap:30px; animation:scrollTools 20s linear infinite}
+.tool{flex:0 0 auto; cursor:pointer; position:relative}
+.tool img{
+  width:64px; height:64px; object-fit:contain;
+  filter:brightness(0) invert(1) opacity(.85);
+  transition:transform .25s ease, filter .25s ease;
+}
+.tool:hover img{transform:scale(1.2); filter:drop-shadow(0 0 6px rgba(88,166,255,.8)) brightness(1)}
+@keyframes scrollTools{from{transform:translateX(0)} to{transform:translateX(-50%)}}
+
+/* Contact */
+#contact a{color:var(--blue)} #contact a:hover{text-decoration:underline}
+footer{text-align:center; padding:40px 20px; color:#8b949e; background:rgba(13,17,23,.4); backdrop-filter:blur(10px)}
+
+/* Reduced motion */
+@media (prefers-reduced-motion: reduce){
+  *{animation:none !important; transition:none !important}
+}
+</style>
 </head>
 <body>
-    Test
+
+<div class="progress" id="progress"></div>
+<canvas id="particles"></canvas>
+
+<nav class="navbar" id="navbar">
+  <div class="brand magnetic">
+    <span>⚡ Xalamandrus</span>
+    <span>Tech Artist & Shader Wizard</span>
+  </div>
+  <button class="nav-btn magnetic" id="navBtn" aria-label="Menu" data-ripple>≡</button>
+  <div class="nav-links" id="navLinks">
+    <a href="#home" class="active magnetic" data-ripple>Home</a>
+    <a href="#about" class="magnetic" data-ripple>O mnie</a>
+    <a href="#categories" class="magnetic" data-ripple>Kategorie</a>
+    <a href="#tools" class="magnetic" data-ripple>Narzędzia</a>
+    <a href="#contact" class="magnetic" data-ripple>Kontakt</a>
+  </div>
+</nav>
+
+<div class="hero" id="home">
+  <div class="slide"></div>
+  <div class="slide"></div>
+  <div class="hero-overlay">
+    <div class="hero-title">
+      <h1>Xalamandrus</h1>
+      <p>Tech Artist • Unity Developer • Shader &amp; VFX Specialist</p>
+    </div>
+  </div>
+</div>
+
+<div class="wrapper">
+  <section id="about">
+    <h2>O mnie</h2>
+    <div class="about-content">
+      <div class="avatar magnetic"><img src="assets/img/avatar.jpg" alt="Avatar"></div>
+      <div class="bio">
+        <p>Jestem Tech Artistą i programistą Unity łączącym techniczne myślenie z artystyczną wizją. Specjalizuję się w shaderach, VFX oraz narzędziach gameplayowych. Tworzę systemy, które wyglądają jak milion dolców i działają nawet na tosterze.</p>
+        <div class="tags">
+          <div class="tag">Shader Graph</div>
+          <div class="tag">URP</div>
+          <div class="tag">C# Tools</div>
+          <div class="tag">VFX Graph</div>
+          <div class="tag">Compute Shaders</div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section id="categories">
+    <h2>Kategorie</h2>
+    <div class="categories">
+      <div class="category-card tilt magnetic" data-ripple onclick="location.href='#games'">
+        <div class="category-icon">🎮</div>
+        <h3>Projekty Gier</h3>
+        <p>Portfolio moich gier, w tym tytuły akademickie i autorskie.</p>
+      </div>
+      <div class="category-card tilt magnetic" data-ripple onclick="location.href='#vfx'">
+        <div class="category-icon">✨</div>
+        <h3>VFX &amp; Shadery</h3>
+        <p>Eksperymenty z Shader Graph, niestandardowe efekty i wizualne systemy.</p>
+      </div>
+      <div class="category-card tilt magnetic" data-ripple onclick="location.href='#tools'">
+        <div class="category-icon">🛠️</div>
+        <h3>Narzędzia &amp; Systemy</h3>
+        <p>Moje autorskie narzędzia edytora i frameworki do Unity.</p>
+      </div>
+    </div>
+  </section>
+
+  <section id="tools">
+    <h2>Narzędzia</h2>
+    <div class="tools-wrap">
+      <div class="tools-desc" id="desc">Kliknij ikonę, aby zobaczyć mój opis umiejętności.</div>
+      <div class="tools-slider tilt magnetic">
+        <div class="tools-track">
+          <div class="tool" data-tool="unity"><img src="assets/icons/unity.svg" alt="Unity"></div>
+          <div class="tool" data-tool="ue5"><img src="assets/icons/ue5.svg" alt="UE5"></div>
+          <div class="tool" data-tool="blender"><img src="assets/icons/blender.svg" alt="Blender"></div>
+          <div class="tool" data-tool="krita"><img src="assets/icons/krita.svg" alt="Krita"></div>
+          <div class="tool" data-tool="github"><img src="assets/icons/github.svg" alt="GitHub"></div>
+          <div class="tool" data-tool="gitlab"><img src="assets/icons/gitlab.svg" alt="GitLab"></div>
+          <!-- loop dupes -->
+          <div class="tool" data-tool="unity"><img src="assets/icons/unity.svg" alt="Unity"></div>
+          <div class="tool" data-tool="ue5"><img src="assets/icons/ue5.svg" alt="UE5"></div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section id="contact">
+    <h2>Kontakt</h2>
+    <p style="margin-top:24px">
+      📧 <a href="mailto:xalamandrus@gmail.com" class="magnetic" data-ripple>xalamandrus@gmail.com</a><br>
+      💼 <a href="https://github.com/xalamandrus" target="_blank" rel="noopener" class="magnetic" data-ripple>github.com/xalamandrus</a>
+    </p>
+  </section>
+
+  <footer>© 2025 Xalamandrus — Wszystkie prawa zastrzeżone.</footer>
+</div>
+
+<script>
+// ===== BASIC NAV =====
+const navbar=document.getElementById('navbar');
+const navBtn=document.getElementById('navBtn');
+const navLinks=document.getElementById('navLinks');
+const linkEls=[...navLinks.querySelectorAll('a')];
+const toggleScrolled=()=>{window.scrollY>12?navbar.classList.add('scrolled'):navbar.classList.remove('scrolled')};
+document.addEventListener('scroll',toggleScrolled,{passive:true}); toggleScrolled();
+navBtn.addEventListener('click',()=>navLinks.classList.toggle('open'));
+linkEls.forEach(a=>a.addEventListener('click',()=>navLinks.classList.remove('open')));
+
+// ===== TOOLS DESCRIPTIONS =====
+const desc=document.getElementById("desc");
+const texts={
+  unity:"Tworzę shadery, narzędzia edytora i systemy gameplayowe w Unity (URP, Shader Graph, C#).",
+  ue5:"Blueprints, Material Editor i Niagara — prototypy gameplayu i efekty.",
+  blender:"Modelowanie, UV, bake i pipeline eksportu do silników gier.",
+  krita:"Maluję teksturowane UI i concept arty z użyciem Krita Brush Engine.",
+  github:"Codzienna praca z Git, branchowaniem i GitHub Pages.",
+  gitlab:"CI/CD oraz zarządzanie repozytoriami zespołów i buildami."
+};
+document.querySelectorAll(".tool").forEach(icon=>{
+  icon.addEventListener("click",()=>{
+    const key=icon.dataset.tool;
+    desc.textContent=texts[key]||"Kliknij ikonę, aby zobaczyć opis.";
+  });
+});
+
+// ===== AMBIENT LIGHT FOLLOW =====
+document.addEventListener('mousemove',e=>{
+  document.body.style.setProperty('--x', `${e.clientX}px`);
+  document.body.style.setProperty('--y', `${e.clientY}px`);
+  document.body.style.setProperty('--x2', `${window.innerWidth - e.clientX}px`);
+  document.body.style.setProperty('--y2', `${window.innerHeight - e.clientY}px`);
+});
+
+// ===== FADE-IN ON SCROLL =====
+const observer=new IntersectionObserver(entries=>{
+  entries.forEach(e=>{ if(e.isIntersecting) e.target.classList.add('visible'); });
+},{threshold:0.15});
+document.querySelectorAll('section').forEach(sec=>observer.observe(sec));
+
+// ===== PARTICLES (lightweight) =====
+const c=document.getElementById('particles'); const ctx=c.getContext('2d');
+let parts=Array.from({length:50},()=>({
+  x:Math.random()*innerWidth, y:Math.random()*innerHeight,
+  s:Math.random()*1.2+0.5, dx:(Math.random()-0.5)*0.15, dy:(Math.random()-0.5)*0.15
+}));
+function draw(){
+  c.width=innerWidth; c.height=innerHeight;
+  ctx.clearRect(0,0,c.width,c.height);
+  ctx.fillStyle='rgba(88,166,255,0.15)';
+  for(const p of parts){
+    p.x+=p.dx; p.y+=p.dy;
+    if(p.x<0||p.x>c.width) p.dx*=-1;
+    if(p.y<0||p.y>c.height) p.dy*=-1;
+    ctx.beginPath(); ctx.arc(p.x,p.y,p.s,0,Math.PI*2); ctx.fill();
+  }
+  requestAnimationFrame(draw);
+}
+draw();
+
+// ===== SCROLL PROGRESS BAR =====
+const progress=document.getElementById('progress');
+function updateProgress(){
+  const h=document.documentElement;
+  const max=h.scrollHeight - h.clientHeight;
+  const val=(window.scrollY / max) * 100;
+  progress.style.width=val + '%';
+}
+document.addEventListener('scroll',updateProgress,{passive:true}); updateProgress();
+
+// ===== MAGNETIC HOVER + 3D TILT =====
+const magneticEls=[...document.querySelectorAll('.magnetic')];
+magneticEls.forEach(el=>{
+  el.addEventListener('mousemove',e=>{
+    const r=el.getBoundingClientRect();
+    const strength=8; // px
+    const x=((e.clientX - r.left)/r.width - 0.5) * strength;
+    const y=((e.clientY - r.top)/r.height - 0.5) * strength;
+    el.style.transform=`translate(${x}px, ${y}px)`;
+  });
+  el.addEventListener('mouseleave',()=>{ el.style.transform='translate(0,0)'; });
+});
+// 3D tilt for .tilt
+const tiltEls=[...document.querySelectorAll('.tilt')];
+tiltEls.forEach(card=>{
+  card.addEventListener('mousemove',e=>{
+    const b=card.getBoundingClientRect();
+    const px=(e.clientX - b.left)/b.width - 0.5;
+    const py=(e.clientY - b.top)/b.height - 0.5;
+    const rotX=py * -8; const rotY=px * 12;
+    card.style.transform=`rotateX(${rotX}deg) rotateY(${rotY}deg) translateZ(0)`;
+  });
+  card.addEventListener('mouseleave',()=>{
+    card.style.transform='rotateX(0) rotateY(0) translateZ(0)';
+  });
+});
+
+// ===== RIPPLE ON CLICK =====
+document.addEventListener('click',e=>{
+  const target=e.target.closest('[data-ripple]');
+  if(!target) return;
+  const rect=target.getBoundingClientRect();
+  const circle=document.createElement('span');
+  const d=Math.max(rect.width,rect.height);
+  circle.style.width=circle.style.height=d+'px';
+  circle.style.position='absolute';
+  circle.style.left=(e.clientX - rect.left - d/2)+'px';
+  circle.style.top=(e.clientY - rect.top - d/2)+'px';
+  circle.style.borderRadius='50%';
+  circle.style.background='rgba(88,166,255,0.25)';
+  circle.style.boxShadow='0 0 10px rgba(88,166,255,0.6)';
+  circle.style.pointerEvents='none';
+  circle.style.transform='scale(0)';
+  circle.style.opacity='1';
+  circle.style.transition='transform .45s ease, opacity .6s ease';
+  target.style.position='relative';
+  target.appendChild(circle);
+  requestAnimationFrame(()=>{ circle.style.transform='scale(1)'; circle.style.opacity='0';});
+  setTimeout(()=>circle.remove(), 650);
+},{passive:true});
+</script>
 </body>
 </html>

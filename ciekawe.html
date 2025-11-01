@@ -1,0 +1,194 @@
+<!DOCTYPE html>
+<html lang="pl">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>Xalamandrus | Dynamic Portfolio</title>
+<style>
+:root {
+  --hue: 210;
+  --sat: 80%;
+  --light: 50%;
+  --text: #c9d1d9;
+  --bg: hsl(var(--hue), var(--sat), 6%);
+}
+*{box-sizing:border-box;margin:0;padding:0}
+html{scroll-behavior:smooth}
+body {
+  font-family: "Segoe UI", Arial, sans-serif;
+  color: var(--text);
+  overflow-x: hidden;
+  background: radial-gradient(ellipse at center, hsl(var(--hue),var(--sat),10%) 0%, #050608 100%);
+  transition: background 0.3s ease;
+}
+
+/* Dynamic background layer */
+body::before {
+  content: "";
+  position: fixed;
+  inset: 0;
+  z-index: 0;
+  pointer-events: none;
+  background: radial-gradient(800px circle at var(--x,50%) var(--y,50%),
+    hsla(calc(var(--hue) + 40), 100%, 65%, 0.15), transparent 70%),
+  radial-gradient(600px circle at var(--x2,80%) var(--y2,20%),
+    hsla(calc(var(--hue) - 40), 100%, 60%, 0.12), transparent 70%);
+  filter: blur(100px);
+  transition: background 0.3s ease;
+}
+
+/* Animated pulse overlay */
+body::after {
+  content:"";
+  position:fixed;
+  inset:0;
+  background:radial-gradient(circle at 50% 50%, hsla(var(--hue),100%,60%,.06), transparent 70%);
+  mix-blend-mode:overlay;
+  animation:pulse 8s ease-in-out infinite;
+}
+@keyframes pulse {
+  0%,100% {opacity:.4; transform:scale(1);}
+  50% {opacity:.9; transform:scale(1.05);}
+}
+
+/* Navbar */
+.navbar {
+  position:fixed; top:0; left:0; right:0; z-index:10;
+  display:flex; justify-content:space-between; align-items:center;
+  padding:14px 24px;
+  background:rgba(0,0,0,.3);
+  backdrop-filter:blur(20px);
+  border-bottom:1px solid rgba(255,255,255,.1);
+  transition:background .3s ease;
+}
+.navbar.scrolled {background:rgba(0,0,0,.6);}
+.navbar a {color:var(--text); margin-left:16px; text-decoration:none; transition:.3s;}
+.navbar a:hover {color:hsl(var(--hue),100%,70%);}
+.brand span:first-child{font-weight:600; font-size:1.1rem;}
+.brand span:last-child{font-size:.8rem; color:hsl(var(--hue),100%,70%);}
+
+/* Hero */
+.hero {height:100vh; display:flex; flex-direction:column; align-items:center; justify-content:center; text-align:center; position:relative; z-index:1;}
+.hero h1 {font-size:3rem; text-shadow:0 0 15px hsla(var(--hue),100%,70%,.4);}
+.hero p {
+  margin-top:10px;
+  font-size:1.1rem;
+  background:linear-gradient(90deg,hsl(var(--hue),100%,70%),hsl(calc(var(--hue)+90),100%,70%),hsl(var(--hue),100%,70%));
+  -webkit-background-clip:text; -webkit-text-fill-color:transparent;
+  background-size:200%;
+  animation:gradientflow 5s linear infinite;
+}
+@keyframes gradientflow {to{background-position:200% 0}}
+
+/* Sections */
+section {padding:100px 0;text-align:center;position:relative;z-index:1;transition:color .3s ease;}
+h2 {font-size:2rem;margin-bottom:40px;color:hsl(var(--hue),100%,80%);text-shadow:0 0 12px hsla(var(--hue),100%,60%,.5);}
+p {max-width:800px;margin:0 auto;font-size:1.05rem;line-height:1.7;}
+
+/* Tools carousel */
+.tools-slider{width:100%;overflow:hidden;margin-top:60px;}
+.tools-track{display:flex;align-items:center;gap:60px;animation:scrollTools 25s linear infinite;width:max-content;}
+.tool img{width:64px;height:64px;filter:brightness(0) invert(1) opacity(.8);transition:.3s;}
+.tool:hover img{filter:brightness(1) invert(1) drop-shadow(0 0 10px hsl(var(--hue),100%,70%));transform:scale(1.2);}
+@keyframes scrollTools{from{transform:translateX(0)}to{transform:translateX(-50%)}}
+
+/* Categories */
+.categories{display:grid;grid-template-columns:repeat(auto-fit,minmax(260px,1fr));gap:40px;max-width:1000px;margin:0 auto;}
+.category-card{background:rgba(0,0,0,.3);border:1px solid rgba(255,255,255,.08);border-radius:18px;padding:60px 20px;transition:.3s;cursor:pointer;}
+.category-card:hover{box-shadow:0 0 25px hsla(var(--hue),100%,60%,.3);transform:translateY(-4px);}
+.category-icon{font-size:2rem;margin-bottom:20px;color:hsl(var(--hue),100%,70%);}
+
+/* Footer */
+footer{text-align:center;padding:40px 20px;color:#8b949e;background:rgba(0,0,0,.4);border-top:1px solid rgba(255,255,255,.05);}
+</style>
+</head>
+<body>
+<canvas id="particles"></canvas>
+
+<nav class="navbar" id="navbar">
+  <div class="brand"><span>⚡ Xalamandrus</span><span>Tech Artist & Shader Wizard</span></div>
+  <div>
+    <a href="#home">Home</a>
+    <a href="#about">O mnie</a>
+    <a href="#categories">Kategorie</a>
+  </div>
+</nav>
+
+<section class="hero" id="home">
+  <h1>Xalamandrus</h1>
+  <p>Tech Artist • Unity Developer • Shader & VFX Specialist</p>
+</section>
+
+<section id="about">
+  <h2>O mnie</h2>
+  <p>Jestem Tech Artistą łączącym techniczne myślenie z artystyczną wizją. Specjalizuję się w shaderach, VFX i narzędziach gameplayowych.</p>
+  <div class="tools-slider">
+    <div class="tools-track">
+      <div class="tool"><img src="assets/icons/unity.svg"></div>
+      <div class="tool"><img src="assets/icons/ue5.svg"></div>
+      <div class="tool"><img src="assets/icons/blender.svg"></div>
+      <div class="tool"><img src="assets/icons/krita.svg"></div>
+      <div class="tool"><img src="assets/icons/github.svg"></div>
+      <div class="tool"><img src="assets/icons/gitlab.svg"></div>
+      <div class="tool"><img src="assets/icons/unity.svg"></div>
+      <div class="tool"><img src="assets/icons/ue5.svg"></div>
+    </div>
+  </div>
+</section>
+
+<section id="categories">
+  <h2>Kategorie</h2>
+  <div class="categories">
+    <div class="category-card"><div class="category-icon">🎮</div><h3>Projekty Gier</h3></div>
+    <div class="category-card"><div class="category-icon">✨</div><h3>VFX & Shadery</h3></div>
+    <div class="category-card"><div class="category-icon">🛠️</div><h3>Narzędzia & Systemy</h3></div>
+  </div>
+</section>
+
+<footer>© 2025 Xalamandrus — dynamiczny chaos w idealnej równowadze.</footer>
+
+<script>
+/* Navbar scroll */
+const navbar=document.getElementById('navbar');
+document.addEventListener('scroll',()=>{window.scrollY>12?navbar.classList.add('scrolled'):navbar.classList.remove('scrolled');});
+
+/* Mouse reactive colors */
+document.addEventListener('mousemove',e=>{
+  document.body.style.setProperty('--x',`${e.clientX}px`);
+  document.body.style.setProperty('--y',`${e.clientY}px`);
+  document.body.style.setProperty('--x2',`${window.innerWidth-e.clientX}px`);
+  document.body.style.setProperty('--y2',`${window.innerHeight-e.clientY}px`);
+  const hue=Math.round((e.clientX/window.innerWidth)*360);
+  document.documentElement.style.setProperty('--hue',hue);
+});
+
+/* Scroll reactive saturation */
+document.addEventListener('scroll',()=>{
+  const s=50+(window.scrollY/window.innerHeight)*50;
+  document.documentElement.style.setProperty('--sat',`${s}%`);
+});
+
+/* Time of day color shift */
+const hour=new Date().getHours();
+let baseHue=hour<12?200:hour<18?160:340; // rano=niebieski, popołudnie=złoty, noc=fiolet
+document.documentElement.style.setProperty('--hue',baseHue);
+
+/* Subtle moving particles */
+const c=document.getElementById('particles'),ctx=c.getContext('2d');
+let p=Array.from({length:60},()=>({x:Math.random()*innerWidth,y:Math.random()*innerHeight,s:Math.random()*1.5+0.3,dx:(Math.random()-0.5)*0.2,dy:(Math.random()-0.5)*0.2}));
+function draw(){
+  c.width=innerWidth;c.height=innerHeight;
+  ctx.clearRect(0,0,c.width,c.height);
+  ctx.fillStyle=`hsla(${getComputedStyle(document.documentElement).getPropertyValue('--hue')},100%,70%,0.15)`;
+  for(const a of p){
+    a.x+=a.dx;a.y+=a.dy;
+    if(a.x<0||a.x>c.width)a.dx*=-1;
+    if(a.y<0||a.y>c.height)a.dy*=-1;
+    ctx.beginPath();ctx.arc(a.x,a.y,a.s,0,Math.PI*2);ctx.fill();
+  }
+  requestAnimationFrame(draw);
+}
+draw();
+</script>
+</body>
+</html>

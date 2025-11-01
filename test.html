@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html lang="pl">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>Xalamandrus | SVG Blur Mask + Outline + Inner Glow</title>
+<style>
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+  html, body { width: 100%; height: 100%; overflow: hidden; }
+  body {
+    background: url("assets/img/obeer.png") no-repeat center center / cover;
+    position: relative;
+  }
+  svg { position: absolute; inset: 0; width: 100%; height: 100%; pointer-events:none; }
+</style>
+</head>
+<body>
+
+<svg viewBox="0 0 1920 1080" preserveAspectRatio="xMidYMid slice" aria-hidden="true">
+  <defs>
+    <!-- Blur tła w literach -->
+    <filter id="blurFilter" x="-20%" y="-20%" width="140%" height="140%">
+      <feGaussianBlur stdDeviation="20" />
+    </filter>
+
+    <!-- Miękki blur dla glow -->
+    <filter id="innerGlowFilter" x="-30%" y="-30%" width="160%" height="160%">
+      <feGaussianBlur stdDeviation="6" />
+    </filter>
+
+    <!-- Maska liter -->
+    <mask id="textMask">
+      <rect width="100%" height="100%" fill="black"/>
+      <text x="50%" y="50%"
+            text-anchor="middle"
+            dominant-baseline="middle"
+            fill="white"
+            font-family="Montserrat, Arial, sans-serif"
+            font-weight="900"
+            font-size="180">
+        Xalamandrus
+      </text>
+    </mask>
+  </defs>
+
+  <!-- Rozmyte tło widoczne tylko wewnątrz liter -->
+  <image href="assets/img/obeer.png"
+         x="0" y="0" width="100%" height="100%"
+         preserveAspectRatio="xMidYMid slice"
+         filter="url(#blurFilter)"
+         mask="url(#textMask)" />
+
+  <!-- Wewnętrzne podświetlenie (inner glow) -->
+  <g mask="url(#textMask)">
+    <text x="50%" y="50%"
+          text-anchor="middle"
+          dominant-baseline="middle"
+          fill="none"
+          stroke="white"
+          stroke-width="8"          
+          stroke-linejoin="round"
+          opacity="0.2"
+          filter="url(#innerGlowFilter)"
+          font-family="Montserrat, Arial, sans-serif"
+          font-weight="900"
+          font-size="180">
+      Xalamandrus
+    </text>
+  </g>
+
+  <!-- Cienka biała ramka na wierzchu -->
+  <text x="50%" y="50%"
+        text-anchor="middle"
+        dominant-baseline="middle"
+        fill="none"
+        stroke="white"
+        stroke-width="1"
+        stroke-opacity="0.7"
+        stroke-linejoin="round"
+        font-family="Montserrat, Arial, sans-serif"
+        font-weight="900"
+        font-size="180">
+    Xalamandrus
+  </text>
+</svg>
+
+</body>
+</html>
