@@ -1,0 +1,107 @@
+
+/* === SHOWCASE: pełnoekranowe okno z obrazem === */
+
+.showcase
+{
+    position: relative;
+    height: 100vh;
+    width: 100%;
+    overflow: hidden;
+    z-index: 1;
+}
+
+.showcase-media
+{
+    position: absolute;
+    inset: 0;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    object-position: center;
+}
+
+.showcase-overlay
+{
+    position: absolute;
+    inset: 0;
+    background: linear-gradient(
+        to bottom,
+        rgba(23, 13, 13, 0) 0%,
+        rgba(33, 82, 156, 0) 50%,
+        rgba(0, 0, 0, 0.35) 100%
+    );
+    pointer-events: none;
+}
+
+.showcase-caption
+{
+    position: absolute;
+    left: 50%;
+    bottom: clamp(32px, 8vh, 96px);
+    transform: translateX(-50%);
+    text-align: center;
+    padding: 0 16px;
+}
+
+.showcase-caption h1
+{
+    font-size: clamp(28px, 4.2vw, 56px);
+    font-weight: 700;
+    letter-spacing: .3px;
+    margin: 0 0 6px;
+    text-shadow: 0 0 12px rgba(255, 255, 255, 0.25);
+}
+
+.showcase-caption p
+{
+    font-size: clamp(14px, 1.4vw, 20px);
+    margin: 0;
+    color: var(--text);
+    opacity: .95;
+    text-shadow: 0 0 10px rgba(0,0,0,.45);
+}
+
+.line-fade
+{
+    display:block;
+    width: clamp(260px, 62vw, 720px);
+    height: 2px;
+    margin: 8px auto 10px;
+    border-radius: 2px;
+    background: linear-gradient(
+        to right,
+        rgba(255,255,255,0) 0%,
+        rgba(255,255,255,0.65) 50%,
+        rgba(255,255,255,0) 100%
+        );
+    box-shadow: 0 0 10px rgba(0,0,0,.25) inset, 0 0 8px rgba(255,255,255,.08);
+    opacity: .9;
+}
+
+/* */
+
+.title-outline{
+    position: relative;
+    font-size: clamp(42px, 6vw, 80px);
+    font-weight: 800;
+    margin: 0;
+    background: linear-gradient(
+        to bottom,
+        #ffffff 0%,
+        rgba(255,255,255,0) 100%
+        );
+    -webkit-background-clip: text;
+            background-clip: text;
+    -webkit-text-fill-color: transparent;
+}
+
+.title-outline::before{
+    content: attr(data-text);
+    position: absolute;
+    inset: 0;
+    color: transparent;
+    -webkit-text-stroke: 1px rgba(255,255,255,.35);
+    text-shadow: none;
+    mix-blend-mode: screen;
+    pointer-events: none;
+}
