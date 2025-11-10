@@ -71,7 +71,7 @@
 
 .nav-links a.active
 {
-    color: var(--blue);
+    color: #fff;
 }
 
 .nav-btn

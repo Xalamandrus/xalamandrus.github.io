@@ -8,6 +8,8 @@
     <link rel="stylesheet" href="home.css">
     <link rel="stylesheet" href="navbar.css">
 
+    <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@300;400;500;700&display=swap" rel="stylesheet">
+
     <title>Xalamandrus | Portfolio</title>
 </head>
 <body>
@@ -15,10 +17,11 @@
     <nav class="navbar" id="navbar">
         <div class="brand">
             <span>Xalamandrus</span>
-            <span>Game Developer & Tech Artist</span>
+            <span>Game Developer</span>
         </div>
         <button class="nav-btn" id="navBtn">≡</button>
         <div class="nav-links" id="navLinks">
+            <a href="#" class="active">Home</a>
             <a href="#">Highlights</a>
             <a href="#">About</a>
             <a href="#">Projects</a>
@@ -26,15 +29,25 @@
         </div>
     </nav>
 
-<section class="showcase" id="home">
-  <img class="showcase-media" src="../assets/img/image.png" alt="Xalamandrus project cover" decoding="async"/>
-  <div class="showcase-overlay"></div>
-  <div class="showcase-caption">
-    <h1 class="title-outline" data-text="Xalamandrus">Xalamandrus</h1>
-    <span class="line-fade" aria-hidden="true"></span>
-    <p class="pulse-gradient">Tech Artist • Unity Developer • Shader &amp; VFX Specialist</p>
-  </div>
-</section>
+    <section class="showcase" id="home">
+        <img class="showcase-media" id="media1" src="../assets/img/image.png" alt="Project 1" decoding="async">
+        <img class="showcase-media" id="media2" src="../assets/img/obeer.png" alt="Project 2" decoding="async">
+        <div class="showcase-overlay"></div>
+
+        <div class="showcase-caption">
+            <h1 class="title-outline outline-text" data-text="Xalamandrus">Xalamandrus</h1>
+            <span class="line-fade" aria-hidden="true"></span>
+            <p class="outline-text" data-text="Unity Developer • Gameplay Programmer • Shaders & VFX">
+                Unity Developer • Gameplay Programmer • Shaders & VFX
+            </p>
+        </div>
+    </section>
+
+    <section>
+
+    </section>
+
+    <script src="showcase-media.js"></script>
 
 </body>
 </html>
