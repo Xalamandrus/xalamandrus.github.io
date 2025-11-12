@@ -1,3 +1,5 @@
+@import url(fonts.css);
+
 *
 {
     margin: 0;
@@ -22,12 +24,15 @@
     --muted:#9da5b4;
 }
 
+/* <========== HTML ==========> */
+
 html
 {
     color-scheme: dark;
 }
 
-body{
+body
+{
     background:
         radial-gradient(900px 700px at 0% 0%, rgba(17, 0, 255, 0.1), transparent 65%),
         radial-gradient(900px 700px at 100% 100%, rgba(0, 255, 170, 0.1), transparent 65%),

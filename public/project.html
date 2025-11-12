@@ -1,0 +1,275 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+  <link rel="stylesheet" href="css/style.css">
+  <link rel="stylesheet" href="css/home.css">
+
+  <title>Slay The Nightmares | Xalamandrus</title>
+</head>
+<body>
+
+  <div data-inject="components/navbar.html" data-target="#this"></div>
+
+  <!-- === PROJECT HERO === -->
+  <header class="project-hero">
+    <div class="hero-image">
+      <img src="../assets/img/slay.png" alt="Slay The Nightmares header">
+    </div>
+
+    <div class="hero-caption">
+      <h1>Slay The Nightmares</h1>
+      <p>Academic 2.5D Game Project</p>
+      <a href="index.html#highlights" class="back-link">← Back to Portfolio</a>
+    </div>
+  </header>
+
+  <div class="glass-strip"></div>
+
+  <!-- === PROJECT BODY === -->
+  <section class="project-page reveal">
+    <div class="container">
+      <div class="project-intro">
+        <h2>Project Overview</h2>
+        <p>
+          <strong>Slay The Nightmares</strong> to gra akcji typu beat ’em up utrzymana w stylistyce 2.5D.
+          Gracz wciela się w jednorożca walczącego z falami koszmarów, używając rogu zdolnego przybierać różne formy broni.
+          Celem rozgrywki jest przetrwanie dziesięciu intensywnych fal przeciwników.
+        </p>
+      </div>
+
+      <div class="divider"></div>
+
+      <div class="project-details">
+        <h3>My Role</h3>
+        <p>
+          Odpowiadałem za pełną stronę techniczną gry — od implementacji mechanik walki i ruchu,
+          po systemy przeciwników, logikę UI oraz transformacje broni.  
+          Przygotowałem sceny pod styl 2.5D, shadery i efekty VFX oraz opracowałem wizualizacje koszmarów
+          z użyciem Shader Graph.
+        </p>
+
+        <div class="tags" style="margin-top: 16px;">
+          <span class="tag">Unity (URP)</span>
+          <span class="tag">C# Gameplay</span>
+          <span class="tag">Shader Graph</span>
+          <span class="tag">VFX</span>
+          <span class="tag">Post-process</span>
+          <span class="tag">2.5D Pipeline</span>
+        </div>
+      </div>
+
+      <div class="divider"></div>
+
+      <div class="project-media reveal">
+        <h3>Gallery</h3>
+        <div class="gallery">
+          <img src="../assets/img/slay1.png" alt="Gameplay Screenshot 1">
+          <img src="../assets/img/slay2.png" alt="Gameplay Screenshot 2">
+          <img src="../assets/img/slay3.png" alt="Gameplay Screenshot 3">
+        </div>
+      </div>
+
+      <div class="divider"></div>
+
+      <div class="project-code reveal">
+        <h3>Example Code Snippet</h3>
+        <pre><code class="language-csharp">
+// Example: Weapon Transformation System
+public class WeaponForm : MonoBehaviour
+{
+    [SerializeField] private WeaponType currentForm;
+    [SerializeField] private GameObject[] forms;
+
+    public void SwitchForm(WeaponType newForm)
+    {
+        if (newForm == currentForm) return;
+        forms[(int)currentForm].SetActive(false);
+        currentForm = newForm;
+        forms[(int)currentForm].SetActive(true);
+    }
+}
+        </code></pre>
+      </div>
+
+      <div class="divider"></div>
+
+      <div class="project-tools reveal">
+        <h3>Programs & Tools</h3>
+        <ul class="tools-list">
+          <li>Unity (URP)</li>
+          <li>Visual Studio</li>
+          <li>Blender</li>
+          <li>Krita</li>
+        </ul>
+      </div>
+    </div>
+  </section>
+
+  <!-- === FOOTER === -->
+  <footer class="footer">
+    <div class="container footer-inner">
+      <div class="footer-top">
+        <div class="footer-col">
+          <h3 class="footer-title">Contact:</h3>
+          <a href="mailto:xalamandrus@gmail.com" class="footer-link">xalamandrus@gmail.com</a>
+        </div>
+
+        <div class="footer-col">
+          <h3 class="footer-title">Follow me:</h3>
+          <div class="footer-socials">
+            <a href="https://github.com/Xalamandrus" target="_blank" rel="noopener">GitHub</a>
+            <span class="sep">·</span>
+            <a href="https://www.artstation.com/xalamandrus" target="_blank" rel="noopener">ArtStation</a>
+            <span class="sep">·</span>
+            <a href="https://linkedin.com/in/xalamandrus" target="_blank" rel="noopener">LinkedIn</a>
+          </div>
+        </div>
+
+        <div class="footer-col">
+          <h3 class="footer-title">Download CV:</h3>
+          <a href="assets/CV_Xalamandrus.pdf" target="_blank" rel="noopener" class="footer-link">Download PDF</a>
+        </div>
+      </div>
+
+      <div class="footer-line"></div>
+      <p class="footer-copy">
+        © <span id="footer-year"></span> Xalamandrus • Game Dev Portfolio • 
+        <a href="#top" class="to-top">Back to top ↑</a>
+      </p>
+    </div>
+  </footer>
+
+  <script>
+    document.addEventListener('DOMContentLoaded', () => {
+      const y = document.getElementById('footer-year');
+      if (y) y.textContent = new Date().getFullYear();
+    });
+
+    const reveals = document.querySelectorAll('.reveal');
+    function revealOnScroll() {
+      const triggerBottom = window.innerHeight * 0.85;
+      reveals.forEach(el => {
+        const boxTop = el.getBoundingClientRect().top;
+        if (boxTop < triggerBottom) el.classList.add('active');
+      });
+    }
+    window.addEventListener('scroll', revealOnScroll);
+    revealOnScroll();
+  </script>
+
+  <style>
+    /* === PROJECT HERO === */
+    .project-hero {
+      position: relative;
+      height: 70vh;
+      width: 100%;
+      overflow: hidden;
+      display: flex;
+      align-items: flex-end;
+      justify-content: center;
+      border-bottom: 1px solid rgba(255,255,255,0.1);
+    }
+    .hero-image {
+      position: absolute;
+      inset: 0;
+      width: 100%;
+      height: 100%;
+      overflow: hidden;
+    }
+    .hero-image img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      object-position: center;
+      filter: brightness(0.8);
+    }
+    .hero-caption {
+      position: relative;
+      z-index: 2;
+      text-align: center;
+      padding-bottom: 60px;
+      background: linear-gradient(to top, rgba(0,0,0,0.7), transparent);
+      width: 100%;
+    }
+    .hero-caption h1 {
+      font-size: clamp(38px, 5vw, 68px);
+      font-weight: 700;
+      letter-spacing: 0.5px;
+      color: #fff;
+      text-shadow: 0 4px 14px rgba(0,0,0,0.5);
+    }
+    .hero-caption p {
+      font-size: clamp(16px, 1.6vw, 22px);
+      color: var(--blue);
+      opacity: 0.95;
+      text-shadow: 0 2px 8px rgba(0,0,0,0.6);
+      margin-bottom: 10px;
+    }
+    .back-link {
+      display: inline-block;
+      color: var(--text);
+      font-size: 0.95rem;
+      opacity: 0.85;
+      text-decoration: none;
+      transition: color .2s ease;
+    }
+    .back-link:hover { color: var(--blue); opacity: 1; }
+
+    /* === CONTENT === */
+    .project-page h2, .project-page h3 { margin-bottom: 12px; color: #fff; }
+    .project-page p, .tools-list li { line-height: 1.7; color: var(--text); }
+
+    .gallery { 
+      display: grid; 
+      grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); 
+      gap: 20px; 
+      margin-top: 16px; 
+    }
+    .gallery img { 
+      width: 100%; 
+      border-radius: 12px; 
+      box-shadow: 0 8px 30px rgba(0,0,0,.35); 
+      transition: transform .3s ease; 
+    }
+    .gallery img:hover { transform: scale(1.02); }
+
+    pre { 
+      background: rgba(255,255,255,0.04); 
+      padding: 18px; 
+      border-radius: 10px; 
+      overflow-x: auto; 
+      margin-top: 12px; 
+    }
+    code { 
+      color: #9ad5ff; 
+      font-family: 'JetBrains Mono', monospace; 
+      font-size: 0.9rem; 
+    }
+
+    .tools-list { 
+      list-style: none; 
+      padding: 0; 
+      margin-top: 12px; 
+      display: flex; 
+      flex-wrap: wrap; 
+      gap: 10px 16px; 
+    }
+    .tools-list li { 
+      background: rgba(255,255,255,0.06); 
+      border: 1px solid rgba(255,255,255,0.12); 
+      border-radius: 999px; 
+      padding: 8px 14px; 
+    }
+
+    @media (max-width: 700px) {
+      .project-hero { height: 50vh; }
+      .hero-caption { padding-bottom: 40px; }
+    }
+  </style>
+
+  <script src="inject.js" defer></script>
+</body>
+</html>
