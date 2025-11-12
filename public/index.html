@@ -24,11 +24,11 @@
             <button class="nav-btn" id="navBtn" aria-expanded="false" aria-controls="navLinks" aria-label="Toggle navigation">≡</button>
 
             <div class="nav-links" id="navLinks" role="navigation">
-            <a href="#home" class="active">Home</a>
-            <a href="#highlights">Highlights</a>
-            <a href="#about">About</a>
-            <a href="#projects">Projects</a>
-            <a href="#more">More</a>
+                <a href="#home" class="active">Home</a>
+                <a href="#highlights">Highlights</a>
+                <a href="#about">About</a>
+                <a href="#projects">Projects</a>
+                <a href="#more">More</a>
             </div>
         </div>
     </nav>
@@ -47,37 +47,105 @@
         </div>
     </section>
 
-    <!-- np. tuż pod navbarem -->
-<div class="glass-strip"></div>
+    <div class="glass-strip"></div>
 
-
-    <section class="abount" id="about" aria-labelledby="about-kicker">
+    <section class="abount reveal" id="about" aria-labelledby="about-kicker">
         <div class="container">
             <div class="grid">
-            <div class="avatar-wrap">
-                <img class="avatar" src="https://picsum.photos/seed/xala/600/600" alt="Portrait" loading="lazy" decoding="async">
-            </div>
-            <div class="bio">
-                <div class="kicker" id="about-kicker">Tech Artist • Unity Developer</div>
-                <p class="lead">I’m a tech artist and Unity developer focused on real-time VFX, post-processing, and performant shaders. I build features that look premium yet run smooth on modest hardware. I care about clean code, clear pipelines, and tools that make teams faster.</p>
-                <div class="divider" aria-hidden="true"></div>
-                <div class="tags" role="list">
-                <span class="tag" role="listitem">Unity (URP)</span>
-                <span class="tag" role="listitem">Shader Graph</span>
-                <span class="tag" role="listitem">C# Gameplay</span>
-                <span class="tag" role="listitem">Real-time VFX</span>
-                <span class="tag" role="listitem">Post-processing</span>
-                <span class="tag" role="listitem">Tooling / Pipelines</span>
-                <span class="tag" role="listitem">Blender</span>
-                <span class="tag" role="listitem">FMOD</span>
+                <div class="avatar-wrap">
+                    <img class="avatar" src="../assets/icons/avatar.jpg" alt="Portrait" loading="lazy" decoding="async">
                 </div>
-                <p class="note">Currently exploring advanced tech art for Unity and building production-ready tools that bridge art & engineering.</p>
-            </div>
+
+                <div class="bio">
+                    <div class="kicker" id="about-kicker">Tech Artist • Unity Developer</div>
+
+                    <p class="lead">
+                        I’m a tech artist and Unity developer focused on real-time VFX, post-processing, and performant shaders.
+                        I build features that look premium yet run smooth on modest hardware. I care about clean code, clear pipelines,
+                        and tools that make teams faster.
+                    </p>
+
+                    <div class="divider" aria-hidden="true"></div>
+
+                    <div class="tags" role="list">
+                        <span class="tag" role="listitem">Unity (URP)</span>
+                        <span class="tag" role="listitem">Shader Graph</span>
+                        <span class="tag" role="listitem">C# Gameplay</span>
+                        <span class="tag" role="listitem">Real-time VFX</span>
+                        <span class="tag" role="listitem">Post-processing</span>
+                        <span class="tag" role="listitem">Tooling / Pipelines</span>
+                        <span class="tag" role="listitem">Blender</span>
+                        <span class="tag" role="listitem">FMOD</span>
+                    </div>
+
+                    <p class="note">
+                        Currently exploring advanced tech art for Unity and building production-ready tools that bridge art & engineering.
+                    </p>
+                </div>
             </div>
         </div>
     </section>
 
+    <footer class="footer">
+        <div class="container footer-inner">
+
+            <div class="footer-top">
+                <div class="footer-col">
+                    <h3 class="footer-title">Contact:</h3>
+                    <a href="mailto:xalamandrus@gmail.com" class="footer-link">xalamandrus@gmail.com</a>
+                </div>
+
+                <div class="footer-col">
+                    <h3 class="footer-title">Follow me:</h3>
+                    <div class="footer-socials">
+                        <a href="https://github.com/Xalamandrus" target="_blank" rel="noopener">GitHub</a>
+                        <span class="sep">·</span>
+                        <a href="https://www.artstation.com/xalamandrus" target="_blank" rel="noopener">ArtStation</a>
+                        <span class="sep">·</span>
+                        <a href="https://linkedin.com/in/xalamandrus" target="_blank" rel="noopener">LinkedIn</a>
+                    </div>
+                </div>
+
+                <div class="footer-col">
+                    <h3 class="footer-title">Download CV:</h3>
+                    <a href="assets/CV_Xalamandrus.pdf" target="_blank" rel="noopener" class="footer-link">Download PDF</a>
+                </div>
+            </div>
+
+            <div class="footer-line"></div>
+
+            <p class="footer-copy">
+                © <span id="footer-year"></span> Xalamandrus • Game Dev Portfolio • 
+                <a href="#home" class="to-top">Back to top ↑</a>
+            </p>
+        </div>
+    </footer>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', () => {
+            const y = document.getElementById('footer-year');
+            if (y) y.textContent = new Date().getFullYear();
+        });
+    </script>
+
     <script src="showcase-media.js"></script>
+
+    <script>
+        const reveals = document.querySelectorAll('.reveal');
+
+        function revealOnScroll() {
+            const triggerBottom = window.innerHeight * 0.85;
+            reveals.forEach(el => {
+            const boxTop = el.getBoundingClientRect().top;
+            if (boxTop < triggerBottom) {
+                el.classList.add('active');
+            }
+            });
+        }
+
+        window.addEventListener('scroll', revealOnScroll);
+        revealOnScroll();
+    </script>
 
 </body>
 </html>
