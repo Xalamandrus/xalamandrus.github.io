@@ -15,17 +15,21 @@
 <body>
 
     <nav class="navbar" id="navbar">
-        <div class="brand">
-            <span>Xalamandrus</span>
-            <span>Game Developer</span>
-        </div>
-        <button class="nav-btn" id="navBtn">≡</button>
-        <div class="nav-links" id="navLinks">
-            <a href="#" class="active">Home</a>
-            <a href="#">Highlights</a>
-            <a href="#">About</a>
-            <a href="#">Projects</a>
-            <a href="#">More</a>
+        <div class="container nav-inner">
+            <a class="brand" href="https://xalamandrus.github.io/" aria-label="Go to home">
+                <span>Xalamandrus</span>
+                <span>Game Developer</span>
+            </a>
+
+            <button class="nav-btn" id="navBtn" aria-expanded="false" aria-controls="navLinks" aria-label="Toggle navigation">≡</button>
+
+            <div class="nav-links" id="navLinks" role="navigation">
+            <a href="#home" class="active">Home</a>
+            <a href="#highlights">Highlights</a>
+            <a href="#about">About</a>
+            <a href="#projects">Projects</a>
+            <a href="#more">More</a>
+            </div>
         </div>
     </nav>
 
@@ -43,8 +47,30 @@
         </div>
     </section>
 
-    <section>
-
+    <section class="abount" id="about" aria-labelledby="about-kicker">
+        <div class="container">
+            <div class="grid">
+            <div class="avatar-wrap">
+                <img class="avatar" src="https://picsum.photos/seed/xala/600/600" alt="Portrait" loading="lazy" decoding="async">
+            </div>
+            <div class="bio">
+                <div class="kicker" id="about-kicker">Tech Artist • Unity Developer</div>
+                <p class="lead">I’m a tech artist and Unity developer focused on real-time VFX, post-processing, and performant shaders. I build features that look premium yet run smooth on modest hardware. I care about clean code, clear pipelines, and tools that make teams faster.</p>
+                <div class="divider" aria-hidden="true"></div>
+                <div class="tags" role="list">
+                <span class="tag" role="listitem">Unity (URP)</span>
+                <span class="tag" role="listitem">Shader Graph</span>
+                <span class="tag" role="listitem">C# Gameplay</span>
+                <span class="tag" role="listitem">Real-time VFX</span>
+                <span class="tag" role="listitem">Post-processing</span>
+                <span class="tag" role="listitem">Tooling / Pipelines</span>
+                <span class="tag" role="listitem">Blender</span>
+                <span class="tag" role="listitem">FMOD</span>
+                </div>
+                <p class="note">Currently exploring advanced tech art for Unity and building production-ready tools that bridge art & engineering.</p>
+            </div>
+            </div>
+        </div>
     </section>
 
     <script src="showcase-media.js"></script>

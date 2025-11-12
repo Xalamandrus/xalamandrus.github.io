@@ -3,6 +3,9 @@
     margin: 0;
     padding: 0;
     box-sizing: border-box;
+
+    scrollbar-width: thin;
+    scrollbar-color: #ffffff33 transparent;
 }
 
 :root
@@ -12,6 +15,9 @@
     --red:#ff4747;
     --text:#c9d1d9;
     --border:#30363d;
+
+    --container-max: 1200px;
+    --container-pad: clamp(16px, 4vw, 32px);
 }
 
 body
@@ -23,5 +29,35 @@ body
 
 section
 {
+    padding-block: clamp(32px, 6vw, 72px);
+}
 
+.container{
+    max-width: var(--container-max);
+    width: 100%;
+    margin-inline: auto;
+    padding-inline: var(--container-pad);
+}
+
+/* Scroll */
+
+::-webkit-scrollbar {
+    width: 10px;
+    height: 10px;
+}
+
+::-webkit-scrollbar-track {
+    background: rgba(255,255,255,0.05);
+    border-radius: 10px;
+}
+
+::-webkit-scrollbar-thumb {
+    background: linear-gradient(180deg, #fff3, #fff6);
+    border-radius: 10px;
+    box-shadow: inset 0 0 6px rgba(255,255,255,0.2);
+    transition: background 0.3s ease;
+}
+
+::-webkit-scrollbar-thumb:hover {
+    background: linear-gradient(180deg, #fff6, #fff9);
 }
