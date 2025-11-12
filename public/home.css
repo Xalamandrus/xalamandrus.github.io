@@ -272,6 +272,72 @@
 
 /*  ABOUT */
 
+.section-divider
+{
+  position: relative;
+  width: min(860px, 80%);
+  height: clamp(48px, 10vw, 88px);
+  margin: clamp(32px, 8vw, 96px) auto;
+  overflow: visible;
+}
+
+.section-divider::before,
+.section-divider::after
+{
+  content:"";
+  position: absolute;
+  inset: 0;
+  border-radius: 999px;
+}
+
+.section-divider::before
+{
+  background: linear-gradient(90deg, rgba(88,166,255,0.45), rgba(255,255,255,0.15), rgba(255,71,71,0.35));
+  filter: blur(36px);
+  opacity: .85;
+}
+
+.section-divider::after
+{
+  inset: 12%;
+  background: linear-gradient(90deg, rgba(11,18,32,0.9), rgba(11,18,32,0.35));
+  border: 1px solid rgba(255,255,255,0.12);
+  backdrop-filter: blur(14px);
+  box-shadow: 0 18px 40px rgba(0,0,0,0.35);
+  opacity: .95;
+}
+
+.abount
+{
+  position: relative;
+  isolation: isolate;
+  background: linear-gradient(145deg, rgba(19,32,54,0.88), rgba(5,7,13,0.92));
+  border: 1px solid rgba(255,255,255,0.07);
+  border-radius: clamp(24px, 4vw, 40px);
+  margin-inline: clamp(16px, 6vw, 80px);
+  box-shadow: 0 25px 55px rgba(0,0,0,0.45);
+  overflow: hidden;
+}
+
+.abount::before
+{
+  content:"";
+  position: absolute;
+  inset: 0;
+  background:
+    radial-gradient(120% 140% at -10% -20%, rgba(88,166,255,0.25), transparent 55%),
+    radial-gradient(90% 120% at 110% 120%, rgba(255,71,71,0.18), transparent 65%);
+  opacity: .85;
+  mix-blend-mode: screen;
+  pointer-events: none;
+}
+
+.abount > .container
+{
+  position: relative;
+  z-index: 1;
+}
+
 .abount .grid {
   display: grid;
   grid-template-columns: auto 1fr;
