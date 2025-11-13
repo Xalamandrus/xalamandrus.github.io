@@ -1,0 +1,115 @@
+[
+    {
+        "comment": "Aktualizować Dane",
+
+        "title": "Beans & Rats",
+        "date": "April 2024",
+        "type": "Academic VR Project",
+        "tools": ["Unity", "Visual Studio", "Blender", "Krita", "FMOD"],
+        "technologies": ["Unity (URP)", "C#", "Shader Graph", "VFX Graph"],
+
+        "images":
+        [
+            "assets/projects/Beans-&-Rats/image.png"
+        ],
+
+        "description": "Beans & Rats to gra VR, w której gracz wciela się w alchemika przygotowującego mikstury według receptur zapisanych w magicznej księdze. Rozgrywka polega na wykonywaniu kolejnych etapów procesu - nalewaniu składników, mieszaniu oraz kontrolowaniu ognia pod kociołkiem, aby uzyskać odpowiedni kolor i efekt mikstury.",
+
+        "role": "Zajmowałem się tworzeniem logiki rozgrywki, w tym systemu poruszania się gracza i interakcji. Opracowałem główny system kotła, który przetwarza receptury i ocenia poprawność mikstur. Stworzyłem dynamiczny system wylewania cieczy oraz shader przewijania stron książki w Shader Graph, a także zintegrowałem dźwięki przy użyciu FMOD. Dodatkowo przygotowałem efekty VFX, post-process oraz zaprojektowałem układ poziomu."
+    },
+
+    {
+        "comment": "Aktualizować Dane",
+
+        "title": "Slay The Nightmares",
+        "date": "October 2024",
+        "type": "Academic 2.5D Project",
+        "tools": ["Unity", "Visual Studio", "Blender", "Krita"],
+        "technologies": ["Unity (URP)", "C#", "Shader Graph", "VFX Graph"],
+
+        "images":
+        [
+            "assets/projects/Slay-The-Nightmares/slay.png"
+        ],
+
+        "description": "Slay The Nightmares to gra akcji typu beat ’em up utrzymana w stylistyce 2.5D. Główna postać, jednorożec, stawia czoła falom koszmarów, wykorzystując róg zdolny przybierać różne formy broni o unikalnych mechanikach walki. Celem rozgrywki jest przetrwanie dziesięciu intensywnych fal przeciwników.",
+
+        "role": "Odpowiadałem za całą stronę techniczną gry – zarządzanie silnikiem oraz implementację kluczowych mechanik, takich jak poruszanie, walka, przeciwnicy, transformacje i logika UI. Przygotowywałem sceny pod styl 2.5D, tworząc shadery, post-process, oświetlenie oraz efekty VFX broni i wizualizacje koszmaru z wykorzystaniem Shader Graph."
+    },
+
+    {
+        "comment": "Aktualizować Dane",
+
+        "title": "Purrrifiers Cleaning Chaos DEMO",
+        "date": "Juli 2024",
+        "type": "Internship 3D Project",
+        "tools": ["Unity", "Visual Studio", "Blender", "Krita"],
+        "technologies": ["Unity (URP)", "C#", "Shader Graph", "VFX Graph", "Compute Shader"],
+
+        "images":
+        [
+            "assets/projects/Purrrifiers-Cleaning-Chaos/..."
+        ],
+
+        "description": "",
+
+        "role": ""
+    },
+
+    {
+        "comment": "Aktualizować Dane",
+
+        "title": "Turbo Tire",
+        "date": "Juli 2024",
+        "type": "Internship 3D Project",
+        "tools": ["Unity", "Visual Studio", "Blender", "Krita"],
+        "technologies": ["Unity (URP)", "C#", "Shader Graph", "VFX Graph"],
+
+        "images":
+        [
+            "assets/projects/Purrrifiers-Cleaning-Chaos/..."
+        ],
+
+        "description": "",
+
+        "role": ""
+    },
+
+    {
+        "comment": "Aktualizować Dane",
+
+        "title": "Can A Fella Borrow a French Fry",
+        "date": "February 2025",
+        "type": "GameJam (PoGJam 2025)",
+        "tools": ["Unity", "Visual Studio"],
+        "technologies": ["Unity (URP)", "C#", "Shader Graph"],
+
+        "images":
+        [
+            "assets/projects/Can-A-Fella/..."
+        ],
+
+        "description": "",
+
+        "role": ""
+    },
+
+    {
+        "comment": "Aktualizować Dane",
+
+        "title": "Journey Of Johan",
+        "date": "March 2023",
+        "type": "",
+        "tools": ["Unity", "Visual Studio"],
+        "technologies": ["Unity (URP)", "C#"],
+
+        "images":
+        [
+            "assets/projects/Journey-Of-Johan/..."
+        ],
+
+        "description": "",
+
+        "role": ""
+    }
+]
