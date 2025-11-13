@@ -44,15 +44,12 @@
       width: 100%;
     }
     .hero-caption h1 {
-      font-size: clamp(38px, 5vw, 68px);
-      font-weight: 700;
       letter-spacing: 0.5px;
       color: #fff;
       text-shadow: 0 4px 14px rgba(0,0,0,0.5);
     }
     .hero-caption p {
-      font-size: clamp(16px, 1.6vw, 22px);
-      color: var(--blue);
+      color: var(--color-primary);
       opacity: 0.95;
       text-shadow: 0 2px 8px rgba(0,0,0,0.6);
       margin-bottom: 10px;
@@ -60,7 +57,6 @@
     .back-link {
       display: inline-block;
       color: var(--text);
-      font-size: 0.95rem;
       opacity: 0.85;
       text-decoration: none;
       transition: color .2s ease;
@@ -68,7 +64,7 @@
     .back-link:hover { color: var(--blue); opacity: 1; }
 
     /* === CONTENT === */
-    .project-page h2, .project-page h3 { margin-bottom: 12px; color: #fff; }
+    .project-page .heading { margin-bottom: 12px; color: #fff; display: inline-block; }
     .project-page p, .tools-list li { line-height: 1.7; color: var(--text); }
 
     .gallery { 
@@ -142,7 +138,7 @@
   <section class="project-page reveal">
     <div class="container">
       <div class="project-intro">
-        <h2>Project Overview</h2>
+        <h1 class="heading text-heading">Project Overview</h1>
         <p>
           <strong>Slay The Nightmares</strong> to gra akcji typu beat ’em up utrzymana w stylistyce 2.5D.
           Gracz wciela się w jednorożca walczącego z falami koszmarów, używając rogu zdolnego przybierać różne formy broni.
@@ -153,7 +149,7 @@
       <div class="divider"></div>
 
       <div class="project-details">
-        <h3>My Role</h3>
+        <span class="heading text-heading">My Role</span>
         <p>
           Odpowiadałem za pełną stronę techniczną gry — od implementacji mechanik walki i ruchu,
           po systemy przeciwników, logikę UI oraz transformacje broni.  
@@ -174,7 +170,7 @@
       <div class="divider"></div>
 
       <div class="project-media reveal">
-        <h3>Gallery</h3>
+        <span class="heading text-heading">Gallery</span>
         <div class="gallery">
           <img src="../assets/img/slay1.png" alt="Gameplay Screenshot 1">
           <img src="../assets/img/slay2.png" alt="Gameplay Screenshot 2">
@@ -185,7 +181,7 @@
       <div class="divider"></div>
 
       <div class="project-code reveal">
-        <h3>Example Code Snippet</h3>
+        <span class="heading text-heading">Example Code Snippet</span>
         <pre><code class="language-csharp">
 // Example: Weapon Transformation System
 public class WeaponForm : MonoBehaviour
@@ -207,7 +203,7 @@ public class WeaponForm : MonoBehaviour
       <div class="divider"></div>
 
       <div class="project-tools reveal">
-        <h3>Programs & Tools</h3>
+        <span class="heading text-heading">Programs & Tools</span>
         <ul class="tools-list">
           <li>Unity (URP)</li>
           <li>Visual Studio</li>
