@@ -1,7 +1,7 @@
 // Blur tła + Render projektów z projects.json
 (function() {
     const projectsUrl = 'assets/data/projects.json';
-    const fadeDuration = 200; // ms; sparowane z CSS transition w body::before
+    const fadeDuration = 100; // ms; sparowane z CSS transition w body::before
     let fadeTimeout;
 
     // ====== BLUR TŁA ======
