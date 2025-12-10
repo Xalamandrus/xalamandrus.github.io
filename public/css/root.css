@@ -10,6 +10,12 @@
     scrollbar-color: #444 transparent;
 }
 
+html
+{
+    scroll-behavior: smooth;
+    scroll-padding-top: calc(72px + 48px);
+}
+
 :root
 {
     /* ========== Colors ========== */

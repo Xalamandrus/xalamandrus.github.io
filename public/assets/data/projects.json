@@ -1,7 +1,7 @@
 [
     {
         "comment": "Aktualizować Dane",
-
+        "featured": true,
         "title": "Beans & Rats",
         "date": "April 2024",
         "type": "Academic VR Project",
@@ -20,7 +20,7 @@
 
     {
         "comment": "Aktualizować Dane",
-
+        "featured": true,
         "title": "Slay The Nightmares",
         "date": "October 2024",
         "type": "Academic 2.5D Project",
@@ -29,7 +29,7 @@
 
         "images":
         [
-            "assets/projects/Slay-The-Nightmares/slay.png"
+            "assets/projects/Slay-The-Nightmares/image.png"
         ],
 
         "description": "Slay The Nightmares to gra akcji typu beat ’em up utrzymana w stylistyce 2.5D. Główna postać, jednorożec, stawia czoła falom koszmarów, wykorzystując róg zdolny przybierać różne formy broni o unikalnych mechanikach walki. Celem rozgrywki jest przetrwanie dziesięciu intensywnych fal przeciwników.",
@@ -39,7 +39,7 @@
 
     {
         "comment": "Aktualizować Dane",
-
+        "featured": true,
         "title": "Purrrifiers Cleaning Chaos DEMO",
         "date": "Juli 2024",
         "type": "Internship 3D Project",
@@ -48,7 +48,7 @@
 
         "images":
         [
-            "assets/projects/Purrrifiers-Cleaning-Chaos/..."
+            "assets/projects/Purrrifiers-Cleaning-Chaos/image.png"
         ],
 
         "description": "",
@@ -58,7 +58,7 @@
 
     {
         "comment": "Aktualizować Dane",
-
+        "featured": false,
         "title": "Turbo Tire",
         "date": "Juli 2024",
         "type": "Internship 3D Project",
@@ -67,7 +67,7 @@
 
         "images":
         [
-            "assets/projects/Purrrifiers-Cleaning-Chaos/..."
+            "assets/projects/Turbo-Tire/image.png"
         ],
 
         "description": "",
@@ -77,7 +77,7 @@
 
     {
         "comment": "Aktualizować Dane",
-
+        "featured": false,
         "title": "Can A Fella Borrow a French Fry",
         "date": "February 2025",
         "type": "GameJam (PoGJam 2025)",
@@ -86,7 +86,7 @@
 
         "images":
         [
-            "assets/projects/Can-A-Fella/..."
+            "assets/projects/Can-A-Fella/image.png"
         ],
 
         "description": "",
@@ -96,7 +96,7 @@
 
     {
         "comment": "Aktualizować Dane",
-
+        "featured": false,
         "title": "Journey Of Johan",
         "date": "March 2023",
         "type": "",
@@ -105,7 +105,7 @@
 
         "images":
         [
-            "assets/projects/Journey-Of-Johan/..."
+            "assets/projects/Journey-Of-Johan/image.png"
         ],
 
         "description": "",
