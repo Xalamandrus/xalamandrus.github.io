@@ -1,0 +1,742 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <title>Xalamandrus – Projects (Preview)</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <style>
+    :root {
+      --color-bg-base: #0d1117;
+      --color-text-primary: #c9d1d9;
+      --color-text-secondary: #9da5b4;
+      --color-text-muted: #6e7681;
+      --color-primary: #58a6ff;
+      --color-border: #30363d;
+      --color-border-light: rgba(255, 255, 255, 0.08);
+
+      --spacing-xs: 4px;
+      --spacing-sm: 8px;
+      --spacing-md: 16px;
+      --spacing-lg: 24px;
+      --spacing-xl: 32px;
+      --spacing-2xl: 48px;
+
+      --container-max: 1100px;
+      --section-padding-y: 64px;
+
+      --fs-2xs: 11px;
+      --fs-xs: 12px;
+      --fs-sm: 14px;
+      --fs-md: 16px;
+      --fs-lg: 18px;
+      --fs-xl: 22px;
+      --fs-2xl: 28px;
+
+      --fw-regular: 400;
+      --fw-medium: 500;
+      --fw-semibold: 600;
+      --fw-bold: 700;
+
+      --radius-sm: 10px;
+      --radius-md: 16px;
+      --radius-full: 9999px;
+
+      --shadow-md: 0 18px 45px rgba(0, 0, 0, 0.55);
+      --shadow-lg: 0 26px 60px rgba(0, 0, 0, 0.8);
+
+      --transition-base: 0.25s ease;
+    }
+
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    body {
+      min-height: 100vh;
+      font-family: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+      background: radial-gradient(circle at 10% 0,
+        #101624 0, #070b10 35%, #05070b 70%, #030408 100%);
+      color: var(--color-text-primary);
+      display: flex;
+      justify-content: center;
+      position: relative;
+      overflow-x: hidden;
+    }
+
+    /* BLUR TŁA NA PODSTAWIE PROJEKTU */
+    body::before {
+      content: "";
+      position: fixed;
+      inset: 0;
+      z-index: -1;
+      background-image: var(--project-bg-image, none);
+      background-size: cover;
+      background-position: center;
+      background-repeat: no-repeat;
+      filter: blur(28px) saturate(1.2);
+      opacity: 0;
+      transform: scale(1.05);
+      transition:
+        opacity 0.35s ease,
+        transform 0.35s ease;
+      pointer-events: none;
+    }
+
+    body.project-bg-active::before {
+      opacity: 0.35;
+      transform: scale(1.02);
+    }
+
+    .page-projects {
+      width: 100%;
+      padding: var(--section-padding-y) var(--spacing-md);
+      padding-top: 96px;
+    }
+
+    .container {
+      max-width: var(--container-max);
+      margin: 0 auto;
+    }
+
+    /* HEADER SEKCJI */
+    .section-header {
+      max-width: 640px;
+      margin-bottom: var(--spacing-xl);
+    }
+
+    .section-kicker {
+      font-size: var(--fs-xs);
+      font-weight: var(--fw-semibold);
+      letter-spacing: 0.16em;
+      text-transform: uppercase;
+      color: var(--color-text-muted);
+      margin-bottom: var(--spacing-xs);
+    }
+
+    .section-title {
+      font-size: var(--fs-2xl);
+      font-weight: var(--fw-bold);
+      margin-bottom: var(--spacing-sm);
+    }
+
+    .section-lead {
+      font-size: var(--fs-md);
+      color: var(--color-text-secondary);
+      line-height: 1.6;
+    }
+
+    /* FILTRY */
+    .projects-filters {
+      display: flex;
+      flex-wrap: wrap;
+      gap: var(--spacing-sm);
+      margin-bottom: var(--spacing-xl);
+    }
+
+    .chip {
+      border-radius: var(--radius-full);
+      border: 1px solid var(--color-border-light);
+      padding: 6px 14px;
+      font-size: var(--fs-xs);
+      font-weight: var(--fw-medium);
+      background: rgba(13, 17, 23, 0.8);
+      color: var(--color-text-secondary);
+      cursor: pointer;
+      transition:
+        background var(--transition-base),
+        border-color var(--transition-base),
+        color var(--transition-base),
+        transform var(--transition-base);
+    }
+
+    .chip:hover {
+      border-color: var(--color-primary);
+      color: var(--color-text-primary);
+      transform: translateY(-1px);
+    }
+
+    .chip-active {
+      background: rgba(88, 166, 255, 0.18);
+      border-color: rgba(88, 166, 255, 0.9);
+      color: var(--color-primary);
+    }
+
+    /* FEATURED PROJECTS */
+    .projects-featured {
+      display: flex;
+      flex-direction: column;
+      gap: var(--spacing-xl);
+      margin-bottom: var(--spacing-2xl);
+    }
+
+    .subheader {
+      display: flex;
+      align-items: baseline;
+      justify-content: space-between;
+      gap: var(--spacing-sm);
+      margin-bottom: var(--spacing-lg);
+    }
+
+    .subheader-title {
+      font-size: var(--fs-lg);
+      font-weight: var(--fw-semibold);
+      display: flex;
+      align-items: center;
+      gap: 8px;
+    }
+
+    .subheader-note {
+      font-size: var(--fs-xs);
+      color: var(--color-text-muted);
+    }
+
+    .subheader--featured .subheader-title {
+      letter-spacing: 0.04em;
+      text-transform: uppercase;
+      font-size: var(--fs-sm);
+    }
+
+    .project-card {
+      position: relative;
+      border-radius: var(--radius-md);
+      overflow: hidden;
+      border: 1px solid var(--color-border);
+      box-shadow: var(--shadow-md);
+      isolation: isolate;
+      background: #05070b;
+      cursor: pointer;
+      transition:
+        transform var(--transition-base),
+        border-color var(--transition-base),
+        box-shadow var(--transition-base);
+    }
+
+    .project-card:hover {
+      transform: translateY(-4px);
+      border-color: rgba(88, 166, 255, 0.7);
+      box-shadow: var(--shadow-lg);
+    }
+
+    .project-card--featured .project-media {
+      position: relative;
+      aspect-ratio: 21 / 9;
+      overflow: hidden;
+    }
+
+    .project-media img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      display: block;
+      transform: scale(1.04);
+      filter: saturate(1.05);
+      transition:
+        transform var(--transition-base),
+        filter var(--transition-base),
+        opacity var(--transition-base);
+    }
+
+    .project-card:hover .project-media img {
+      transform: scale(1.08);
+      filter: saturate(1.18);
+    }
+
+    .project-card--featured .project-media::after {
+      content: "";
+      position: absolute;
+      inset: 0;
+      background: linear-gradient(to top,
+        rgba(5, 7, 11, 0.92) 0%,
+        rgba(5, 7, 11, 0.7) 35%,
+        transparent 80%);
+    }
+
+    .project-media-label {
+      position: absolute;
+      left: var(--spacing-lg);
+      top: var(--spacing-lg);
+      z-index: 1;
+      padding: 4px 10px;
+      border-radius: var(--radius-full);
+      background: rgba(3, 7, 14, 0.86);
+      border: 1px solid rgba(255,255,255,0.18);
+      font-size: var(--fs-2xs);
+      text-transform: uppercase;
+      letter-spacing: 0.16em;
+      color: var(--color-text-secondary);
+    }
+
+    .project-overlay {
+      position: absolute;
+      inset: auto 0 0 0;
+      padding: var(--spacing-lg);
+      display: flex;
+      flex-direction: column;
+      gap: var(--spacing-sm);
+      z-index: 1;
+    }
+
+    .project-meta {
+      font-size: var(--fs-2xs);
+      text-transform: uppercase;
+      letter-spacing: 0.18em;
+      color: var(--color-text-muted);
+    }
+
+    .project-title {
+      font-size: var(--fs-xl);
+      font-weight: var(--fw-semibold);
+      margin: 0;
+    }
+
+    .project-description {
+      font-size: var(--fs-sm);
+      color: var(--color-text-secondary);
+      line-height: 1.6;
+      max-width: 60ch;
+    }
+
+    .project-role {
+      font-size: var(--fs-sm);
+      font-weight: var(--fw-medium);
+      color: var(--color-text-primary);
+    }
+
+    .project-bottom-row {
+      display: flex;
+      flex-wrap: wrap;
+      gap: var(--spacing-sm);
+      align-items: center;
+      justify-content: space-between;
+      margin-top: var(--spacing-sm);
+    }
+
+    .project-tags {
+      display: flex;
+      flex-wrap: wrap;
+      gap: var(--spacing-xs);
+    }
+
+    .tag {
+      font-size: var(--fs-2xs);
+      padding: 4px 9px;
+      border-radius: var(--radius-full);
+      border: 1px solid var(--color-border-light);
+      background: rgba(10, 12, 18, 0.85);
+      color: var(--color-text-secondary);
+      white-space: nowrap;
+    }
+
+    .project-link {
+      font-size: var(--fs-sm);
+      font-weight: var(--fw-medium);
+      color: var(--color-primary);
+      text-decoration: none;
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      white-space: nowrap;
+    }
+
+    .project-link::after {
+      content: "↗";
+      font-size: 0.9em;
+      transition: transform var(--transition-base);
+    }
+
+    .project-card:hover .project-link::after {
+      transform: translateX(3px) translateY(-1px);
+    }
+
+    /* divider między featured a all */
+    .projects-all {
+      margin-top: var(--spacing-2xl);
+      padding-top: var(--spacing-xl);
+      border-top: 1px solid rgba(255, 255, 255, 0.04);
+    }
+
+    .subheader--all .subheader-title {
+      font-size: var(--fs-md);
+      letter-spacing: 0.02em;
+    }
+
+    /* ALL PROJECTS – KOMPAKTOWA SIATKA */
+    .projects-grid {
+      display: grid;
+      grid-template-columns: repeat(3, minmax(0, 1fr));
+      gap: var(--spacing-lg);
+    }
+
+    @media (max-width: 1000px) {
+      .projects-grid {
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+      }
+    }
+
+    @media (max-width: 700px) {
+      .projects-grid {
+        grid-template-columns: 1fr;
+      }
+    }
+
+    .project-card--compact {
+      display: flex;
+      flex-direction: column;
+      background: rgba(5, 7, 11, 0.96);
+    }
+
+    .project-card--compact .project-media {
+      position: relative;
+      aspect-ratio: 16 / 9;
+      overflow: hidden;
+    }
+
+    .project-card--compact .project-media::after {
+      content: "";
+      position: absolute;
+      inset: 0;
+      background: linear-gradient(to top,
+        rgba(5, 7, 11, 0.95) 0%,
+        rgba(5, 7, 11, 0.6) 50%,
+        transparent 100%);
+    }
+
+    .project-card--compact .project-content {
+      padding: var(--spacing-md);
+      display: flex;
+      flex-direction: column;
+      gap: var(--spacing-sm);
+    }
+
+    .project-card--compact .project-meta {
+      font-size: var(--fs-2xs);
+    }
+
+    .project-card--compact .project-title {
+      font-size: var(--fs-md);
+    }
+
+    .project-card--compact .project-description {
+      font-size: var(--fs-sm);
+      max-width: none;
+    }
+
+    .project-card--compact .project-bottom-row {
+      margin-top: var(--spacing-sm);
+      align-items: center;
+      gap: var(--spacing-sm);
+      flex-direction: row;
+      justify-content: space-between;
+    }
+
+    .project-link--compact::after {
+      content: "→";
+    }
+
+    @media (max-width: 600px) {
+      .project-card--compact .project-bottom-row {
+        flex-direction: column;
+        align-items: flex-start;
+      }
+    }
+
+    @media (max-width: 768px) {
+      .project-overlay {
+        padding: var(--spacing-md);
+      }
+      .project-title {
+        font-size: var(--fs-lg);
+      }
+      .project-description {
+        font-size: var(--fs-sm);
+      }
+      .projects-featured {
+        gap: var(--spacing-lg);
+      }
+    }
+  </style>
+</head>
+<body>
+  <main class="page-projects">
+    <div class="container">
+      <header class="section-header">
+        <p class="section-kicker">Projects</p>
+        <h1 class="section-title">Selected Work</h1>
+        <p class="section-lead">
+          A mix of game prototypes, tools and VR projects that showcase my work
+          as a tech artist and Unity developer.
+        </p>
+      </header>
+
+      <!-- FEATURED PROJECTS -->
+      <section class="projects-featured">
+        <div class="subheader subheader--featured">
+          <h2 class="subheader-title">⭐ Featured projects</h2>
+          <p class="subheader-note">Highlights with more focus and context.</p>
+        </div>
+
+        <!-- Featured 1 -->
+        <article class="project-card project-card--featured"
+                 data-bg="../public//assets//projects/Beans-&-Rats/image.png">
+          <div class="project-media">
+            <img src="../public//assets//projects/Beans-&-Rats/image.png"
+                 alt="Beans & Rats preview">
+            <span class="project-media-label">VR Game</span>
+          </div>
+          <div class="project-overlay">
+            <p class="project-meta">Academic VR Project • 2024</p>
+            <h3 class="project-title">Beans &amp; Rats</h3>
+            <p class="project-description">
+              VR potion-brewing game focused on tactile interactions and clear feedback:
+              pouring, mixing and controlling the fire under the cauldron.
+            </p>
+            <p class="project-role">Role: Tech Artist &amp; Unity Developer</p>
+            <div class="project-bottom-row">
+              <div class="project-tags">
+                <span class="tag">Unity (URP)</span>
+                <span class="tag">VR</span>
+                <span class="tag">FMOD</span>
+                <span class="tag">Shader Graph</span>
+              </div>
+              <a href="#" class="project-link">View project</a>
+            </div>
+          </div>
+        </article>
+
+        <!-- Featured 2 -->
+        <article class="project-card project-card--featured"
+                 data-bg="../public//assets//projects/Beans-&-Rats/image.png">
+          <div class="project-media">
+            <img src="../public//assets//projects/Beans-&-Rats/image.png"
+                 alt="Slay The Nightmares preview">
+            <span class="project-media-label">2.5D Game</span>
+          </div>
+          <div class="project-overlay">
+            <p class="project-meta">Academic 2.5D Project • 2024</p>
+            <h3 class="project-title">Slay The Nightmares</h3>
+            <p class="project-description">
+              2.5D beat ’em up where a unicorn fights waves of nightmares using
+              a transforming horn with distinct weapon forms and mechanics.
+            </p>
+            <p class="project-role">Role: Tech Lead • Gameplay &amp; VFX</p>
+            <div class="project-bottom-row">
+              <div class="project-tags">
+                <span class="tag">Unity (URP)</span>
+                <span class="tag">C# Gameplay</span>
+                <span class="tag">Shader Graph</span>
+                <span class="tag">Blender</span>
+              </div>
+              <a href="#" class="project-link">View project</a>
+            </div>
+          </div>
+        </article>
+
+        <!-- Featured 3 -->
+        <article class="project-card project-card--featured"
+                 data-bg="../public//assets//projects/Beans-&-Rats/image.png">
+          <div class="project-media">
+            <img src="../public//assets//projects/Beans-&-Rats/image.png"
+                 alt="One Beer Left preview">
+            <span class="project-media-label">Thesis</span>
+          </div>
+          <div class="project-overlay">
+            <p class="project-meta">Bachelor’s Thesis • In Development</p>
+            <h3 class="project-title">One Beer Left</h3>
+            <p class="project-description">
+              Detective psychological thriller set in West Labrene in 1971,
+              focused on mood, narrative design and systemic interactions in a bar.
+            </p>
+            <p class="project-role">Role: Game Designer &amp; Tech Artist</p>
+            <div class="project-bottom-row">
+              <div class="project-tags">
+                <span class="tag">Unity</span>
+                <span class="tag">Narrative Design</span>
+                <span class="tag">Post-processing</span>
+              </div>
+              <a href="#" class="project-link">View project</a>
+            </div>
+          </div>
+        </article>
+      </section>
+
+      <!-- ALL PROJECTS -->
+      <section class="projects-all">
+        <div class="subheader subheader--all">
+          <h2 class="subheader-title">All projects</h2>
+          <p class="subheader-note">Compact list that scales to more work.</p>
+        </div>
+
+        <div class="projects-filters">
+          <button class="chip chip-active">All</button>
+          <button class="chip">Games</button>
+          <button class="chip">Tools</button>
+          <button class="chip">VR</button>
+          <button class="chip">Student</button>
+          <button class="chip">Personal</button>
+        </div>
+
+        <div class="projects-grid">
+          <!-- Compact 1 -->
+          <article class="project-card project-card--compact"
+                   data-bg="../public//assets//projects/Beans-&-Rats/image.png">
+            <div class="project-media">
+              <img src="../public//assets//projects/Beans-&-Rats/image.png"
+                   alt="Beans & Rats thumb">
+            </div>
+            <div class="project-content">
+              <p class="project-meta">VR Game • 2024</p>
+              <h3 class="project-title">Beans &amp; Rats</h3>
+              <p class="project-description">
+                VR potion-brewing prototype focused on interaction and feedback.
+              </p>
+              <div class="project-bottom-row">
+                <div class="project-tags">
+                  <span class="tag">Unity</span>
+                  <span class="tag">VR</span>
+                </div>
+                <a href="#" class="project-link project-link--compact">View project</a>
+              </div>
+            </div>
+          </article>
+
+          <!-- Compact 2 -->
+          <article class="project-card project-card--compact"
+                   data-bg="../public//assets//projects/Beans-&-Rats/image.png">
+            <div class="project-media">
+              <img src="../public//assets//projects/Beans-&-Rats/image.png"
+                   alt="Slay The Nightmares thumb">
+            </div>
+            <div class="project-content">
+              <p class="project-meta">2.5D Game • 2024</p>
+              <h3 class="project-title">Slay The Nightmares</h3>
+              <p class="project-description">
+                Beat ’em up about fighting nightmares with a transforming horn.
+              </p>
+              <div class="project-bottom-row">
+                <div class="project-tags">
+                  <span class="tag">Unity</span>
+                  <span class="tag">2.5D</span>
+                </div>
+                <a href="#" class="project-link project-link--compact">View project</a>
+              </div>
+            </div>
+          </article>
+
+          <!-- Compact 3 -->
+          <article class="project-card project-card--compact"
+                   data-bg="../public//assets//projects/Beans-&-Rats/image.png">
+            <div class="project-media">
+              <img src="../public//assets//projects/Beans-&-Rats/image.png"
+                   alt="One Beer Left thumb">
+            </div>
+            <div class="project-content">
+              <p class="project-meta">Thesis • 2025</p>
+              <h3 class="project-title">One Beer Left</h3>
+              <p class="project-description">
+                Narrative-focused thriller set in a fictional 1970s country.
+              </p>
+              <div class="project-bottom-row">
+                <div class="project-tags">
+                  <span class="tag">Unity</span>
+                  <span class="tag">Narrative</span>
+                </div>
+                <a href="#" class="project-link project-link--compact">View project</a>
+              </div>
+            </div>
+          </article>
+
+          <!-- Compact 4 -->
+          <article class="project-card project-card--compact"
+                   data-bg="../public//assets//projects/Beans-&-Rats/image.png">
+            <div class="project-media">
+              <img src="../public//assets//projects/Beans-&-Rats/image.png"
+                   alt="Periculum Vitae thumb">
+            </div>
+            <div class="project-content">
+              <p class="project-meta">Table Game • 2025</p>
+              <h3 class="project-title">Periculum Vitae</h3>
+              <p class="project-description">
+                Touch-table adaptation of a board game with tokens and resource systems.
+              </p>
+              <div class="project-bottom-row">
+                <div class="project-tags">
+                  <span class="tag">Unity</span>
+                  <span class="tag">Touch UI</span>
+                </div>
+                <a href="#" class="project-link project-link--compact">View project</a>
+              </div>
+            </div>
+          </article>
+
+          <!-- Compact 5 -->
+          <article class="project-card project-card--compact"
+                   data-bg="../public//assets//projects/Beans-&-Rats/image.png">
+            <div class="project-media">
+              <img src="../public//assets//projects/Beans-&-Rats/image.png"
+                   alt="Future project thumb">
+            </div>
+            <div class="project-content">
+              <p class="project-meta">Prototype • 2025</p>
+              <h3 class="project-title">Future Tool Prototype</h3>
+              <p class="project-description">
+                Slot for another game/tool – easy to add more entries later.
+              </p>
+              <div class="project-bottom-row">
+                <div class="project-tags">
+                  <span class="tag">Tool</span>
+                  <span class="tag">Unity</span>
+                </div>
+                <a href="#" class="project-link project-link--compact">View project</a>
+              </div>
+            </div>
+          </article>
+
+          <!-- Compact 6 -->
+          <article class="project-card project-card--compact"
+                   data-bg="../public//assets//projects/Beans-&-Rats/image.png">
+            <div class="project-media">
+              <img src="../public//assets//projects/Beans-&-Rats/image.png"
+                   alt="Future project thumb">
+            </div>
+            <div class="project-content">
+              <p class="project-meta">Prototype • 2025</p>
+              <h3 class="project-title">Another Experiment</h3>
+              <p class="project-description">
+                Placeholder entry to see how the grid scales with more projects.
+              </p>
+              <div class="project-bottom-row">
+                <div class="project-tags">
+                  <span class="tag">Experimental</span>
+                </div>
+                <a href="#" class="project-link project-link--compact">View project</a>
+              </div>
+            </div>
+          </article>
+        </div>
+      </section>
+    </div>
+  </main>
+
+  <script>
+    document.addEventListener('DOMContentLoaded', () => {
+      const cards = document.querySelectorAll('.project-card[data-bg]');
+
+      cards.forEach(card => {
+        const bgUrl = card.dataset.bg;
+        if (!bgUrl) return;
+
+        card.addEventListener('mouseenter', () => {
+          document.body.style.setProperty('--project-bg-image', `url("${bgUrl}")`);
+          document.body.classList.add('project-bg-active');
+        });
+
+        card.addEventListener('mouseleave', () => {
+          document.body.classList.remove('project-bg-active');
+        });
+      });
+    });
+  </script>
+</body>
+</html>
