@@ -172,10 +172,10 @@
             inset: 0;
             background: linear-gradient(
                 115deg,
-                rgba(5, 8, 14, 0.9) 0%,
-                rgba(5, 8, 14, 0.82) 32%,
-                rgba(5, 8, 14, 0.58) 65%,
-                rgba(5, 8, 14, 0.18) 100%
+                rgba(5, 8, 14, 0.7) 0%,
+                rgba(5, 8, 14, 0.62) 32%,
+                rgba(5, 8, 14, 0.38) 65%,
+                rgba(5, 8, 14, 0) 100%
             );
         }
 
@@ -195,7 +195,7 @@
             width: 100%;        /* pełna szerokość karty */
             max-width: none;
             gap: var(--spacing-sm);
-            background: linear-gradient(90deg, rgba(5, 8, 14, 0.52), rgba(5, 8, 14, 0.18));
+            background: linear-gradient(90deg, rgba(5, 8, 14, 0.35), rgba(5, 8, 14, 0));
         }
 
         .project-meta {
@@ -223,6 +223,7 @@
             line-height: var(--text-small-line);
             color: var(--color-text-secondary);
             margin-top: 0;
+            max-width: 65ch;
         }
 
         .project-role {
@@ -278,6 +279,7 @@
             align-items: center;
             gap: 6px;
             white-space: nowrap;
+            text-shadow: 0 0 8px rgba(0, 0, 0, 0.6);
         }
 
         .project-link::after {
@@ -510,9 +512,9 @@
 
                     <!-- Featured 2 -->
                     <article class="project-card project-card--featured"
-                            data-bg="assets/projects/Beans-&-Rats/image.png">
+                            data-bg="assets/projects/Slay-The-Nightmares/slay.png">
                         <div class="project-media">
-                            <img src="assets/projects/Beans-&-Rats/image.png"
+                            <img src="assets/projects/Slay-The-Nightmares/slay.png"
                                  alt="Slay The Nightmares preview">
                         </div>
                         <div class="project-layer">
