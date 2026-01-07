@@ -1,0 +1,225 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+  <link rel="stylesheet" href="css/style.css" />
+  <link rel="stylesheet" href="css/home.css" />
+  <link rel="stylesheet" href="css/view-project.css" />
+
+  <title>Project • Xalamandrus</title>
+</head>
+
+<body id="top" class="project-bg-active"
+      style="--project-bg-image: url('assets/projects/Beans-&-Rats/image.png');">
+
+  <div data-inject="components/navbar.html" data-target="#this"></div>
+
+  <main class="project-main">
+
+    <!-- HERO -->
+    <header class="project-hero">
+      <div class="project-hero-media" aria-hidden="true">
+        <img src="assets/projects/Beans-&-Rats/image.png" alt="" decoding="async" />
+      </div>
+      <div class="project-hero-overlay" aria-hidden="true"></div>
+
+      <div class="container project-hero-content">
+        <a class="project-back" href="projects.html">← Back to Projects</a>
+
+        <div class="project-hero-grid">
+          <div class="project-hero-left">
+            <p class="project-kicker">Academic VR Project • April 2024</p>
+            <h1 class="project-title">Beans & Rats</h1>
+            <p class="project-subtitle">
+              VR alchemy prototype focused on interaction feel, shaders, and production-friendly tech art.
+            </p>
+
+            <div class="project-cta">
+              <a class="btn btn-primary" href="#" target="_blank" rel="noopener">Watch Trailer</a>
+              <a class="btn btn-ghost" href="#" target="_blank" rel="noopener">GitHub</a>
+            </div>
+
+            <div class="tags" role="list" aria-label="Technologies">
+              <span class="tag" role="listitem">Unity (URP)</span>
+              <span class="tag" role="listitem">C#</span>
+              <span class="tag" role="listitem">Shader Graph</span>
+              <span class="tag" role="listitem">VFX Graph</span>
+              <span class="tag" role="listitem">FMOD</span>
+            </div>
+          </div>
+
+          <aside class="project-hero-right">
+            <div class="panel panel-tight">
+              <h2 class="panel-title">Project info</h2>
+
+              <dl class="facts">
+                <div class="fact">
+                  <dt>Date</dt><dd>April 2024</dd>
+                </div>
+                <div class="fact">
+                  <dt>Type</dt><dd>Academic VR Project</dd>
+                </div>
+                <div class="fact">
+                  <dt>Tools</dt><dd>Unity, Blender, Krita, FMOD</dd>
+                </div>
+                <div class="fact">
+                  <dt>Role</dt><dd>Tech Art • Gameplay</dd>
+                </div>
+                <div class="fact">
+                  <dt>Status</dt><dd><span class="status status-live">Playable</span></dd>
+                </div>
+              </dl>
+
+              <div class="panel-actions">
+                <a class="mini-link" href="#gallery">Jump to gallery ↓</a>
+              </div>
+            </div>
+          </aside>
+        </div>
+      </div>
+    </header>
+
+    <!-- BODY -->
+    <section class="project-body">
+      <div class="container">
+        <div class="project-layout">
+
+          <article class="project-article">
+
+            <section class="panel reveal" id="overview">
+              <h2 class="section-title">Overview</h2>
+              <p class="section-text">
+                Short, readable summary: what it is, what problem it solves, and what you shipped.
+                Keep it to 3–5 sentences max.
+              </p>
+
+              <div class="callouts">
+                <div class="callout">
+                  <p class="callout-title">Goal</p>
+                  <p class="callout-text">Make VR interactions feel “sticky” and readable with clean VFX + feedback.</p>
+                </div>
+                <div class="callout">
+                  <p class="callout-title">Focus</p>
+                  <p class="callout-text">Gameplay loop, shaders, VFX, and tool-friendly pipeline.</p>
+                </div>
+                <div class="callout">
+                  <p class="callout-title">Result</p>
+                  <p class="callout-text">Playable prototype with stable performance and clear interaction language.</p>
+                </div>
+              </div>
+            </section>
+
+            <section class="panel reveal" id="role">
+              <h2 class="section-title">My role</h2>
+              <p class="section-text">
+                One paragraph: responsibilities + scope + what decisions you owned.
+              </p>
+
+              <ul class="bullet">
+                <li>Gameplay logic (interaction, movement, progression hooks)</li>
+                <li>Cauldron system: recipe processing + correctness evaluation</li>
+                <li>Fluid pouring system + book page shader</li>
+                <li>VFX + post-processing + scene setup</li>
+              </ul>
+            </section>
+
+            <section class="panel reveal" id="highlights">
+              <h2 class="section-title">Highlights</h2>
+
+              <div class="highlight-grid">
+                <div class="highlight">
+                  <p class="highlight-title">Interaction feedback stack</p>
+                  <p class="highlight-text">
+                    Audio + VFX + subtle camera/lighting cues tuned for VR readability.
+                  </p>
+                </div>
+                <div class="highlight">
+                  <p class="highlight-title">Shader-driven book pages</p>
+                  <p class="highlight-text">
+                    Lightweight page-flip that sells material without heavy animation overhead.
+                  </p>
+                </div>
+                <div class="highlight">
+                  <p class="highlight-title">Performance mindset</p>
+                  <p class="highlight-text">
+                    Effects kept stable and scalable for “looks premium / runs on a toaster”.
+                  </p>
+                </div>
+              </div>
+            </section>
+
+            <section class="panel reveal" id="gallery">
+              <h2 class="section-title">Gallery</h2>
+
+              <div class="gallery">
+                <a class="shot" href="#" aria-label="Open image 1 (placeholder)">
+                  <img src="assets/projects/Beans-&-Rats/image.png" alt="Project screenshot 1" loading="lazy" decoding="async" />
+                </a>
+                <a class="shot" href="#" aria-label="Open image 2 (placeholder)">
+                  <img src="assets/projects/Slay-The-Nightmares/image.png" alt="Project screenshot 2" loading="lazy" decoding="async" />
+                </a>
+                <a class="shot" href="#" aria-label="Open image 3 (placeholder)">
+                  <img src="assets/projects/Purrrifiers-Cleaning-Chaos/image.png" alt="Project screenshot 3" loading="lazy" decoding="async" />
+                </a>
+                <a class="shot shot-wide" href="#" aria-label="Open image 4 (placeholder)">
+                  <img src="assets/projects/Turbo-Tire/image.png" alt="Project screenshot 4" loading="lazy" decoding="async" />
+                </a>
+              </div>
+
+              <p class="hint">
+                Tip: później te obrazki będą zaciągane z <code>projects.json</code>.
+              </p>
+            </section>
+
+            <section class="panel reveal" id="notes">
+              <h2 class="section-title">Notes / Lessons learned</h2>
+              <p class="section-text">
+                3–6 krótkich punktów: co zadziałało, co byś zrobił inaczej, jakie wnioski do pipeline’u.
+              </p>
+
+              <ul class="bullet bullet-muted">
+                <li>Small feedback layers beat one big “wow” effect in VR.</li>
+                <li>Authoring tools matter — future-me should be able to tweak without fear.</li>
+                <li>Keep shader complexity predictable; bake visuals into cheap layers.</li>
+              </ul>
+            </section>
+
+          </article>
+
+          <!-- TOC / STICKY -->
+          <aside class="project-aside">
+            <div class="panel panel-tight toc">
+              <h2 class="panel-title">On this page</h2>
+              <nav class="toc-nav" aria-label="Table of contents">
+                <a href="#overview">Overview</a>
+                <a href="#role">My role</a>
+                <a href="#highlights">Highlights</a>
+                <a href="#gallery">Gallery</a>
+                <a href="#notes">Notes</a>
+              </nav>
+            </div>
+
+            <div class="panel panel-tight">
+              <h2 class="panel-title">Links</h2>
+              <div class="link-list">
+                <a class="mini-link" href="#" target="_blank" rel="noopener">Trailer</a>
+                <a class="mini-link" href="#" target="_blank" rel="noopener">Build / Itch</a>
+                <a class="mini-link" href="#" target="_blank" rel="noopener">Source</a>
+              </div>
+            </div>
+          </aside>
+
+        </div>
+      </div>
+    </section>
+
+  </main>
+
+  <div data-inject="components/footer.html" data-target="#this"></div>
+
+  <script src="js/inject.js"></script>
+  <script src="js/animations.js"></script>
+</body>
+</html>
