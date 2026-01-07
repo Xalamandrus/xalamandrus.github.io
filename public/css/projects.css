@@ -110,6 +110,8 @@ body.projects-bg-active::before {
     position: relative;
     border-radius: var(--radius-lg);
     border: 1px solid var(--color-border-light);
+    text-decoration: none;
+    color: inherit;
     background:
         radial-gradient(circle at 0 0,
             rgba(88, 166, 255, 0.12),
