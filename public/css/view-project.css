@@ -1,4 +1,4 @@
-/* Optional background blur (jak wcześniej) */
+/* Optional background blur */
 body::before {
   content: "";
   position: fixed;
@@ -21,15 +21,24 @@ body.project-bg-active::before { opacity: 0.22; transform: scale(1.03); }
 /* Page spacing under fixed navbar */
 .project-main {
   min-height: 100vh;
-  padding-top: calc(72px + var(--spacing-xl));
+  padding-top: 72px;
 }
 
-/* HERO (zostaje “cinematic”, ale bez sidebara) */
+
+/* If a glass-strip is placed before the hero, overlap it so the image sits directly under the navbar */
+.glass-strip + .project-hero {
+  margin-top: -80px;
+  padding-top: calc(80px + var(--spacing-xl) + clamp(44px, 6vw, 86px));
+}
+
+
+/* HERO (cinematic, no sidebar) */
 .project-hero {
   position: relative;
   overflow: hidden;
   border-bottom: 1px solid var(--color-border-light);
-  padding-block: clamp(44px, 6vw, 86px);
+  padding-top: calc(var(--spacing-xl) + clamp(44px, 6vw, 86px));
+  padding-bottom: clamp(44px, 6vw, 86px);
   isolation: isolate;
 }
 
@@ -45,9 +54,9 @@ body.project-bg-active::before { opacity: 0.22; transform: scale(1.03); }
 .project-hero-overlay {
   position: absolute;
   inset: 0;
-  z-index: 0;
+  z-index: 1;
+  pointer-events: none;
   background:
-    radial-gradient(900px 700px at 0% 0%, rgba(88, 166, 255, 0.16), transparent 60%),
     linear-gradient(115deg,
       rgba(5, 8, 14, 0.86) 0%,
       rgba(5, 8, 14, 0.72) 38%,
@@ -55,7 +64,7 @@ body.project-bg-active::before { opacity: 0.22; transform: scale(1.03); }
       rgba(5, 8, 14, 0.0) 100%);
 }
 
-.project-hero-content { position: relative; z-index: 1; }
+.project-hero-content { position: relative; z-index: 2; }
 
 .project-back {
   display: inline-flex;
@@ -102,7 +111,7 @@ body.project-bg-active::before { opacity: 0.22; transform: scale(1.03); }
   margin-bottom: var(--spacing-lg);
 }
 
-/* Buttons (spójne z resztą, bez nowych “systemów”) */
+/* Buttons (aligned with the rest of the site) */
 .project-cta { display: flex; gap: var(--spacing-md); flex-wrap: wrap; margin-bottom: var(--spacing-lg); }
 
 .btn {
@@ -143,7 +152,7 @@ body.project-bg-active::before { opacity: 0.22; transform: scale(1.03); }
   max-width: 80ch;
 }
 
-/* Project info: prosto, czytelnie */
+/* Project info: clean and readable */
 .vp-info {
   display: grid;
   grid-template-columns: 1fr;
@@ -191,7 +200,7 @@ body.project-bg-active::before { opacity: 0.22; transform: scale(1.03); }
 .vp-bullets { margin-top: var(--spacing-md); padding-left: 18px; }
 .vp-bullets li { margin: 8px 0; color: var(--color-text-secondary); }
 
-/* Gallery: spójnie, bez “kart” */
+/* Gallery: consistent, minimal */
 .vp-gallery {
   display: grid;
   grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
@@ -232,4 +241,48 @@ body.project-bg-active::before { opacity: 0.22; transform: scale(1.03); }
 
 @media (max-width: 700px) {
   .vp-info-row { grid-template-columns: 1fr; gap: 6px; }
+}
+
+
+/* ====== RHYTHM / SPACING (match projects page) ====== */
+
+@media (max-width: 1024px) {
+  .project-main {
+    padding-top: 72px;
+  }
+  .vp-block {
+    scroll-margin-top: calc(72px + 48px);
+  }
+}
+
+/* Section-like spacing + separators (same vibe as .projects-section) */
+.vp-page { padding-block: 0; }
+
+.vp-block {
+  padding-block: var(--section-padding);
+  border-top: 1px solid var(--color-border-light);
+  scroll-margin-top: calc(72px + 48px);
+}
+
+.vp-block:first-of-type { border-top: none; }
+
+/* Consistent breathing room for tag clusters */
+.vp-tags,
+.vp-tools { margin-top: var(--spacing-md); }
+
+/* Code blocks (consistent with glass/soft borders) */
+.vp-block pre {
+  margin-top: var(--spacing-md);
+  padding: var(--spacing-lg);
+  border-radius: var(--radius-md);
+  overflow-x: auto;
+  background: rgba(255, 255, 255, 0.04);
+  border: 1px solid rgba(255, 255, 255, 0.08);
+  box-shadow: var(--shadow-md);
+}
+
+.vp-block code {
+  font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, "Liberation Mono", "Courier New", monospace;
+  font-size: 0.9rem;
+  color: rgba(154, 213, 255, 0.95);
 }
