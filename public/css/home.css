@@ -421,7 +421,9 @@
 
 /* <========== HIGHLIGHTS ==========> */
 
-.highlights {
+.highlights { 
+    --interval: 5s; 
+    --card-w: clamp(520px, 46vw, 780px);
     display: flex;
     justify-content: center;
     align-items: center;
@@ -431,46 +433,60 @@
 
 .highlight-stack {
     position: relative;
-    width: clamp(340px, 60vw, 820px);
-    aspect-ratio: 16 / 9;
+    width: min(1280px, 94vw);
+    height: clamp(280px, 30vw, 460px);
+    margin: 0 auto;
 }
 
+/* absolute positioning to overlap */
 .highlight-card {
     position: absolute;
-    inset: 0;
+    top: 0;
+    width: var(--card-w);
+    aspect-ratio: 16 / 9;
     border-radius: var(--radius-lg);
     overflow: hidden;
     background: rgba(255, 255, 255, 0.02);
     box-shadow: 0 18px 45px rgba(0, 0, 0, 0.45);
     transform-origin: center;
-    transition: transform 0.7s ease, opacity 0.6s ease, filter 0.6s ease;
+    transition: transform 0.5s ease, opacity 0.5s ease, filter 0.5s ease, box-shadow 0.5s ease;
+    opacity: 0.9;
+}
+
+.highlight-card.pos-1 {
+    left: 0%;
+    transform: translateX(0) translateY(14px) scale(0.96) rotate(-4deg);
+    cursor: pointer;
+    z-index: 1;
+}
+
+.highlight-card.pos-2 {
+    left: 50%;
+    transform: translateX(-50%) translateY(-10px) scale(1.06);
+    z-index: 3;
+    opacity: 1;
+    filter: brightness(1);
+}
+
+.highlight-card.pos-3 {
+    left: 100%;
+    transform: translateX(-100%) translateY(14px) scale(0.96) rotate(4deg);
+    cursor: pointer;
+    z-index: 1;
 }
 
 .highlight-card img {
     width: 100%;
     height: 100%;
     object-fit: cover;
+    object-position: center;
     filter: brightness(0.95);
+    transition: opacity 0.6s ease, transform 0.6s ease;
 }
 
-.active {
-    z-index: 3;
-    transform: translate(0, 0) scale(1);
-    filter: brightness(1);
-}
-
-.behind-1 {
-    z-index: 2;
-    opacity: 0.85;
-    transform: translate(24px, -24px) scale(0.96);
-    filter: blur(1px) brightness(0.85);
-}
-
-.behind-2 {
-    z-index: 1;
-    opacity: 0.7;
-    transform: translate(48px, -48px) scale(0.92);
-    filter: blur(2px) brightness(0.7);
+.highlight-card.transitioning img {
+    opacity: 0;
+    transform: scale(1.05);
 }
 
 .card-info {
@@ -481,6 +497,13 @@
     padding: var(--spacing-lg) var(--spacing-xl) var(--spacing-2xl);
     background: linear-gradient(to top, rgba(0, 0, 0, 0.75), rgba(0, 0, 0, 0));
     color: var(--color-text-bright);
+    z-index: 2;
+    transition: opacity 0.5s ease, transform 0.5s ease;
+}
+
+.card-info.transitioning {
+    opacity: 0;
+    transform: translateY(15px);
 }
 
 .card-info h3 {
@@ -493,7 +516,7 @@
     font-size: var(--text-body-size);
     line-height: 1.6;
     opacity: 0.9;
-    max-width: 90%;
+    max-width: 80%;
     margin: 0;
 }
 
@@ -521,6 +544,7 @@
     height: 4px;
     width: 100%;
     background: rgba(255, 255, 255, 0.1);
+    z-index: 3;
 }
 
 .progress-fill {
@@ -530,26 +554,34 @@
     height: 100%;
     width: 0%;
     background: var(--gradient-primary);
-    animation: progressSlide 5s linear infinite;
 }
 
 @keyframes progressSlide {
-    from {
-        width: 0%;
-    }
-    to {
-        width: 100%;
-    }
+    from { width: 0%; }
+    to { width: 100%; }
 }
 
-@media (max-width: 800px) {
+@media (max-width: 860px) {
     .highlight-stack {
+        height: auto;
+        display: grid;
+        gap: var(--spacing-lg);
+        grid-template-columns: 1fr;
         width: 92%;
     }
-    .behind-1 {
-        transform: translate(12px, -12px) scale(0.96);
+    .highlight-card,
+    .highlight-card.pos-1,
+    .highlight-card.pos-2,
+    .highlight-card.pos-3 {
+        position: relative;
+        left: auto;
+        transform: none;
+        width: 100%;
+        rotate: 0deg;
+        opacity: 1;
+        cursor: default;
     }
-    .behind-2 {
-        transform: translate(24px, -24px) scale(0.92);
+    .card-info p {
+        max-width: 100%;
     }
 }
