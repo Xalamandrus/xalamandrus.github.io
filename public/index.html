@@ -14,8 +14,10 @@
     <div data-inject="components/navbar.html" data-target="#this"></div>
 
     <section class="showcase" id="home">
-        <img class="showcase-media" alt="Project Preview 1" decoding="async">
-        <img class="showcase-media" alt="Project Preview 2" decoding="async">
+        <video class="showcase-video" autoplay muted loop playsinline>
+            <source src="./assets/projects/test.mp4" type="video/mp4">
+            Your browser does not support the video tag.
+        </video>
         <div class="showcase-overlay"></div>
 
         <div class="showcase-caption">
@@ -102,7 +104,6 @@
 
     <script src="js/inject.js"></script>
     <script src="js/animations.js"></script>
-    <script src="js/showcase-media.js"></script>
     <script src="js/anchor-scroll.js"></script>
 </body>
 </html>
