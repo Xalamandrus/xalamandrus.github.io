@@ -14,10 +14,8 @@
     <div data-inject="components/navbar.html" data-target="#this"></div>
 
     <section class="showcase" id="home">
-        <video class="showcase-video" autoplay muted loop playsinline>
-            <source src="./assets/projects/test.mp4" type="video/mp4">
-            Your browser does not support the video tag.
-        </video>
+        <img class="showcase-media" alt="Project Preview 1" decoding="async">
+        <img class="showcase-media" alt="Project Preview 2" decoding="async">
         <div class="showcase-overlay"></div>
 
         <div class="showcase-caption">
@@ -32,32 +30,8 @@
     </section>
 
     <div class="glass-strip"></div>
-
-    <section class="highlights" id="highlights">
-        <div class="highlight-stack">
-            <div class="highlight-card pos-1">
-                <img src="./assets/projects/Journey-Of-Johan/image.png" alt="Journey Of Johan">
-            </div>
-
-            <div class="highlight-card pos-2">
-                <img src="./assets/projects/Slay-The-Nightmares/image.png" alt="Slay The Nightmares">
-                <div class="card-info">
-                    <h3>Slay The Nightmares</h3>
-                    <p>Dynamiczna akcja i mroczny klimat. Walcz z koszmarami w rytmie arcade.</p>
-                    <a href="#" class="btn-highlight">View Project →</a>
-                </div>
-                <div class="progress-bar"><div class="progress-fill"></div></div>
-            </div>
-
-            <div class="highlight-card pos-3">
-                <img src="./assets/projects/Beans-&-Rats/image.png" alt="Beans & Rats">
-            </div>
-        </div>
-    </section>
-
-    <div class="glass-strip"></div>
     
-    <section class="abount reveal" id="about" aria-labelledby="about-kicker">
+    <section class="about reveal" id="about" aria-labelledby="about-kicker">
         <div class="container">
             <div class="grid">
                 <div class="avatar-wrap">
@@ -100,6 +74,7 @@
 
     <script src="js/inject.js"></script>
     <script src="js/animations.js"></script>
+    <script src="js/showcase-media.js"></script>
     <script src="js/anchor-scroll.js"></script>
 </body>
 </html>

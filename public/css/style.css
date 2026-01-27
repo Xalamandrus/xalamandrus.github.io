@@ -165,7 +165,6 @@
     background: rgba(22, 27, 34, 0.45);
     backdrop-filter: blur(var(--blur-md)) saturate(150%);
     border-top: 1px solid rgba(255, 255, 255, 0.08);
-    margin-top: var(--spacing-3xl);
     color: var(--color-text-primary);
 }
 
