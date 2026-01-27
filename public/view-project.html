@@ -88,19 +88,107 @@
         </div>
       </section>
 
+      <section class="vp-block reveal" id="challenges">
+        <div class="container">
+          <h2 class="vp-heading text-heading">Challenges & Solutions</h2>
+
+          <div class="vp-challenges">
+            <div class="challenge-item">
+              <div class="challenge-icon">⚡</div>
+              <div class="challenge-content">
+                <h3 class="challenge-title">Performance Optimization</h3>
+                <p class="challenge-description">
+                  Optymalizacja renderingu setek przeciwników jednocześnie przy zachowaniu płynności 60 FPS.
+                  Zastosowanie object pooling oraz LOD system dla modeli 3D.
+                </p>
+              </div>
+            </div>
+
+            <div class="challenge-item">
+              <div class="challenge-icon">🎨</div>
+              <div class="challenge-content">
+                <h3 class="challenge-title">Visual Style Consistency</h3>
+                <p class="challenge-description">
+                  Utrzymanie spójnego stylu 2.5D przy użyciu custom shaderów i post-processingu.
+                  Stworzenie systemu materiałów zapewniającego jednolity look.
+                </p>
+              </div>
+            </div>
+
+            <div class="challenge-item">
+              <div class="challenge-icon">⚔️</div>
+              <div class="challenge-content">
+                <h3 class="challenge-title">Weapon Transformation System</h3>
+                <p class="challenge-description">
+                  Płynne przejścia między formami broni z zachowaniem responsywności kontroli.
+                  Implementacja state machine dla różnych trybów ataku.
+                </p>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
       <section class="vp-block reveal" id="gallery">
         <div class="container">
           <h2 class="vp-heading text-heading">Gallery</h2>
 
           <div class="vp-gallery" role="list">
-            <a class="vp-shot" href="assets/img/slay1.png" role="listitem">
-              <img src="assets/img/slay1.png" alt="Gameplay screenshot 1" loading="lazy" decoding="async" />
+            <!-- Featured wide image -->
+            <a class="vp-shot vp-shot--wide" href="assets/projects/Slay-The-Nightmares/image.png" role="listitem" data-lightbox>
+              <img src="assets/projects/Slay-The-Nightmares/image.png" alt="Gameplay screenshot - Main arena battle" loading="lazy" decoding="async" />
             </a>
-            <a class="vp-shot" href="assets/img/slay2.png" role="listitem">
-              <img src="assets/img/slay2.png" alt="Gameplay screenshot 2" loading="lazy" decoding="async" />
+
+            <!-- Regular images -->
+            <a class="vp-shot" href="assets/projects/Slay-The-Nightmares/image2.png" role="listitem" data-lightbox>
+              <img src="assets/projects/Slay-The-Nightmares/image2.png" alt="Gameplay screenshot - Weapon transformation" loading="lazy" decoding="async" />
             </a>
-            <a class="vp-shot" href="assets/img/slay3.png" role="listitem">
-              <img src="assets/img/slay3.png" alt="Gameplay screenshot 3" loading="lazy" decoding="async" />
+            
+            <a class="vp-shot" href="assets/projects/Slay-The-Nightmares/image3.png" role="listitem" data-lightbox>
+              <img src="assets/projects/Slay-The-Nightmares/image3.png" alt="Gameplay screenshot - Enemy wave" loading="lazy" decoding="async" />
+            </a>
+
+            <a class="vp-shot" href="assets/projects/Slay-The-Nightmares/image4.png" role="listitem" data-lightbox>
+              <img src="assets/projects/Slay-The-Nightmares/image4.png" alt="Gameplay screenshot - Boss encounter" loading="lazy" decoding="async" />
+            </a>
+
+            <a class="vp-shot" href="assets/projects/Slay-The-Nightmares/image5.png" role="listitem" data-lightbox>
+              <img src="assets/projects/Slay-The-Nightmares/image5.png" alt="Gameplay screenshot - VFX showcase" loading="lazy" decoding="async" />
+            </a>
+
+            <a class="vp-shot" href="assets/projects/Slay-The-Nightmares/image6.png" role="listitem" data-lightbox>
+              <img src="assets/projects/Slay-The-Nightmares/image6.png" alt="Gameplay screenshot - Environment detail" loading="lazy" decoding="async" />
+            </a>
+
+            <!-- Tall image example (optional) -->
+            <!-- <a class="vp-shot vp-shot--tall" href="assets/img/slay4.png" role="listitem" data-lightbox>
+              <img src="assets/img/slay4.png" alt="Gameplay screenshot - Character detail" loading="lazy" decoding="async" />
+            </a> -->
+
+            <!-- Add more images as needed -->
+          </div>
+
+          <div class="vp-timeline" role="list">
+            <a class="timeline-item" href="assets/projects/Slay-The-Nightmares/timeline-01.png" role="listitem" data-lightbox>
+              <img class="timeline-img" src="assets/projects/Slay-The-Nightmares/timeline-01.png" alt="Wczesny prototyp HUD - styczeń 2023" loading="lazy" decoding="async" />
+              <div class="timeline-meta">
+                <span class="timeline-date">01.2023</span>
+                <p class="timeline-caption">Wczesny prototyp HUD i pierwsze fale przeciwników.</p>
+              </div>
+            </a>
+            <a class="timeline-item" href="assets/projects/Slay-The-Nightmares/timeline-02.png" role="listitem" data-lightbox>
+              <img class="timeline-img" src="assets/projects/Slay-The-Nightmares/timeline-02.png" alt="Polish ruchu i efektów - czerwiec 2023" loading="lazy" decoding="async" />
+              <div class="timeline-meta">
+                <span class="timeline-date">06.2023</span>
+                <p class="timeline-caption">Dopieszczone animacje ruchu, pierwsze shadery i VFX.</p>
+              </div>
+            </a>
+            <a class="timeline-item" href="assets/projects/Slay-The-Nightmares/timeline-03.png" role="listitem" data-lightbox>
+              <img class="timeline-img" src="assets/projects/Slay-The-Nightmares/timeline-03.png" alt="Aktualny wygląd gry - listopad 2023" loading="lazy" decoding="async" />
+              <div class="timeline-meta">
+                <span class="timeline-date">11.2023</span>
+                <p class="timeline-caption">Finalny look: pełna oprawa 2.5D, post-process i dopracowane UI.</p>
+              </div>
             </a>
           </div>
         </div>
@@ -108,24 +196,121 @@
 
       <section class="vp-block reveal" id="code">
         <div class="container">
-          <h2 class="vp-heading text-heading">Example Code Snippet</h2>
+          <h2 class="vp-heading text-heading">Code Examples</h2>
 
-          <pre><code class="language-csharp">// Example: Weapon Transformation System
+          <div class="code-tabs" role="tablist">
+            <button class="code-tab active" role="tab" data-tab="weapon" aria-selected="true">
+              Weapon System
+            </button>
+            <button class="code-tab" role="tab" data-tab="enemy" aria-selected="false">
+              Enemy AI
+            </button>
+            <button class="code-tab" role="tab" data-tab="vfx" aria-selected="false">
+              VFX Controller
+            </button>
+          </div>
+
+          <div class="code-panels">
+            <div class="code-panel active" role="tabpanel" data-panel="weapon">
+              <pre><code class="language-csharp">// Weapon Transformation System
 public class WeaponForm : MonoBehaviour
 {
     [SerializeField] private WeaponType currentForm;
     [SerializeField] private GameObject[] forms;
+    [SerializeField] private float transformDuration = 0.3f;
+
+    private bool isTransforming = false;
 
     public void SwitchForm(WeaponType newForm)
     {
-        if (newForm == currentForm) return;
+        if (newForm == currentForm || isTransforming) return;
+        StartCoroutine(TransformCoroutine(newForm));
+    }
 
+    private IEnumerator TransformCoroutine(WeaponType newForm)
+    {
+        isTransforming = true;
+        
+        // Play VFX
+        PlayTransformEffect();
+        
+        yield return new WaitForSeconds(transformDuration);
+        
         forms[(int)currentForm].SetActive(false);
         currentForm = newForm;
         forms[(int)currentForm].SetActive(true);
+        
+        isTransforming = false;
     }
-}
-</code></pre>
+}</code></pre>
+            </div>
+
+            <div class="code-panel" role="tabpanel" data-panel="enemy">
+              <pre><code class="language-csharp">// Enemy AI Behavior
+public class NightmareAI : MonoBehaviour
+{
+    [SerializeField] private float detectionRange = 10f;
+    [SerializeField] private float attackRange = 2f;
+    
+    private Transform player;
+    private AIState currentState;
+
+    private void Update()
+    {
+        float distanceToPlayer = Vector3.Distance(transform.position, player.position);
+        
+        switch (currentState)
+        {
+            case AIState.Patrol:
+                if (distanceToPlayer < detectionRange)
+                    currentState = AIState.Chase;
+                break;
+                
+            case AIState.Chase:
+                ChasePlayer();
+                if (distanceToPlayer < attackRange)
+                    currentState = AIState.Attack;
+                break;
+                
+            case AIState.Attack:
+                AttackPlayer();
+                break;
+        }
+    }
+}</code></pre>
+            </div>
+
+            <div class="code-panel" role="tabpanel" data-panel="vfx">
+              <pre><code class="language-csharp">// VFX Controller for Abilities
+public class VFXController : MonoBehaviour
+{
+    [SerializeField] private ParticleSystem[] hitEffects;
+    [SerializeField] private ParticleSystem transformEffect;
+    
+    private ObjectPool<ParticleSystem> effectPool;
+
+    private void Start()
+    {
+        InitializePool();
+    }
+
+    public void PlayHitEffect(Vector3 position, int effectIndex)
+    {
+        var effect = effectPool.Get();
+        effect.transform.position = position;
+        effect.Play();
+        
+        StartCoroutine(ReturnToPoolAfterPlay(effect));
+    }
+
+    private IEnumerator ReturnToPoolAfterPlay(ParticleSystem effect)
+    {
+        yield return new WaitForSeconds(effect.main.duration);
+        effectPool.Return(effect);
+    }
+}</code></pre>
+            </div>
+          </div>
         </div>
       </section>
 
@@ -137,5 +322,7 @@ public class WeaponForm : MonoBehaviour
 
   <script src="js/inject.js"></script>
   <script src="js/animations.js"></script>
+  <script src="js/code-tabs.js"></script>
+  <script src="js/lightbox.js"></script>
 </body>
 </html>
