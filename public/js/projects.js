@@ -109,10 +109,10 @@
         const href = `view-project.html?slug=${encodeURIComponent(project.slug || '')}`;
 
         return `
-            <article class="project-card ${cardClass}" data-bg="${imageSrc}">
-                <a class="project-media" href="${href}">
+            <a href="${href}" class="project-card ${cardClass}" data-bg="${imageSrc}" role="article">
+                <div class="project-media">
                     <img src="${imageSrc}" alt="${project.title || 'Project'} preview">
-                </a>
+                </div>
                 <div class="project-layer">
                     <div class="project-body">
                         <p class="project-meta">${metaText}</p>
@@ -121,10 +121,9 @@
                     </div>
                     <div class="project-footer">
                         ${tagsHtml ? `<div class="tags" role="list">${tagsHtml}</div>` : ''}
-                        <a href="${href}" class="project-link">View project &nearrow;</a>
                     </div>
                 </div>
-            </article>
+            </a>
         `;
     };
 
@@ -135,7 +134,7 @@
 
             const projects = await fetchProjectDetails(indexItems);
 
-            const featured = projects.filter(p => p.featured === true);
+            const featured = projects.filter(p => p.featured === true).slice(0, 3);
             const nonFeatured = projects.filter(p => p.featured !== true);
 
             const featuredSorted = sortByDate(featured);

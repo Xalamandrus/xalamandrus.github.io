@@ -1,109 +1,158 @@
 (() => {
-  const section = document.querySelector('.highlights');
-  if (!section) return;
+    const projectsIndexUrl = 'assets/data/projects.json';
+    
+    const fetchProjectDetails = async (indexItems) => {
+        const tasks = (indexItems || []).map(async item => {
+            if (!item?.dataPath) return null;
+            try {
+                const res = await fetch(item.dataPath);
+                if (!res.ok) throw new Error(`Bad status ${res.status}`);
+                const data = await res.json();
+                return data;
+            } catch (err) {
+                console.error(`Error loading project data from ${item?.dataPath}:`, err);
+                return null;
+            }
+        });
+        const results = await Promise.all(tasks);
+        return results.filter(Boolean);
+    };
 
-  const stack = section.querySelector('.highlight-stack');
-  const cards = stack ? Array.from(stack.querySelectorAll('.highlight-card')) : [];
-  if (cards.length < 2) return;
+    const loadHighlights = async () => {
+        try {
+            const response = await fetch(projectsIndexUrl);
+            const indexItems = await response.json();
+            const projects = await fetchProjectDetails(indexItems);
+            const featured = projects.filter(p => p.featured === true).slice(0, 3);
 
-  const prefersReducedMotion = window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+            if (featured.length === 0) return;
 
-  const getDurationMs = () => {
-    const raw = getComputedStyle(section).getPropertyValue('--hl-duration').trim();
-    if (!raw) return 6000;
-    if (raw.endsWith('ms')) return Math.max(0, parseFloat(raw));
-    if (raw.endsWith('s')) return Math.max(0, parseFloat(raw) * 1000);
-    const n = parseFloat(raw);
-    return Number.isFinite(n) ? Math.max(0, n) : 6000;
-  };
+            const stack = document.querySelector('.highlight-stack');
+            if (!stack) return;
 
-  let durationMs = getDurationMs();
-  let current = Math.max(0, cards.findIndex(c => c.classList.contains('active')));
-  let intervalId = null;
-  let exitTimeoutId = null;
+            stack.innerHTML = '';
 
-  const restartProgress = (card) => {
-    const fill = card.querySelector('.progress-fill');
-    if (!fill) return;
+            featured.forEach((project, idx) => {
+                const isActive = idx === 0;
+                const article = document.createElement('article');
+                article.className = `highlight-card ${isActive ? 'active' : ''} ${idx === 1 ? 'behind behind-1' : ''} ${idx === 2 ? 'behind behind-2' : ''}`;
+                article.setAttribute('aria-hidden', isActive ? 'false' : 'true');
+                article.innerHTML = `
+                    <img src="${project.heroImage || 'assets/projects/default.png'}" alt="${project.title}">
+                    <div class="card-info">
+                        <h3>${project.title || ''}</h3>
+                        <p>${project.description || ''}</p>
+                        <a href="view-project.html?slug=${encodeURIComponent(project.slug || '')}" class="btn-highlight">View Project →</a>
+                    </div>
+                    <div class="progress-bar" aria-hidden="true"><div class="progress-fill"></div></div>
+                `;
+                stack.appendChild(article);
+            });
 
-    // Reset the animation reliably by forcing a reflow between toggles.
-    // This is a common technique (remove animation -> reflow -> re-add).
-    // https://css-tricks.com/restart-css-animation/
-    fill.style.animation = 'none';
-    void fill.offsetWidth; // force reflow
-    fill.style.animation = '';
-  };
+            initHighlightsLogic();
+        } catch (error) {
+            console.error('Error loading highlights:', error);
+        }
+    };
 
-  const applyState = (activeIndex) => {
-    const count = cards.length;
-    const i0 = activeIndex % count;
-    const i1 = (activeIndex + 1) % count;
-    const i2 = (activeIndex + 2) % count;
+    const initHighlightsLogic = () => {
+        const section = document.querySelector('.highlights');
+        if (!section) return;
 
-    cards.forEach(c => {
-      c.classList.remove('active', 'behind', 'behind-1', 'behind-2', 'is-exiting');
-      c.setAttribute('aria-hidden', 'true');
-    });
+        const stack = section.querySelector('.highlight-stack');
+        const cards = stack ? Array.from(stack.querySelectorAll('.highlight-card')) : [];
+        if (cards.length < 2) return;
 
-    cards[i0].classList.add('active');
-    cards[i0].setAttribute('aria-hidden', 'false');
-    cards[i1].classList.add('behind', 'behind-1');
-    cards[i2].classList.add('behind', 'behind-2');
+        const prefersReducedMotion = window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches;
 
-    restartProgress(cards[i0]);
-  };
+        const getDurationMs = () => {
+            const raw = getComputedStyle(section).getPropertyValue('--hl-duration').trim();
+            if (!raw) return 6000;
+            if (raw.endsWith('ms')) return Math.max(0, parseFloat(raw));
+            if (raw.endsWith('s')) return Math.max(0, parseFloat(raw) * 1000);
+            const n = parseFloat(raw);
+            return Number.isFinite(n) ? Math.max(0, n) : 6000;
+        };
 
-  const stop = () => {
-    if (intervalId) window.clearInterval(intervalId);
-    intervalId = null;
+        let durationMs = getDurationMs();
+        let current = Math.max(0, cards.findIndex(c => c.classList.contains('active')));
+        let intervalId = null;
+        let exitTimeoutId = null;
 
-    if (exitTimeoutId) window.clearTimeout(exitTimeoutId);
-    exitTimeoutId = null;
-  };
+        const restartProgress = (card) => {
+            const fill = card.querySelector('.progress-fill');
+            if (!fill) return;
+            fill.style.animation = 'none';
+            void fill.offsetWidth;
+            fill.style.animation = '';
+        };
 
-  const step = () => {
-    const leaving = cards[current];
-    leaving.classList.add('is-exiting');
+        const applyState = (activeIndex) => {
+            const count = cards.length;
+            const i0 = activeIndex % count;
+            const i1 = (activeIndex + 1) % count;
+            const i2 = (activeIndex + 2) % count;
 
-    // Small exit animation, then swap the stacking classes.
-    exitTimeoutId = window.setTimeout(() => {
-      leaving.classList.remove('is-exiting');
-      current = (current + 1) % cards.length;
-      applyState(current);
-    }, 320);
-  };
+            cards.forEach(c => {
+                c.classList.remove('active', 'behind', 'behind-1', 'behind-2', 'is-exiting');
+                c.setAttribute('aria-hidden', 'true');
+            });
 
-  const start = () => {
-    stop();
-    durationMs = getDurationMs();
-    applyState(current);
+            cards[i0].classList.add('active');
+            cards[i0].setAttribute('aria-hidden', 'false');
+            if (cards.length > 1) {
+                cards[i1].classList.add('behind', 'behind-1');
+                if (cards.length > 2) cards[i2].classList.add('behind', 'behind-2');
+            }
 
-    if (prefersReducedMotion || durationMs <= 0) return;
-    intervalId = window.setInterval(step, durationMs);
-  };
+            restartProgress(cards[i0]);
+        };
 
-  // Click to bring a card to the front (optional but feels good).
-  cards.forEach((card, idx) => {
-    card.addEventListener('click', (e) => {
-      // Don't block normal navigation on buttons/links.
-      if (e.target.closest('a')) return;
+        const stop = () => {
+            if (intervalId) window.clearInterval(intervalId);
+            intervalId = null;
+            if (exitTimeoutId) window.clearTimeout(exitTimeoutId);
+            exitTimeoutId = null;
+        };
 
-      current = idx;
-      start();
-    });
-  });
+        const step = () => {
+            const leaving = cards[current];
+            leaving.classList.add('is-exiting');
+            exitTimeoutId = window.setTimeout(() => {
+                leaving.classList.remove('is-exiting');
+                current = (current + 1) % cards.length;
+                applyState(current);
+            }, 320);
+        };
 
-  // Pause when tab is hidden.
-  document.addEventListener('visibilitychange', () => {
-    if (document.hidden) stop();
-    else start();
-  });
+        const start = () => {
+            stop();
+            durationMs = getDurationMs();
+            applyState(current);
+            if (prefersReducedMotion || durationMs <= 0) return;
+            intervalId = window.setInterval(step, durationMs);
+        };
 
-  // If CSS variables load late, re-sync duration.
-  window.addEventListener('resize', () => {
-    const next = getDurationMs();
-    if (Math.abs(next - durationMs) > 50) start();
-  });
+        cards.forEach((card, idx) => {
+            card.addEventListener('click', (e) => {
+                if (e.target.closest('a')) return;
+                current = idx;
+                start();
+            });
+        });
 
-  start();
+        document.addEventListener('visibilitychange', () => {
+            if (document.hidden) stop();
+            else start();
+        });
+
+        window.addEventListener('resize', () => {
+            const next = getDurationMs();
+            if (Math.abs(next - durationMs) > 50) start();
+        });
+
+        start();
+    };
+
+    document.addEventListener('DOMContentLoaded', loadHighlights);
 })();

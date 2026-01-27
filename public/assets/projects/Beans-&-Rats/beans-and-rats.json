@@ -1,12 +1,12 @@
 {
   "slug": "beans-and-rats",
   "title": "Beans & Rats",
-  "kicker": "PROJECT TYPE (np. ACADEMIC VR PROJECT, INTERNSHIP 3D PROJECT, GAMEJAM PROJECT)",
+  "kicker": "ACADEMIC VR PROJECT",
   "subtitle": "Krótki opis projektu w 1-2 zdaniach.",
   
   "heroImage": "assets/projects/Beans-&-Rats/Gallery/image.png",
 
-  "type": "Academic VR Project / Internship 3D Project / GameJam / itp.",
+  "type": "Academic VR Project",
   "featured": true,
   
   "overview": "Długi opis projektu - co to jest, jaki był cel, jak wygląda rozgrywka. Kilka zdań opisujących kontekst i główne cechy projektu.",

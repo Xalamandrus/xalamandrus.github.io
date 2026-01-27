@@ -2,30 +2,5 @@
     {
         "slug": "beans-and-rats",
         "dataPath": "assets/projects/Beans-&-Rats/beans-and-rats.json"
-    },
-
-    {
-        "slug": "slay-the-nightmares",
-        "dataPath": "assets/projects/Slay-The-Nightmares/slay-the-nightmares.json"
-    },
-
-    {
-        "slug": "purrrifiers-cleaning-chaos",
-        "dataPath": "assets/projects/Purrrifiers-Cleaning-Chaos/purrrifiers-cleaning-chaos.json"
-    },
-
-    {
-        "slug": "turbo-tire",
-        "dataPath": "assets/projects/Turbo-Tire/turbo-tire.json"
-    },
-
-    {
-        "slug": "can-a-fella-borrow-a-french-fry",
-        "dataPath": "assets/projects/Can-A-Fella/can-a-fella.json"
-    },
-
-    {
-        "slug": "journey-of-johan",
-        "dataPath": "assets/projects/Journey-Of-Johan/journey-of-johan.json"
     }
 ]
