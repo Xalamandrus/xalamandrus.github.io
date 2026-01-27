@@ -1,0 +1,97 @@
+{
+  "slug": "project-slug-name",
+  "title": "Project Title",
+  "kicker": "PROJECT TYPE (np. ACADEMIC VR PROJECT, INTERNSHIP 3D PROJECT, GAMEJAM PROJECT)",
+  "subtitle": "Krótki opis projektu w 1-2 zdaniach.",
+  
+  "heroImage": "assets/projects/Project-Name/image.png",
+  
+  "type": "Academic VR Project / Internship 3D Project / GameJam / itp.",
+  "featured": true,
+  
+  "overview": "Długi opis projektu - co to jest, jaki był cel, jak wygląda rozgrywka. Kilka zdań opisujących kontekst i główne cechy projektu.",
+  
+  "role": "Twoja rola w projekcie - za co odpowiadałeś, jakie systemy stworzyłeś, jakie narzędzia użyłeś. Szczegółowy opis Twojego wkładu technicznego.",
+  
+  "tools": [
+    "Unity",
+    "Visual Studio",
+    "Blender",
+    "Krita",
+    "FMOD"
+  ],
+  
+  "tags": [
+    "C# Gameplay",
+    "Shader Graph",
+    "VFX",
+    "Post-process",
+    "Custom Pipeline"
+  ],
+  
+  "technologies": [
+    "Unity (URP)",
+    "C#",
+    "Shader Graph",
+    "VFX Graph",
+    "Compute Shader"
+  ],
+  
+  "description": "Krótki opis do karty projektu na liście (1-2 zdania max).",
+  
+  "challenges": [
+    {
+      "icon": "⚡",
+      "title": "Nazwa wyzwania",
+      "description": "Opis problemu i jak go rozwiązałeś. Co było trudne, jakie podejście zastosowałeś."
+    },
+    {
+      "icon": "🎨",
+      "title": "Drugie wyzwanie",
+      "description": "Kolejny problem techniczny lub artystyczny i jego rozwiązanie."
+    },
+    {
+      "icon": "⚔️",
+      "title": "Trzecie wyzwanie",
+      "description": "Trzeci problem do pokazania Twoich umiejętności problem-solving."
+    }
+  ],
+  
+  "timelineDates": [
+    "01.2023",
+    "06.2023",
+    "11.2023"
+  ],
+  
+  "timelineCaptions": [
+    "Opis tego co było na początku projektu - wczesny prototyp, pierwsze mechaniki.",
+    "Opis środkowej fazy - dopracowanie, dodanie nowych feature'ów.",
+    "Opis finalnej wersji - ostateczny wygląd, wszystkie systemy działają."
+  ],
+  
+  "codeExamples": [
+    {
+      "id": "example1",
+      "title": "Nazwa systemu 1",
+      "language": "csharp",
+      "code": "// Komentarz\npublic class ExampleClass : MonoBehaviour\n{\n    // Twój kod tutaj\n}\n"
+    },
+    {
+      "id": "example2",
+      "title": "Nazwa systemu 2",
+      "language": "csharp",
+      "code": "// Drugi przykład kodu\n"
+    },
+    {
+      "id": "example3",
+      "title": "Nazwa systemu 3",
+      "language": "csharp",
+      "code": "// Trzeci przykład kodu\n"
+    }
+  ],
+  
+  "headings": {
+    "overview": "Project Overview",
+    "role": "My Role"
+  }
+}

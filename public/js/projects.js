@@ -1,6 +1,6 @@
 // Blur tła + Render projektów z projects.json
 (function() {
-    const projectsUrl = 'assets/data/projects.json';
+    const projectsIndexUrl = 'assets/data/projects.json';
     const fadeDuration = 100; // ms; sparowane z CSS transition w body::before
     let fadeTimeout;
 
@@ -54,44 +54,74 @@
     };
     const focusoutHandler = () => hideBackground();
 
-    // ====== RENDER Z JSON ======
+    // ====== RENDER Z JSON (wielu plików) ======
+    const fetchDateForSlug = async (slug) => {
+        if (!slug) return null;
+        try {
+            const res = await fetch(`assets/projects/${slug}/date.txt`, { cache: 'no-store' });
+            if (!res.ok) throw new Error(`Bad status ${res.status}`);
+            const text = (await res.text()).trim();
+            return text || null;
+        } catch (err) {
+            console.warn(`Date not found for slug '${slug}':`, err);
+            return null;
+        }
+    };
+
+    const fetchProjectDetails = async (indexItems) => {
+        const tasks = (indexItems || []).map(async item => {
+            if (!item?.dataPath) return null;
+            try {
+                const res = await fetch(item.dataPath);
+                if (!res.ok) throw new Error(`Bad status ${res.status}`);
+                const data = await res.json();
+                const slug = data.slug || item.slug || '';
+                const dateFromFile = await fetchDateForSlug(slug);
+                return { ...data, slug, date: dateFromFile || data.date || '', dataPath: item.dataPath };
+            } catch (err) {
+                console.error(`Error loading project data from ${item?.dataPath}:`, err);
+                return null;
+            }
+        });
+        const results = await Promise.all(tasks);
+        return results.filter(Boolean);
+    };
+
     const parseDate = (dateStr) => {
         const months = {
             'January': 0, 'February': 1, 'March': 2, 'April': 3, 'May': 4, 'June': 5,
             'July': 6, 'Juli': 6, 'August': 7, 'September': 8, 'October': 9, 'November': 10, 'December': 11
         };
-        const [monthStr, year] = dateStr.split(' ');
+        const [monthStr, year] = (dateStr || '').split(' ');
         const month = months[monthStr] ?? 0;
-        return new Date(year, month);
+        return new Date(year || 0, month);
     };
 
-    const sortByDate = (projects) => {
-        return projects.sort((a, b) => parseDate(b.date) - parseDate(a.date));
-    };
+    const sortByDate = (projects) => projects.sort((a, b) => parseDate(b.date) - parseDate(a.date));
 
     const createCard = (project, isCompact) => {
-        const imageSrc = project.images?.[0] || 'assets/projects/default.png';
+        const imageSrc = project.heroImage || 'assets/projects/default.png';
         const cardClass = isCompact ? 'project-card--compact' : 'project-card--featured';
         const metaText = project.type || 'PROJECT';
-        
         const tagsHtml = (project.technologies || [])
             .map(tech => `<span class="tag" role="listitem">${tech}</span>`)
             .join('');
+        const href = `view-project.html?slug=${encodeURIComponent(project.slug || '')}`;
 
         return `
             <article class="project-card ${cardClass}" data-bg="${imageSrc}">
-                <div class="project-media">
-                    <img src="${imageSrc}" alt="${project.title} preview">
-                </div>
+                <a class="project-media" href="${href}">
+                    <img src="${imageSrc}" alt="${project.title || 'Project'} preview">
+                </a>
                 <div class="project-layer">
                     <div class="project-body">
                         <p class="project-meta">${metaText}</p>
-                        <h3 class="project-title">${project.title}</h3>
+                        <h3 class="project-title">${project.title || ''}</h3>
                         ${project.description ? `<p class="project-description">${project.description}</p>` : ''}
                     </div>
                     <div class="project-footer">
                         ${tagsHtml ? `<div class="tags" role="list">${tagsHtml}</div>` : ''}
-                        <a href="#" class="project-link">View project &nearrow;</a>
+                        <a href="${href}" class="project-link">View project &nearrow;</a>
                     </div>
                 </div>
             </article>
@@ -100,18 +130,17 @@
 
     const renderProjects = async () => {
         try {
-            const response = await fetch(projectsUrl);
-            const projects = await response.json();
+            const response = await fetch(projectsIndexUrl);
+            const indexItems = await response.json();
 
-            // Filtruj featured i non-featured
+            const projects = await fetchProjectDetails(indexItems);
+
             const featured = projects.filter(p => p.featured === true);
             const nonFeatured = projects.filter(p => p.featured !== true);
 
-            // Sortuj po dacie (najnowsze pierwsze)
             const featuredSorted = sortByDate(featured);
             const allProjectsSorted = sortByDate(nonFeatured);
 
-            // Renderuj Featured section
             const featuredContainer = document.querySelector('.projects-featured-list');
             if (featuredContainer) {
                 featuredContainer.innerHTML = featuredSorted
@@ -119,7 +148,6 @@
                     .join('');
             }
 
-            // Renderuj All Projects grid
             const gridContainer = document.querySelector('.projects-grid');
             if (gridContainer) {
                 gridContainer.innerHTML = allProjectsSorted
@@ -127,7 +155,6 @@
                     .join('');
             }
 
-            // Załącz listenery do wszystkich kart
             attachBackgroundListeners();
 
         } catch (error) {

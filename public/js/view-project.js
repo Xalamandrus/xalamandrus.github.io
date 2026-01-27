@@ -1,0 +1,231 @@
+(() => {
+    const indexUrl = 'assets/data/projects.json';
+
+    const qs = new URLSearchParams(window.location.search);
+    const slug = qs.get('slug') || 'slay-the-nightmares';
+
+    const $ = (sel) => document.querySelector(sel);
+    const setText = (sel, text) => {
+        const el = typeof sel === 'string' ? $(sel) : sel;
+        if (el) el.textContent = text || '';
+    };
+
+    // Fetch date from date.txt in project folder
+    const fetchDateForSlug = async (slug) => {
+        try {
+            const res = await fetch(`assets/projects/${slug}/date.txt`);
+            if (!res.ok) throw new Error(`Bad status ${res.status}`);
+            return (await res.text()).trim();
+        } catch (err) {
+            console.warn(`Date not found for slug '${slug}':`, err);
+            return '';
+        }
+    };
+
+    // Scan folder for .png and .jpg files
+    const scanFolder = async (folderPath) => {
+        const extensions = ['png', 'jpg', 'jpeg'];
+        const found = [];
+        
+        // Try common numbering patterns: 1-20, 01-20, image1-image20
+        for (let i = 1; i <= 20; i++) {
+            for (const ext of extensions) {
+                const candidates = [
+                    `${folderPath}/${i}.${ext}`,
+                    `${folderPath}/${String(i).padStart(2, '0')}.${ext}`,
+                    `${folderPath}/image${i}.${ext}`,
+                    `${folderPath}/image${String(i).padStart(2, '0')}.${ext}`
+                ];
+                
+                for (const url of candidates) {
+                    try {
+                        const res = await fetch(url, { method: 'HEAD' });
+                        if (res.ok) {
+                            found.push(url);
+                            break; // Found this number, try next
+                        }
+                    } catch (err) {
+                        // File doesn't exist, continue
+                    }
+                }
+            }
+        }
+        
+        return found;
+    };
+
+    const buildTags = (container, items) => {
+        if (!container) return;
+        container.innerHTML = (items || []).map(t => `<span class="tag" role="listitem">${t}</span>`).join('');
+    };
+
+    const buildChallenges = (container, items) => {
+        if (!container) return;
+        container.innerHTML = (items || []).map(ch => `
+            <div class="challenge-item">
+              <div class="challenge-icon">${ch.icon || '⚡'}</div>
+              <div class="challenge-content">
+                <h3 class="challenge-title">${ch.title || ''}</h3>
+                <p class="challenge-description">${ch.description || ''}</p>
+              </div>
+            </div>
+        `).join('');
+    };
+
+    const buildGallery = (container, items) => {
+        if (!container) return;
+        container.innerHTML = (items || []).map((img, idx) => `
+            <a class="vp-shot ${img.wide ? 'vp-shot--wide' : ''} ${img.tall ? 'vp-shot--tall' : ''}" 
+               href="${img.src}" role="listitem" data-lightbox>
+              <img src="${img.src}" alt="${img.alt || `Gallery image ${idx + 1}`}" loading="lazy" decoding="async" />
+            </a>
+        `).join('');
+    };
+
+    const buildTimeline = (container, items) => {
+        if (!container) return;
+        container.innerHTML = (items || []).map((item, idx) => `
+            <a class="timeline-item" href="${item.src}" role="listitem" data-lightbox>
+              <img class="timeline-img" src="${item.src}" alt="${item.alt || `Timeline ${idx + 1}`}" loading="lazy" decoding="async" />
+              <div class="timeline-meta">
+                <span class="timeline-date">${item.date || ''}</span>
+                <p class="timeline-caption">${item.caption || ''}</p>
+              </div>
+            </a>
+        `).join('');
+    };
+
+    const buildCodeTabs = (tabsContainer, panelsContainer, examples) => {
+        if (!tabsContainer || !panelsContainer) return;
+        tabsContainer.innerHTML = '';
+        panelsContainer.innerHTML = '';
+
+        (examples || []).forEach((ex, idx) => {
+            const isActive = idx === 0;
+            const tab = document.createElement('button');
+            tab.className = `code-tab${isActive ? ' active' : ''}`;
+            tab.role = 'tab';
+            tab.dataset.tab = ex.id || `code-${idx}`;
+            tab.setAttribute('aria-selected', isActive ? 'true' : 'false');
+            tab.textContent = ex.title || `Code ${idx + 1}`;
+            tabsContainer.appendChild(tab);
+
+            const panel = document.createElement('div');
+            panel.className = `code-panel${isActive ? ' active' : ''}`;
+            panel.role = 'tabpanel';
+            panel.dataset.panel = ex.id || `code-${idx}`;
+            panel.innerHTML = `<pre><code class="language-${ex.language || 'csharp'}">${ex.code || ''}</code></pre>`;
+            panelsContainer.appendChild(panel);
+        });
+
+        // Re-init code-tabs if function exists
+        document.querySelectorAll('.code-tab').forEach((btn, idx) => {
+            btn.addEventListener('click', () => {
+                document.querySelectorAll('.code-tab').forEach(t => {
+                    t.classList.remove('active');
+                    t.setAttribute('aria-selected', 'false');
+                });
+                document.querySelectorAll('.code-panel').forEach(p => p.classList.remove('active'));
+                
+                btn.classList.add('active');
+                btn.setAttribute('aria-selected', 'true');
+                const panel = document.querySelector(`[data-panel="${btn.dataset.tab}"]`);
+                if (panel) panel.classList.add('active');
+            });
+        });
+    };
+
+    const applyHero = (data) => {
+        const heroImg = document.querySelector('.project-hero-media img');
+        if (heroImg && data.heroImage) {
+            heroImg.src = data.heroImage;
+            heroImg.alt = data.title ? `${data.title} header` : 'Project header';
+        }
+
+        setText('.project-kicker', data.kicker || '');
+        setText('.project-title', data.title || '');
+        setText('.project-subtitle', data.subtitle || '');
+
+        if (data.heroImage) {
+            document.body.style.setProperty('--project-bg-image', `url("${data.heroImage}")`);
+        }
+    };
+
+    const render = async (data) => {
+        applyHero(data);
+
+        setText('[data-bind="heading-overview"]', data.headings?.overview || 'Project Overview');
+        setText('[data-bind="heading-role"]', data.headings?.role || 'My Role');
+
+        setText('[data-bind="overview-text"]', data.overview || '');
+        setText('[data-bind="role-text"]', data.role || '');
+
+        buildTags($('[data-bind="tools-list"]'), data.tools);
+        buildTags($('[data-bind="tags-list"]'), data.tags);
+        buildChallenges($('[data-bind="challenges-list"]'), data.challenges);
+
+        // Auto-scan gallery and timeline folders
+        const galleryImages = await scanFolder(`assets/projects/${data.slug}/gallery`);
+        const timelineImages = await scanFolder(`assets/projects/${data.slug}/timeline`);
+
+        const galleryData = galleryImages.map((src, idx) => ({
+            src,
+            alt: `${data.title} - Gallery ${idx + 1}`,
+            wide: idx === 0 // First image wide
+        }));
+
+        const timelineData = timelineImages.map((src, idx) => ({
+            src,
+            alt: `${data.title} - Timeline ${idx + 1}`,
+            date: data.timelineDates?.[idx] || '',
+            caption: data.timelineCaptions?.[idx] || ''
+        }));
+
+        buildGallery($('[data-bind="gallery-list"]'), galleryData);
+        buildTimeline($('[data-bind="timeline-list"]'), timelineData);
+        buildCodeTabs(
+            $('[data-bind="code-tabs"]'),
+            $('[data-bind="code-panels"]'),
+            data.codeExamples
+        );
+
+        // Reattach lightbox
+        const lightboxScript = document.createElement('script');
+        lightboxScript.textContent = `
+            if (typeof LightboxInit === 'function') LightboxInit();
+            else {
+                document.querySelectorAll('[data-lightbox]').forEach(link => {
+                    link.addEventListener('click', (e) => {
+                        e.preventDefault();
+                        // Simple lightbox fallback
+                    });
+                });
+            }
+        `;
+        document.body.appendChild(lightboxScript);
+    };
+
+    const load = async () => {
+        try {
+            const idxRes = await fetch(indexUrl);
+            const indexList = await idxRes.json();
+            const match = indexList.find(p => p.slug === slug);
+            if (!match) throw new Error(`Project slug '${slug}' not found in index`);
+
+            const dataRes = await fetch(match.dataPath);
+            if (!dataRes.ok) throw new Error(`Failed to load project data (${dataRes.status})`);
+            const data = await dataRes.json();
+            
+            // Fetch date from file
+            const dateFromFile = await fetchDateForSlug(slug);
+            data.date = dateFromFile || data.date || '';
+            data.slug = slug;
+
+            await render(data);
+        } catch (err) {
+            console.error(err);
+        }
+    };
+
+    document.addEventListener('DOMContentLoaded', load);
+})();
