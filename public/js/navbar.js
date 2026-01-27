@@ -41,11 +41,28 @@
 
         // Close menu when a link is clicked and set active state
         navLinks.querySelectorAll('a').forEach(link => {
-            link.addEventListener('click', () => {
+            link.addEventListener('click', (e) => {
                 // Remove active class from all links
                 navLinks.querySelectorAll('a').forEach(l => l.classList.remove('active'));
                 // Add active class to clicked link
                 link.classList.add('active');
+                
+                // Special handling for contact link
+                const href = link.getAttribute('href');
+                if (href && href.includes('#contact')) {
+                    e.preventDefault();
+                    const footer = document.getElementById('contact');
+                    if (footer) {
+                        // Scroll to footer
+                        footer.scrollIntoView({ behavior: 'smooth', block: 'start' });
+                        
+                        // Add highlight animation
+                        footer.classList.add('highlight-contact');
+                        setTimeout(() => {
+                            footer.classList.remove('highlight-contact');
+                        }, 2000);
+                    }
+                }
                 
                 navLinks.classList.remove('open');
                 navBtn.setAttribute('aria-expanded', 'false');
