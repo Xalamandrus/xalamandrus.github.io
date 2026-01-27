@@ -5,9 +5,7 @@
   "subtitle": "Krótki opis projektu w 1-2 zdaniach.",
   
   "heroImage": "assets/projects/Beans-&-Rats/Gallery/image.png",
-  "heroAlt": "Alt text dla hero image",
-  "backgroundImage": "assets/projects/Beans-&-Rats/Gallery/image.png",
-  
+
   "type": "Academic VR Project / Internship 3D Project / GameJam / itp.",
   "featured": true,
   
@@ -37,10 +35,6 @@
     "Shader Graph",
     "VFX Graph",
     "Compute Shader"
-  ],
-  
-  "images": [
-    "assets/projects/Beans-&-Rats/Gallery/image.png"
   ],
   
   "description": "Krótki opis do karty projektu na liście (1-2 zdania max).",
