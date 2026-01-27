@@ -1,4 +1,4 @@
-/* === SHOWCASE: pełnoekranowe okno z obrazem === */
+/* === SHOWCASE: pełnoekranowe okno z video === */
 
 .showcase {
     position: relative;
@@ -9,7 +9,7 @@
     isolation: isolate;
 }
 
-.showcase-media {
+.showcase-video {
     position: absolute;
     inset: 0;
     width: 100%;
@@ -17,10 +17,8 @@
     object-fit: cover;
     object-position: center;
     opacity: 0;
-    transform: scale(1.3);
-    animation: slideshow 24s infinite both;
-    will-change: transform, opacity;
-    backface-visibility: hidden;
+    transform: scale(1.15);
+    animation: videoFadeIn 1.2s cubic-bezier(0.25, 0.1, 0.25, 1) 0.1s forwards;
 }
 
 .showcase-overlay {
@@ -127,25 +125,16 @@
 
 /* === SHOWCASE ANIMATIONS === */
 
-@keyframes slideshow {
+@keyframes videoFadeIn {
     0% {
         opacity: 0;
-        transform: scale(1.3);
-    }
-    10% {
-        opacity: 1;
-        transform: scale(1);
-    }
-    40% {
-        opacity: 1;
-    }
-    50% {
-        opacity: 0;
-        transform: scale(1.1);
+        transform: scale(1.15);
+        filter: blur(12px);
     }
     100% {
-        opacity: 0;
-        transform: scale(1.2);
+        opacity: 1;
+        transform: scale(1);
+        filter: blur(0);
     }
 }
 
@@ -167,30 +156,19 @@
     }
 }
 
-@keyframes showcaseShineSync {
-    0%, 17.5% {
+@keyframes showcaseShine {
+    0% {
         transform: translateX(-120%) rotate(12deg);
         opacity: 0;
     }
-    18% {
+    30% {
         opacity: 0.35;
     }
-    22% {
+    60% {
         transform: translateX(120%) rotate(12deg);
         opacity: 0.10;
     }
-    22.5%, 67.5% {
-        transform: translateX(-120%) rotate(12deg);
-        opacity: 0;
-    }
-    68% {
-        opacity: 0.35;
-    }
-    72% {
-        transform: translateX(120%) rotate(12deg);
-        opacity: 0.10;
-    }
-    72.5%, 100% {
+    100% {
         transform: translateX(120%) rotate(12deg);
         opacity: 0;
     }
@@ -213,9 +191,7 @@
     mix-blend-mode: screen;
     transform: translateX(-120%) rotate(12deg);
     opacity: 0;
-    filter: blur(2px);
-    animation: showcaseShineSync 24s infinite;
-    will-change: transform, opacity;
+    animation: showcaseShine 4s ease-in-out 1s forwards;
 }
 
 .showcase-caption h1,
@@ -238,6 +214,13 @@
 }
 
 @media (prefers-reduced-motion: reduce) {
+    .showcase-video {
+        animation: none;
+        opacity: 1;
+        transform: scale(1);
+        filter: blur(0);
+    }
+    
     .showcase::after {
         animation: none;
         opacity: 0;
