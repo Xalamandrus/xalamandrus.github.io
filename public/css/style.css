@@ -240,10 +240,30 @@
     transition: opacity 0.8s ease, transform 0.8s ease;
 }
 
+.fade-in-footer {
+    opacity: 0;
+    transition: opacity 0.8s ease;
+}
+
 .reveal.active {
     opacity: 1;
     transform: translateY(0);
     animation: fadeInUp 0.8s ease forwards;
+}
+
+.fade-in-footer.active {
+    opacity: 1;
+}
+
+@keyframes fadeInUp {
+    from {
+        opacity: 0;
+        transform: translateY(40px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
 }
 
 /* <========== FOOTER ==========> */
