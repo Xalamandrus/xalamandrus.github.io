@@ -44,6 +44,7 @@
 }
 
 .showcase-caption h1 {
+    font-family: var(--font-primary);
     font-size: var(--text-hero-size);
     line-height: var(--text-hero-line);
     font-weight: var(--text-hero-weight);
@@ -54,6 +55,7 @@
 }
 
 .showcase-caption p {
+    font-family: var(--font-primary);
     font-size: var(--text-hero-sub-size);
     line-height: var(--text-hero-sub-line);
     font-weight: var(--text-hero-sub-weight);
@@ -102,6 +104,7 @@
 }
 
 .title-outline {
+    font-family: var(--font-primary);
     font-size: clamp(42px, 6vw, 80px);
     font-weight: 800;
     margin: 0;
@@ -266,6 +269,7 @@
 }
 
 .kicker {
+    font-family: var(--font-primary);
     font-size: var(--text-hero-sub-size);
     line-height: var(--text-hero-sub-line);
     font-weight: var(--font-weight-semibold);
@@ -274,6 +278,7 @@
 }
 
 .lead {
+    font-family: var(--font-primary);
     font-size: var(--text-body-size);
     line-height: var(--text-body-line);
     font-weight: var(--text-body-weight);
@@ -300,6 +305,7 @@
 }
 
 .tag {
+    font-family: var(--font-primary);
     display: inline-flex;
     align-items: center;
     padding: var(--spacing-sm) var(--spacing-md);
@@ -320,6 +326,7 @@
 }
 
 .note {
+    font-family: var(--font-primary);
     font-size: var(--text-hero-sub-size);
     line-height: var(--text-hero-sub-line);
     font-weight: var(--text-hero-sub-weight);
@@ -530,6 +537,7 @@
 }
 
 .card-info h3 {
+    font-family: var(--font-primary);
     font-size: var(--text-heading-size);
     line-height: var(--text-heading-line);
     font-weight: var(--text-heading-weight);
@@ -537,6 +545,7 @@
 }
 
 .card-info p {
+    font-family: var(--font-primary);
     font-size: var(--text-hero-sub-size);
     line-height: 1.55;
     opacity: 0.92;

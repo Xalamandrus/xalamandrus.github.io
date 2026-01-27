@@ -37,6 +37,7 @@ body.projects-bg-active::before {
 }
 
 .projects-kicker {
+    font-family: var(--font-primary);
     font-size: var(--text-hero-sub-size);
     line-height: var(--text-hero-sub-line);
     font-weight: var(--font-weight-semibold);
@@ -47,6 +48,7 @@ body.projects-bg-active::before {
 }
 
 .projects-title {
+    font-family: var(--font-primary);
     font-size: var(--text-hero-size);
     line-height: var(--text-hero-line);
     font-weight: var(--text-hero-weight);
@@ -55,6 +57,7 @@ body.projects-bg-active::before {
 }
 
 .projects-lead {
+    font-family: var(--font-primary);
     font-size: var(--text-body-size);
     line-height: var(--text-body-line);
     color: var(--color-text-secondary);
@@ -80,6 +83,7 @@ body.projects-bg-active::before {
 }
 
 .projects-section-title {
+    font-family: var(--font-primary);
     font-size: var(--text-heading-size);
     line-height: var(--text-heading-line);
     font-weight: var(--text-heading-weight);
@@ -93,6 +97,7 @@ body.projects-bg-active::before {
 }
 
 .projects-section-note {
+    font-family: var(--font-primary);
     font-size: var(--text-small-size);
     line-height: var(--text-small-line);
     color: var(--color-text-muted);
@@ -189,6 +194,7 @@ body.projects-bg-active::before {
 }
 
 .project-meta {
+    font-family: var(--font-primary);
     font-size: var(--text-small-size);
     line-height: var(--text-small-line);
     text-transform: uppercase;
@@ -202,6 +208,7 @@ body.projects-bg-active::before {
 }
 
 .project-card--featured .project-title {
+    font-family: var(--font-primary);
     font-size: var(--text-body-size);
     line-height: var(--text-body-line);
     font-weight: var(--text-heading-weight);
@@ -209,6 +216,7 @@ body.projects-bg-active::before {
 }
 
 .project-card--featured .project-description {
+    font-family: var(--font-primary);
     font-size: var(--text-small-size);
     line-height: var(--text-small-line);
     color: var(--color-text-secondary);
@@ -217,6 +225,7 @@ body.projects-bg-active::before {
 }
 
 .project-role {
+    font-family: var(--font-primary);
     font-size: var(--text-small-size);
     line-height: var(--text-small-line);
     font-weight: var(--font-weight-medium);
@@ -260,6 +269,7 @@ body.projects-bg-active::before {
 }
 
 .project-link {
+    font-family: var(--font-primary);
     font-size: var(--text-small-size);
     line-height: 1;
     color: var(--color-primary);
@@ -386,10 +396,12 @@ body.projects-bg-active::before {
 }
 
 .project-card--compact .project-title {
+    font-family: var(--font-primary);
     font-size: var(--text-body-size);
 }
 
 .project-card--compact .project-description {
+    font-family: var(--font-primary);
     font-size: var(--text-small-size);
 }
 

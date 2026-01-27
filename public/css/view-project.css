@@ -87,6 +87,7 @@ body.project-bg-active::before { opacity: 0.22; transform: scale(1.03); }
 }
 
 .project-kicker {
+  font-family: var(--font-primary);
   font-size: var(--text-hero-sub-size);
   line-height: var(--text-hero-sub-line);
   font-weight: var(--font-weight-semibold);
@@ -97,6 +98,7 @@ body.project-bg-active::before { opacity: 0.22; transform: scale(1.03); }
 }
 
 .project-title {
+  font-family: var(--font-primary);
   font-size: clamp(2.2rem, 4.2vw, 3.2rem);
   line-height: 1.1;
   letter-spacing: var(--letter-spacing-tight);
@@ -104,6 +106,7 @@ body.project-bg-active::before { opacity: 0.22; transform: scale(1.03); }
 }
 
 .project-subtitle {
+  font-family: var(--font-primary);
   font-size: var(--text-body-size);
   line-height: var(--text-body-line);
   color: rgba(255, 255, 255, 0.82);
@@ -115,6 +118,7 @@ body.project-bg-active::before { opacity: 0.22; transform: scale(1.03); }
 .project-cta { display: flex; gap: var(--spacing-md); flex-wrap: wrap; margin-bottom: var(--spacing-lg); }
 
 .btn {
+  font-family: var(--font-primary);
   display: inline-flex;
   align-items: center;
   justify-content: center;
@@ -147,6 +151,7 @@ body.project-bg-active::before { opacity: 0.22; transform: scale(1.03); }
 .vp-heading { margin-bottom: var(--spacing-md); }
 
 .vp-text {
+  font-family: var(--font-primary);
   color: var(--color-text-secondary);
   line-height: 1.7;
   max-width: 80ch;
@@ -168,6 +173,7 @@ body.project-bg-active::before { opacity: 0.22; transform: scale(1.03); }
 }
 
 .vp-info dt {
+  font-family: var(--font-primary);
   color: var(--color-text-muted);
   font-size: var(--text-small-size);
   letter-spacing: 0.08em;
@@ -176,6 +182,7 @@ body.project-bg-active::before { opacity: 0.22; transform: scale(1.03); }
 .vp-info dd { margin: 0; color: var(--color-text-primary); }
 
 .vp-status {
+  font-family: var(--font-primary);
   display: inline-flex;
   align-items: center;
   padding: 6px 10px;
@@ -187,6 +194,7 @@ body.project-bg-active::before { opacity: 0.22; transform: scale(1.03); }
 }
 
 .vp-jump {
+  font-family: var(--font-primary);
   display: inline-block;
   margin-top: var(--spacing-md);
   color: var(--color-primary);
@@ -234,6 +242,7 @@ body.project-bg-active::before { opacity: 0.22; transform: scale(1.03); }
 .vp-shot-wide { grid-column: 1 / -1; }
 
 .vp-hint {
+  font-family: var(--font-primary);
   margin-top: var(--spacing-md);
   color: var(--color-text-muted);
   font-size: var(--text-small-size);
