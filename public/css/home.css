@@ -402,3 +402,233 @@
         width: clamp(140px, 35vw, 200px);
     }
 }
+
+/* <========== HIGHLIGHTS ==========> */
+
+.highlights {
+    /* Cycle duration for the progress bar + JS (can be '6000ms' or '6s') */
+    --hl-duration: 6s;
+
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding-block: clamp(72px, 10vw, 140px);
+}
+
+.highlight-stack {
+    position: relative;
+    width: min(980px, 90vw);
+    aspect-ratio: 16 / 9;
+    isolation: isolate;
+}
+
+.highlight-card {
+    position: absolute;
+    inset: 0;
+    border-radius: var(--radius-lg);
+    overflow: hidden;
+    background: rgba(255, 255, 255, 0.02);
+    border: 1px solid rgba(255, 255, 255, 0.10);
+    box-shadow: 0 18px 45px rgba(0, 0, 0, 0.45);
+
+    transform-origin: center;
+    transition:
+        transform 700ms cubic-bezier(0.2, 0.85, 0.2, 1),
+        opacity 500ms ease,
+        filter 500ms ease;
+
+    will-change: transform, opacity;
+    cursor: pointer;
+
+    /* Ensure internal overlays don't sit above the caption */
+    isolation: isolate;
+}
+
+.highlight-card img {
+    position: absolute;
+    inset: 0;
+    z-index: 0;
+
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    object-position: center;
+    display: block;
+
+    filter: brightness(0.9) contrast(1.02) saturate(1.05);
+    transform: scale(1.03);
+}
+
+/* Glassy vignette on top of the image */
+.highlight-card::after {
+    content: "";
+    position: absolute;
+    inset: 0;
+    pointer-events: none;
+    z-index: 1;
+    background:
+        radial-gradient(900px 520px at 0% 0%, rgba(88, 166, 255, 0.15), transparent 55%),
+        radial-gradient(900px 520px at 100% 100%, rgba(0, 255, 170, 0.10), transparent 55%);
+    opacity: 0.9;
+}
+
+.card-info,
+.progress-bar {
+    z-index: 2;
+}
+
+/* Active card sits in the middle */
+.highlight-card.active {
+    z-index: 3;
+    transform: translateX(0) scale(1) rotate(0deg);
+    opacity: 1;
+    filter: none;
+    cursor: default;
+}
+
+/* Two side cards (overlap) */
+.highlight-card.behind-1 {
+    z-index: 2;
+    transform: translateX(340px) scale(0.95) rotate(1.25deg);
+    opacity: 0.90;
+    filter: blur(0.6px) brightness(0.70);
+}
+
+.highlight-card.behind-2 {
+    z-index: 1;
+    transform: translateX(-340px) scale(0.93) rotate(-1.25deg);
+    opacity: 0.82;
+    filter: blur(1.1px) brightness(0.64);
+}
+
+/* Exit micro-animation before the next card comes forward */
+.highlight-card.is-exiting {
+    opacity: 0;
+    transform: translateX(-42px) scale(0.98);
+}
+
+.card-info {
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    right: 0;
+
+    padding: var(--spacing-xl) var(--spacing-xl) var(--spacing-2xl);
+    background: linear-gradient(to top, rgba(0, 0, 0, 0.80), rgba(0, 0, 0, 0.00));
+    color: var(--color-text-bright);
+
+    opacity: 0;
+    transform: translateY(12px);
+    transition: opacity 350ms ease, transform 350ms ease;
+    pointer-events: none;
+}
+
+.highlight-card.active .card-info {
+    opacity: 1;
+    transform: translateY(0);
+    pointer-events: auto;
+}
+
+.card-info h3 {
+    font-size: var(--text-heading-size);
+    line-height: var(--text-heading-line);
+    font-weight: var(--text-heading-weight);
+    margin: 0 0 var(--spacing-sm);
+}
+
+.card-info p {
+    font-size: var(--text-hero-sub-size);
+    line-height: 1.55;
+    opacity: 0.92;
+    max-width: 72ch;
+    margin: 0;
+}
+
+.btn-highlight {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+
+    margin-top: var(--spacing-md);
+    padding: 10px 14px;
+    border-radius: var(--radius-full);
+
+    background: rgba(88, 166, 255, 0.14);
+    border: 1px solid rgba(88, 166, 255, 0.28);
+    color: var(--color-text-bright);
+    text-decoration: none;
+
+    font-weight: var(--font-weight-medium);
+    font-size: var(--text-small-size);
+
+    transition: transform var(--transition-fast), background var(--transition-base), border-color var(--transition-base);
+}
+
+.btn-highlight:hover {
+    transform: translateY(-1px);
+    background: rgba(88, 166, 255, 0.22);
+    border-color: rgba(88, 166, 255, 0.40);
+}
+
+.progress-bar {
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    height: 4px;
+    width: 100%;
+    background: rgba(255, 255, 255, 0.10);
+    opacity: 0;
+    transition: opacity 250ms ease;
+}
+
+.highlight-card.active .progress-bar {
+    opacity: 1;
+}
+
+.progress-fill {
+    position: absolute;
+    left: 0;
+    top: 0;
+    height: 100%;
+    width: 0%;
+    background: var(--gradient-primary);
+}
+
+.highlight-card.active .progress-fill {
+    animation: hlProgress var(--hl-duration) linear forwards;
+}
+
+@keyframes hlProgress {
+    from { width: 0%; }
+    to { width: 100%; }
+}
+
+@media (max-width: 900px) {
+    .highlight-stack {
+        width: 92vw;
+    }
+
+    .highlight-card.behind-1 {
+        transform: translateX(54px) scale(0.96) rotate(1deg);
+    }
+
+    .highlight-card.behind-2 {
+        transform: translateX(-54px) scale(0.94) rotate(-1deg);
+    }
+
+    .card-info {
+        padding: var(--spacing-lg) var(--spacing-lg) var(--spacing-xl);
+    }
+}
+
+@media (prefers-reduced-motion: reduce) {
+    .highlight-card,
+    .card-info {
+        transition: none;
+    }
+
+    .highlight-card.active .progress-fill {
+        animation: none;
+        width: 100%;
+    }
+}
