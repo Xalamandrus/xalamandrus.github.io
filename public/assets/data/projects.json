@@ -1,6 +1,16 @@
 [
     {
+        "slug": "slay-the-nightmares",
+        "dataPath": "assets/projects/Slay-The-Nightmares/slay-the-nightmares.json"
+    },
+
+    {
         "slug": "beans-and-rats",
         "dataPath": "assets/projects/Beans-and-Rats/beans-and-rats.json"
+    },
+    
+    {
+        "slug": "purrrifiers-cleaning-chaos-demo",
+        "dataPath": "assets/projects/Purrrifiers-Cleaning-Chaos/purrrifiers-cleaning-chaos.json"
     }
 ]
