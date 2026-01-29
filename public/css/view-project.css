@@ -162,14 +162,14 @@ body.project-bg-active::before { opacity: 0.22; transform: scale(1.03); }
   display: grid;
   grid-template-columns: 1fr;
   gap: 10px;
-  margin-top: var(--spacing-md);
+  margin-top: var(--spacing-lg);
 }
 
 .vp-info-row {
   display: grid;
-  grid-template-columns: 120px 1fr;
-  gap: 12px;
-  align-items: baseline;
+  grid-template-columns: minmax(140px, max-content) minmax(0, 1fr);
+  column-gap: 12px;
+  align-items: center;
 }
 
 .vp-info dt {
@@ -178,8 +178,9 @@ body.project-bg-active::before { opacity: 0.22; transform: scale(1.03); }
   font-size: var(--text-small-size);
   letter-spacing: 0.08em;
   text-transform: uppercase;
+  white-space: nowrap;
 }
-.vp-info dd { margin: 0; color: var(--color-text-primary); }
+.vp-info dd { margin: 0; color: var(--color-text-primary); min-width: 0; }
 
 .vp-status {
   font-family: var(--font-primary);
@@ -278,7 +279,7 @@ body.project-bg-active::before { opacity: 0.22; transform: scale(1.03); }
 
 /* Consistent breathing room for tag clusters */
 .vp-tags,
-.vp-tools { margin-top: var(--spacing-md); }
+.vp-tools { margin-top: 0; }
 
 /* Code blocks (consistent with glass/soft borders) */
 .vp-block pre {
