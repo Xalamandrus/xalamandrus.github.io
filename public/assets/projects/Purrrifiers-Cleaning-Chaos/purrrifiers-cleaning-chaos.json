@@ -1,65 +1,77 @@
 {
-    "slug":  "purrrifiers-cleaning-chaos-demo",
-    "title":  "Purrrifiers: Cleaning Chaos DEMO",
-    "kicker":  "INTERNSHIP 3D PROJECT",
-    "subtitle":  "A co-op cleaning game demo where players work together to clean messy locations and explore a weird, quirky town.",
-    "type":  "Internship 3D Project",
-    "overview":  "Purrrifiers: Cleaning Chaos DEMO is a co-op cleaning experience available on Steam. Players team up to restore dirty environments while exploring an unusual town filled with playful interactions and mission-driven objectives. The demo focuses on the core loop: identify stains, use tools to clean them, and progress through a compact slice of the game that highlights teamwork, readability, and satisfying visual feedback.",
-    "role":  "I delivered the DEMO version and built the core cleaning system based on a decal-driven dirt workflow powered by shaders and compute shaders (GPU-accelerated stamping/removal and scalable stain variation). I also created and integrated VFX and post-processing to improve readability and feel (foam, bubbles, dust particles, stain highlighting, and stylized room effects). Additionally, I authored level content by placing stains across the environment, configuring their parameters, and tuning them for consistent gameplay flow and visual clarity.",
-    "tools":  [
-                  "Unity (URP)",
-                  "Visual Studio"
-              ],
-    "tags":  [
-                 "Decal-based Cleaning",
-                 "Compute Shaders",
-                 "Shaders (HLSL)",
-                 "VFX",
-                 "Post-process",
-                 "Level Content Authoring"
-             ],
-    "technologies":  [
-                         "Unity (URP)",
-                         "C#",
-                         "HLSL",
-                         "Decals",
-                         "Compute Shader",
-                         "Particle Systems",
-                         "URP Post-processing"
-                     ],
-    "description":  "A Steam co-op cleaning demo featuring a GPU-driven decal cleaning system, strong VFX feedback, and tuned stain placement across a full mission slice.",
-    "timelineDates":  [
-                          "07.2024",
-                          "08.2024",
-                          "09.2024"
-                      ],
-    "timelineCaptions":  [
-                             "Demo foundation: first implementation of the decal cleaning workflow and early performance/readability tests.",
-                             "System expansion: compute/shader iteration plus VFX and post-processing layers for cleaning feedback.",
-                             "Content pass \u0026 polish: stain placement across the level, parameter tuning, and final demo stabilization."
-                         ],
-    "codeExamples":  [
-                         {
-                             "id":  "example1",
-                             "title":  "Compute-driven decal stamping (concept)",
-                             "language":  "csharp",
-                             "code":  "// Portfolio placeholder.\n// Demonstrate how cleaning requests are batched and dispatched to a compute shader.\n"
-                         },
-                         {
-                             "id":  "example2",
-                             "title":  "Stain highlight \u0026 readability hooks (concept)",
-                             "language":  "csharp",
-                             "code":  "// Portfolio placeholder.\n// Demonstrate how stain highlighting/intensity is driven for gameplay readability.\n"
-                         },
-                         {
-                             "id":  "example3",
-                             "title":  "Cleaning VFX triggers (concept)",
-                             "language":  "csharp",
-                             "code":  "// Portfolio placeholder.\n// Demonstrate how foam/bubbles/dust VFX scale with cleaning intensity.\n"
-                         }
-                     ],
-    "headings":  {
-                     "overview":  "Project Overview",
-                     "role":  "My Role"
-                 }
+  "slug": "purrrifiers-cleaning-chaos-demo",
+  "title": "Purrrifiers: Cleaning Chaos DEMO",
+  "kicker": "INTERNSHIP 3D PROJECT",
+  "subtitle": "A co-op cleaning game demo where players work together to clean messy locations and explore a weird, quirky town.",
+
+  "type": "Internship 3D Project",
+
+  "overview": "Purrrifiers: Cleaning Chaos DEMO is a co-op cleaning experience available on Steam. Players team up to restore dirty environments while exploring an unusual town filled with playful interactions and mission-driven objectives. The demo focuses on the core loop: identify stains, use tools to clean them, and progress through a compact slice of the game that highlights teamwork, readability, and satisfying visual feedback.",
+
+  "role": "I delivered the DEMO version and built the core cleaning system based on a decal-driven dirt workflow powered by shaders and compute shaders (GPU-accelerated stamping/removal and scalable stain variation). I also created and integrated VFX and post-processing to improve readability and feel (foam, bubbles, dust particles, stain highlighting, and stylized room effects). Additionally, I authored level content by placing stains across the environment, configuring their parameters, and tuning them for consistent gameplay flow and visual clarity.",
+
+  "tools": [
+    "Unity (URP)",
+    "Visual Studio",
+    "Krita"
+  ],
+
+  "tags": [
+    "Decal-based Cleaning",
+    "Compute Shaders",
+    "Shaders (HLSL)",
+    "VFX",
+    "Post-process",
+    "Level Content Authoring"
+  ],
+
+  "technologies": [
+    "Unity (URP)",
+    "C#",
+    "HLSL",
+    "Decals",
+    "Compute Shader",
+    "Particle Systems",
+    "URP Post-processing"
+  ],
+
+  "description": "A Steam co-op cleaning demo featuring a GPU-driven decal cleaning system, strong VFX feedback, and tuned stain placement across a full mission slice.",
+
+  "timelineDates": [
+    "07.2024",
+    "08.2024",
+    "09.2024"
+  ],
+
+  "timelineCaptions": [
+    "Demo foundation: first implementation of the decal cleaning workflow and early performance/readability tests.",
+    "System expansion: compute/shader iteration plus VFX and post-processing layers for cleaning feedback.",
+    "Content pass & polish: stain placement across the level, parameter tuning, and final demo stabilization."
+  ],
+
+  "codeExamples": [
+    {
+      "id": "example1",
+      "title": "Compute-driven decal stamping (concept)",
+      "language": "csharp",
+      "code": "// Portfolio placeholder.\n// Demonstrate how cleaning requests are batched and dispatched to a compute shader.\n"
+    },
+    {
+      "id": "example2",
+      "title": "Stain highlight & readability hooks (concept)",
+      "language": "csharp",
+      "code": "// Portfolio placeholder.\n// Demonstrate how stain highlighting/intensity is driven for gameplay readability.\n"
+    },
+    {
+      "id": "example3",
+      "title": "Cleaning VFX triggers (concept)",
+      "language": "csharp",
+      "code": "// Portfolio placeholder.\n// Demonstrate how foam/bubbles/dust VFX scale with cleaning intensity.\n"
+    }
+  ],
+
+  "headings": {
+    "overview": "Project Overview",
+    "role": "My Role"
+  }
 }

@@ -1,66 +1,76 @@
 {
-    "slug":  "turbo-tire",
-    "title":  "Turbo Tire",
-    "kicker":  "INTERNSHIP 3D PROJECT",
-    "subtitle":  "A fast arcade destruction game where you drive a giant tire through a city, chaining boosts, ramps, and jumps to smash props and rack up score.",
-    "type":  "Internship 3D Project",
-    "featured":  false,
-    "overview":  "Turbo Tire is an arcade-style score attack experience where the player controls a tire rolling through a city and causing as much destruction as possible. The core loop is built around movement momentum and spectacle: using boosters, ramps, and big jumps to crash into objects like billboards, poles, and other breakable props while maintaining speed and building points. The focus is on satisfying feedback, strong sense of velocity, and readable visual effects during fast traversal.",
-    "role":  "I worked on the project’s visual side: creating untextured 3D models (props and environment pieces), building VFX for object destruction, and implementing a speed-focused visual layer. I set up a speed vignette, an outline shader for readability, god rays, and post-processing to push the overall look. I also created additional VFX elements to support impact feedback and reinforce the game’s fast, chaotic feel.",
-    "tools":  [
-                  "Unity (URP)",
-                  "Visual Studio",
-                  "Blender",
-                  "Krita"
-              ],
-    "tags":  [
-                 "3D Modeling",
-                 "VFX",
-                 "Post-process",
-                 "Outline Shader",
-                 "God Rays",
-                 "Destruction FX"
-             ],
-    "technologies":  [
-                         "Unity (URP)",
-                         "URP Post-processing",
-                         "Custom Shaders (Outline, God Rays)",
-                         "VFX (Particle Systems)",
-                         "3D Modeling (Blender)"
-                     ],
-    "description":  "An arcade city-destruction prototype where you drive a tire, hit boosters and ramps, and smash props to score points.",
-    "timelineDates":  [
-                          "07.2024",
-                          "07.2024",
-                          "07.2024"
-                      ],
-    "timelineCaptions":  [
-                             "Early pass: prop modeling (untextured) and initial visual targets for a stylized city-destruction feel.",
-                             "Mid pass: destruction VFX implementation and speed feedback (vignette, impact visuals) iteration.",
-                             "Final pass: outline shader, god rays, post-processing polish, and visual consistency tuning."
-                         ],
-    "codeExamples":  [
-                         {
-                             "id":  "example1",
-                             "title":  "Speed vignette driver (concept)",
-                             "language":  "csharp",
-                             "code":  "// Portfolio placeholder.\n// Demonstrate how speed value drives vignette intensity and other post-process parameters.\n"
-                         },
-                         {
-                             "id":  "example2",
-                             "title":  "Outline readability controls (concept)",
-                             "language":  "csharp",
-                             "code":  "// Portfolio placeholder.\n// Demonstrate how outline thickness/intensity is tuned for readability in fast gameplay.\n"
-                         },
-                         {
-                             "id":  "example3",
-                             "title":  "Destruction VFX hooks (concept)",
-                             "language":  "csharp",
-                             "code":  "// Portfolio placeholder.\n// Demonstrate how breakable props trigger particle bursts and impact feedback.\n"
-                         }
-                     ],
-    "headings":  {
-                     "overview":  "Project Overview",
-                     "role":  "My Role"
-                 }
+  "slug": "turbo-tire",
+  "title": "Turbo Tire",
+  "kicker": "INTERNSHIP 3D PROJECT",
+  "subtitle": "A fast arcade destruction game where you drive a giant tire through a city, chaining boosts, ramps, and jumps to smash props and rack up score.",
+
+  "type": "Internship 3D Project",
+
+  "overview": "Turbo Tire is an arcade-style score attack experience where the player controls a tire rolling through a city and causing as much destruction as possible. The core loop is built around momentum and spectacle: using boosters, ramps, and big jumps to crash into objects like billboards, poles, and other breakable props while maintaining speed and building points. The focus is on satisfying feedback, a strong sense of velocity, and readable visual effects during fast traversal.",
+
+  "role": "I contributed primarily to the project’s visuals: creating untextured 3D models (props and environment pieces), building destruction VFX, and implementing speed-focused feedback. I set up a speed vignette, an outline shader to improve readability, god rays, and post-processing to push the overall look. I also created additional VFX elements to support impact feedback and reinforce the game’s fast, chaotic feel.",
+
+  "tools": [
+    "Unity (URP)",
+    "Visual Studio",
+    "Blender",
+    "Krita"
+  ],
+
+  "tags": [
+    "3D Modeling",
+    "VFX",
+    "Post-process",
+    "Outline Shader",
+    "God Rays",
+    "Destruction FX"
+  ],
+
+  "technologies": [
+    "Unity (URP)",
+    "URP Post-processing",
+    "Custom Shaders (Outline, God Rays)",
+    "VFX (Particle Systems)",
+    "3D Modeling (Blender)"
+  ],
+
+  "description": "An arcade city-destruction prototype where you drive a tire, hit boosters and ramps, and smash props to score points.",
+
+  "timelineDates": [
+    "07.2024",
+    "07.2024",
+    "07.2024"
+  ],
+
+  "timelineCaptions": [
+    "Early pass: untextured prop modeling and initial visual targets for a stylized city-destruction feel.",
+    "Mid pass: destruction VFX implementation and iteration on speed feedback (vignette, impact visuals).",
+    "Final pass: outline shader, god rays, post-processing polish, and overall visual consistency tuning."
+  ],
+
+  "codeExamples": [
+    {
+      "id": "example1",
+      "title": "Speed vignette driver (concept)",
+      "language": "csharp",
+      "code": "// Portfolio placeholder.\n// Demonstrate how speed value drives vignette intensity and other post-process parameters.\n"
+    },
+    {
+      "id": "example2",
+      "title": "Outline readability controls (concept)",
+      "language": "csharp",
+      "code": "// Portfolio placeholder.\n// Demonstrate how outline thickness/intensity is tuned for readability in fast gameplay.\n"
+    },
+    {
+      "id": "example3",
+      "title": "Destruction VFX hooks (concept)",
+      "language": "csharp",
+      "code": "// Portfolio placeholder.\n// Demonstrate how breakable props trigger particle bursts and impact feedback.\n"
+    }
+  ],
+
+  "headings": {
+    "overview": "Project Overview",
+    "role": "My Role"
+  }
 }
