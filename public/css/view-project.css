@@ -667,6 +667,11 @@ body.project-bg-active::before { opacity: 0.22; transform: scale(1.03); }
   text-decoration: none;
   color: inherit;
   cursor: zoom-in;
+  transition: transform var(--transition-base);
+}
+
+.timeline-item:hover {
+  transform: translateY(-6px);
 }
 
 .timeline-img {
@@ -677,11 +682,10 @@ body.project-bg-active::before { opacity: 0.22; transform: scale(1.03); }
   border: 2px solid rgba(255, 255, 255, 0.12);
   box-shadow: var(--shadow-lg);
   filter: saturate(1.05);
-  transition: transform var(--transition-base), filter var(--transition-base), border-color var(--transition-base), box-shadow var(--transition-base);
+  transition: filter var(--transition-base), border-color var(--transition-base), box-shadow var(--transition-base);
 }
 
 .timeline-item:hover .timeline-img {
-  transform: translateY(-4px) scale(1.05);
   filter: saturate(1.15) brightness(1.1);
   border-color: rgba(255, 255, 255, 0.24);
   box-shadow: var(--shadow-xl);
