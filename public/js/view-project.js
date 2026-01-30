@@ -82,19 +82,6 @@
         container.innerHTML = (items || []).map(t => `<span class="tag" role="listitem">${t}</span>`).join('');
     };
 
-    const buildChallenges = (container, items) => {
-        if (!container) return;
-        container.innerHTML = (items || []).map(ch => `
-            <div class="challenge-item">
-              <div class="challenge-icon">${ch.icon || '⚡'}</div>
-              <div class="challenge-content">
-                <h3 class="challenge-title">${ch.title || ''}</h3>
-                <p class="challenge-description">${ch.description || ''}</p>
-              </div>
-            </div>
-        `).join('');
-    };
-
     const buildGallery = (container, items) => {
         if (!container) return;
         container.innerHTML = (items || []).map((img, idx) => `
@@ -188,7 +175,6 @@
 
         buildTags($('[data-bind="tools-list"]'), data.tools);
         buildTags($('[data-bind="tags-list"]'), data.tags);
-        buildChallenges($('[data-bind="challenges-list"]'), data.challenges);
 
         // Auto-scan gallery and timeline folders
         const projectFolder = getFolderFromDataPath(data.dataPath);

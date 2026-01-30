@@ -1,98 +1,69 @@
 {
-  "slug": "slay-the-nightmares",
-  "title": "Slay The Nightmares",
-  "kicker": "ACADEMIC 2.5D PROJECT",
-  "subtitle": "2.5D beat ’em up where a unicorn survives ten intense enemy waves using a horn that transforms into different weapon forms with distinct combat mechanics.",
-
-  "type": "Academic 2.5D Project",
-
-  "overview": "Slay The Nightmares is a fast-paced 2.5D beat ’em up focused on wave-based survival. The player controls a unicorn facing escalating nightmare enemies across ten intense waves. The core hook is a transforming horn that can take multiple weapon forms, each with its own combat rhythm, attacks, and utility. The experience is built around clear readability (telegraphs, hit feedback, VFX) and a strong sense of progression as waves ramp up in difficulty.",
-
-  "role": "I owned the full technical side of the project: engine setup and implementation of key gameplay systems including movement, combat, enemies, horn transformations, and UI logic. I prepared scenes for the 2.5D visual style by building shaders, post-processing, lighting, and weapon VFX, plus nightmare visual overlays using Shader Graph. My goal was to keep combat responsive and readable while maintaining a cohesive stylized look.",
-
-  "tools": [
-    "Unity (URP)",
-    "Visual Studio",
-    "Blender",
-    "Krita"
-  ],
-
-  "tags": [
-    "C# Gameplay",
-    "2.5D Setup",
-    "Combat System",
-    "Enemy Waves",
-    "UI Logic",
-    "Shader Graph",
-    "VFX",
-    "Post-process",
-    "Lighting"
-  ],
-
-  "technologies": [
-    "Unity (URP)",
-    "C#",
-    "Shader Graph",
-    "URP Post-processing",
-    "Custom State Machine",
-    "Real-time VFX"
-  ],
-
-  "description": "A 2.5D beat ’em up where a unicorn survives ten escalating waves using a transforming horn with unique weapon forms.",
-
-  "challenges": [
-    {
-      "icon": "🦄",
-      "title": "Horn transformation system with clean combat extensibility",
-      "description": "The main challenge was supporting multiple weapon forms without turning combat code into a spaghetti mess. I designed a modular weapon interface (shared input → per-form logic) so new forms could be added with minimal coupling, while keeping animation/VFX/audio hooks consistent."
-    },
-    {
-      "icon": "👁️",
-      "title": "2.5D readability: spacing, depth, and hit feedback",
-      "description": "In 2.5D, depth cues and hit confirmation can easily get muddy. I tuned camera framing, enemy spacing rules, and VFX/post-process feedback to make attack ranges, impacts, and enemy telegraphs readable during chaotic waves."
-    },
-    {
-      "icon": "🌊",
-      "title": "Wave pacing and difficulty ramp without performance spikes",
-      "description": "Wave escalation needed to feel intense but stable. I implemented controlled spawning (caps, cooldowns, pooled units) and tuned enemy compositions per wave to increase pressure while avoiding sudden FPS drops or unfair overlaps."
-    }
-  ],
-
-  "timelineDates": [
-    "08.2024",
-    "09.2024",
-    "10.2024"
-  ],
-
-  "timelineCaptions": [
-    "Early prototype: core movement, basic attacks, and first enemy prototype with simple wave loop.",
-    "Core production: modular horn forms, enemy behaviors, UI logic, and first full wave set with difficulty ramp.",
-    "Polish & style: Shader Graph effects, VFX/post-process, lighting pass, readability tuning, and final balancing for 10 waves."
-  ],
-
-  "codeExamples": [
-    {
-      "id": "example1",
-      "title": "Player state machine (movement/combat-ready)",
-      "language": "csharp",
-      "code": "using UnityEngine;\n\npublic interface IPlayerState\n{\n    void Enter();\n    void Tick(float dt);\n    void Exit();\n}\n\npublic sealed class PlayerStateMachine : MonoBehaviour\n{\n    private IPlayerState _current;\n\n    public void SetState(IPlayerState next)\n    {\n        if (_current == next) return;\n        _current?.Exit();\n        _current = next;\n        _current?.Enter();\n    }\n\n    private void Update()\n    {\n        _current?.Tick(Time.deltaTime);\n    }\n}\n"
-    },
-    {
-      "id": "example2",
-      "title": "Modular horn weapon forms (clean extensibility)",
-      "language": "csharp",
-      "code": "using UnityEngine;\n\npublic interface IWeaponForm\n{\n    string Id { get; }\n    void OnEquip();\n    void OnUnequip();\n    void Primary();\n    void Secondary();\n}\n\npublic sealed class HornWeaponController : MonoBehaviour\n{\n    [SerializeField] private MonoBehaviour[] forms; // assign components that implement IWeaponForm\n\n    private IWeaponForm _active;\n\n    public void Equip(string id)\n    {\n        var next = FindForm(id);\n        if (next == null || next == _active) return;\n\n        _active?.OnUnequip();\n        _active = next;\n        _active.OnEquip();\n    }\n\n    public void Primary() => _active?.Primary();\n    public void Secondary() => _active?.Secondary();\n\n    private IWeaponForm FindForm(string id)\n    {\n        foreach (var mb in forms)\n        {\n            if (mb is IWeaponForm f && f.Id == id)\n                return f;\n        }\n        return null;\n    }\n}\n"
-    },
-    {
-      "id": "example3",
-      "title": "Wave director (caps + pacing hooks)",
-      "language": "csharp",
-      "code": "using System.Collections;\nusing UnityEngine;\n\npublic sealed class WaveDirector : MonoBehaviour\n{\n    [SerializeField] private Transform[] spawnPoints;\n    [SerializeField] private GameObject enemyPrefab;\n\n    [Header(\"Pacing\")]\n    [SerializeField] private int maxAlive = 8;\n    [SerializeField] private float spawnInterval = 1.0f;\n    [SerializeField] private int enemiesPerWave = 20;\n\n    private int _alive;\n\n    public IEnumerator RunWave()\n    {\n        int spawned = 0;\n\n        while (spawned < enemiesPerWave)\n        {\n            if (_alive < maxAlive)\n            {\n                SpawnEnemy();\n                spawned++;\n            }\n            yield return new WaitForSeconds(spawnInterval);\n        }\n\n        // wait until wave is cleared\n        while (_alive > 0)\n            yield return null;\n    }\n\n    private void SpawnEnemy()\n    {\n        var p = spawnPoints[Random.Range(0, spawnPoints.Length)];\n        var go = Instantiate(enemyPrefab, p.position, p.rotation);\n        _alive++;\n\n        // Example: enemy reports death back to director\n        var reporter = go.AddComponent<DeathReporter>();\n        reporter.OnDead += () => _alive--;\n    }\n\n    private sealed class DeathReporter : MonoBehaviour\n    {\n        public System.Action OnDead;\n        // Call OnDead?.Invoke() from your enemy death logic.\n        private void OnDestroy() => OnDead?.Invoke();\n    }\n}\n"
-    }
-  ],
-
-  "headings": {
-    "overview": "Project Overview",
-    "role": "My Role"
-  }
+    "slug":  "slay-the-nightmares",
+    "title":  "Slay The Nightmares",
+    "kicker":  "ACADEMIC 2.5D PROJECT",
+    "subtitle":  "2.5D beat ’em up where a unicorn survives ten intense enemy waves using a horn that transforms into different weapon forms with distinct combat mechanics.",
+    "type":  "Academic 2.5D Project",
+    "overview":  "Slay The Nightmares is a fast-paced 2.5D beat ’em up focused on wave-based survival. The player controls a unicorn facing escalating nightmare enemies across ten intense waves. The core hook is a transforming horn that can take multiple weapon forms, each with its own combat rhythm, attacks, and utility. The experience is built around clear readability (telegraphs, hit feedback, VFX) and a strong sense of progression as waves ramp up in difficulty.",
+    "role":  "I owned the full technical side of the project: engine setup and implementation of key gameplay systems including movement, combat, enemies, horn transformations, and UI logic. I prepared scenes for the 2.5D visual style by building shaders, post-processing, lighting, and weapon VFX, plus nightmare visual overlays using Shader Graph. My goal was to keep combat responsive and readable while maintaining a cohesive stylized look.",
+    "tools":  [
+                  "Unity (URP)",
+                  "Visual Studio",
+                  "Blender",
+                  "Krita"
+              ],
+    "tags":  [
+                 "C# Gameplay",
+                 "2.5D Setup",
+                 "Combat System",
+                 "Enemy Waves",
+                 "UI Logic",
+                 "Shader Graph",
+                 "VFX",
+                 "Post-process",
+                 "Lighting"
+             ],
+    "technologies":  [
+                         "Unity (URP)",
+                         "C#",
+                         "Shader Graph",
+                         "URP Post-processing",
+                         "Custom State Machine",
+                         "Real-time VFX"
+                     ],
+    "description":  "A 2.5D beat ’em up where a unicorn survives ten escalating waves using a transforming horn with unique weapon forms.",
+    "timelineDates":  [
+                          "08.2024",
+                          "09.2024",
+                          "10.2024"
+                      ],
+    "timelineCaptions":  [
+                             "Early prototype: core movement, basic attacks, and first enemy prototype with simple wave loop.",
+                             "Core production: modular horn forms, enemy behaviors, UI logic, and first full wave set with difficulty ramp.",
+                             "Polish \u0026 style: Shader Graph effects, VFX/post-process, lighting pass, readability tuning, and final balancing for 10 waves."
+                         ],
+    "codeExamples":  [
+                         {
+                             "id":  "example1",
+                             "title":  "Player state machine (movement/combat-ready)",
+                             "language":  "csharp",
+                             "code":  "using UnityEngine;\n\npublic interface IPlayerState\n{\n    void Enter();\n    void Tick(float dt);\n    void Exit();\n}\n\npublic sealed class PlayerStateMachine : MonoBehaviour\n{\n    private IPlayerState _current;\n\n    public void SetState(IPlayerState next)\n    {\n        if (_current == next) return;\n        _current?.Exit();\n        _current = next;\n        _current?.Enter();\n    }\n\n    private void Update()\n    {\n        _current?.Tick(Time.deltaTime);\n    }\n}\n"
+                         },
+                         {
+                             "id":  "example2",
+                             "title":  "Modular horn weapon forms (clean extensibility)",
+                             "language":  "csharp",
+                             "code":  "using UnityEngine;\n\npublic interface IWeaponForm\n{\n    string Id { get; }\n    void OnEquip();\n    void OnUnequip();\n    void Primary();\n    void Secondary();\n}\n\npublic sealed class HornWeaponController : MonoBehaviour\n{\n    [SerializeField] private MonoBehaviour[] forms; // assign components that implement IWeaponForm\n\n    private IWeaponForm _active;\n\n    public void Equip(string id)\n    {\n        var next = FindForm(id);\n        if (next == null || next == _active) return;\n\n        _active?.OnUnequip();\n        _active = next;\n        _active.OnEquip();\n    }\n\n    public void Primary() =\u003e _active?.Primary();\n    public void Secondary() =\u003e _active?.Secondary();\n\n    private IWeaponForm FindForm(string id)\n    {\n        foreach (var mb in forms)\n        {\n            if (mb is IWeaponForm f \u0026\u0026 f.Id == id)\n                return f;\n        }\n        return null;\n    }\n}\n"
+                         },
+                         {
+                             "id":  "example3",
+                             "title":  "Wave director (caps + pacing hooks)",
+                             "language":  "csharp",
+                             "code":  "using System.Collections;\nusing UnityEngine;\n\npublic sealed class WaveDirector : MonoBehaviour\n{\n    [SerializeField] private Transform[] spawnPoints;\n    [SerializeField] private GameObject enemyPrefab;\n\n    [Header(\"Pacing\")]\n    [SerializeField] private int maxAlive = 8;\n    [SerializeField] private float spawnInterval = 1.0f;\n    [SerializeField] private int enemiesPerWave = 20;\n\n    private int _alive;\n\n    public IEnumerator RunWave()\n    {\n        int spawned = 0;\n\n        while (spawned \u003c enemiesPerWave)\n        {\n            if (_alive \u003c maxAlive)\n            {\n                SpawnEnemy();\n                spawned++;\n            }\n            yield return new WaitForSeconds(spawnInterval);\n        }\n\n        // wait until wave is cleared\n        while (_alive \u003e 0)\n            yield return null;\n    }\n\n    private void SpawnEnemy()\n    {\n        var p = spawnPoints[Random.Range(0, spawnPoints.Length)];\n        var go = Instantiate(enemyPrefab, p.position, p.rotation);\n        _alive++;\n\n        // Example: enemy reports death back to director\n        var reporter = go.AddComponent\u003cDeathReporter\u003e();\n        reporter.OnDead += () =\u003e _alive--;\n    }\n\n    private sealed class DeathReporter : MonoBehaviour\n    {\n        public System.Action OnDead;\n        // Call OnDead?.Invoke() from your enemy death logic.\n        private void OnDestroy() =\u003e OnDead?.Invoke();\n    }\n}\n"
+                         }
+                     ],
+    "headings":  {
+                     "overview":  "Project Overview",
+                     "role":  "My Role"
+                 }
 }
