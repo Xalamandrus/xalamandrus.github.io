@@ -501,7 +501,7 @@ body.project-bg-active::before { opacity: 0.22; transform: scale(1.03); }
   background: rgba(0, 0, 0, 0.18);
   box-shadow: var(--shadow-lg);
   transition: transform var(--transition-base), border-color var(--transition-base), box-shadow var(--transition-base);
-  cursor: zoom-in;
+  cursor: pointer;
   height: 100%;
   min-height: 0;
 }
@@ -544,7 +544,7 @@ body.project-bg-active::before { opacity: 0.22; transform: scale(1.03); }
   padding: var(--spacing-xl);
   opacity: 0;
   animation: fadeIn 0.3s ease forwards;
-  cursor: zoom-out;
+  cursor: default;
 }
 
 .lightbox.active {
@@ -750,7 +750,7 @@ body.project-bg-active::before { opacity: 0.22; transform: scale(1.03); }
   flex: 0 0 auto;
   text-decoration: none;
   color: inherit;
-  cursor: zoom-in;
+  cursor: pointer;
   transition: transform var(--transition-base);
 }
 
