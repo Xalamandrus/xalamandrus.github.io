@@ -167,11 +167,9 @@ body.projects-bg-active::before {
     position: absolute;
     inset: 0;
     background: linear-gradient(
-        115deg,
-        rgba(5, 8, 14, 0.7) 0%,
-        rgba(5, 8, 14, 0.62) 32%,
-        rgba(5, 8, 14, 0.38) 65%,
-        rgba(5, 8, 14, 0) 100%
+        to top,
+        rgba(0, 0, 0, 0.75) 0%,
+        rgba(0, 0, 0, 0.0) 65%
     );
 }
 
@@ -191,7 +189,7 @@ body.projects-bg-active::before {
     width: 100%;        /* pelna szerokosc karty */
     max-width: none;
     gap: var(--spacing-sm);
-    background: linear-gradient(90deg, rgba(5, 8, 14, 0.35), rgba(5, 8, 14, 0));
+    background: linear-gradient(to top, rgba(5, 8, 14, 0.65) 0%, rgba(5, 8, 14, 0) 70%);
 }
 
 .project-meta {
@@ -325,11 +323,9 @@ body.projects-bg-active::before {
     position: absolute;
     inset: 0;
     background: linear-gradient(
-        115deg,
-        rgba(5, 8, 14, 0.7) 0%,
-        rgba(5, 8, 14, 0.62) 32%,
-        rgba(5, 8, 14, 0.38) 65%,
-        rgba(5, 8, 14, 0) 100%
+        to top,
+        rgba(0, 0, 0, 0.75) 0%,
+        rgba(0, 0, 0, 0.0) 65%
     );
 }
 
@@ -349,7 +345,7 @@ body.projects-bg-active::before {
     width: 100%;        /* pelna szerokosc karty */
     max-width: none;
     gap: var(--spacing-sm);
-    background: linear-gradient(90deg, rgba(5, 8, 14, 0.35), rgba(5, 8, 14, 0));
+    background: linear-gradient(to top, rgba(5, 8, 14, 0.65) 0%, rgba(5, 8, 14, 0) 70%);
 }
 
 .project-meta {
