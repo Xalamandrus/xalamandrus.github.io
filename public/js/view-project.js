@@ -105,13 +105,32 @@
         `).join('');
     };
 
-    const buildCodeTabs = (tabsContainer, panelsContainer, examples) => {
+    const buildCodeTabs = async (tabsContainer, panelsContainer, examples) => {
         if (!tabsContainer || !panelsContainer) return;
         tabsContainer.innerHTML = '';
         panelsContainer.innerHTML = '';
 
-        (examples || []).forEach((ex, idx) => {
+        for (let idx = 0; idx < (examples || []).length; idx++) {
+            const ex = examples[idx];
             const isActive = idx === 0;
+            
+            // Fetch code from file if filePath is provided
+            let code = ex.code || '';
+            if (ex.filePath && !code) {
+                try {
+                    const response = await fetch(ex.filePath);
+                    if (response.ok) {
+                        code = await response.text();
+                    } else {
+                        console.warn(`Failed to load code file: ${ex.filePath}`);
+                        code = `// Failed to load file: ${ex.filePath}`;
+                    }
+                } catch (err) {
+                    console.error(`Error loading code file ${ex.filePath}:`, err);
+                    code = `// Error loading file: ${ex.filePath}`;
+                }
+            }
+
             const tab = document.createElement('button');
             tab.className = `code-tab${isActive ? ' active' : ''}`;
             tab.role = 'tab';
@@ -124,9 +143,9 @@
             panel.className = `code-panel${isActive ? ' active' : ''}`;
             panel.role = 'tabpanel';
             panel.dataset.panel = ex.id || `code-${idx}`;
-            panel.innerHTML = `<pre><code class="language-${ex.language || 'csharp'}">${ex.code || ''}</code></pre>`;
+            panel.innerHTML = `<pre><code class="language-${ex.language || 'csharp'}">${escapeHtml(code)}</code></pre>`;
             panelsContainer.appendChild(panel);
-        });
+        }
 
         // Re-init code-tabs if function exists
         document.querySelectorAll('.code-tab').forEach((btn, idx) => {
@@ -143,6 +162,13 @@
                 if (panel) panel.classList.add('active');
             });
         });
+    };
+
+    // Helper to escape HTML in code
+    const escapeHtml = (text) => {
+        const div = document.createElement('div');
+        div.textContent = text;
+        return div.innerHTML;
     };
 
     const applyHero = (data) => {
@@ -196,7 +222,7 @@
 
         buildGallery($('[data-bind="gallery-list"]'), galleryData);
         buildTimeline($('[data-bind="timeline-list"]'), timelineData);
-        buildCodeTabs(
+        await buildCodeTabs(
             $('[data-bind="code-tabs"]'),
             $('[data-bind="code-panels"]'),
             data.codeExamples

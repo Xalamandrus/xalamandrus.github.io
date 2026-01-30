@@ -53,21 +53,27 @@
   "codeExamples": [
     {
       "id": "example1",
-      "title": "Cauldron recipe validation (step-based)",
+      "title": "Cauldron System",
       "language": "csharp",
-      "code": "using System;\nusing System.Collections.Generic;\nusing UnityEngine;\n\n[Serializable]\npublic class RecipeStep\n{\n    public string IngredientId;\n    public float MinAmount;\n    public float MaxAmount;\n    public float MaxAllowedHeat;\n}\n\n[CreateAssetMenu(menuName = \"Beans&Rats/Recipe\")]\npublic class RecipeDefinition : ScriptableObject\n{\n    public string RecipeId;\n    public List<RecipeStep> Steps = new();\n}\n\npublic sealed class CauldronController : MonoBehaviour\n{\n    [SerializeField] private RecipeDefinition activeRecipe;\n\n    private int _stepIndex;\n\n    public event Action<int, int> OnStepChanged; // current, total\n    public event Action OnRecipeCompleted;\n    public event Action<string> OnRecipeFailed;\n\n    public void StartRecipe(RecipeDefinition recipe)\n    {\n        activeRecipe = recipe;\n        _stepIndex = 0;\n        OnStepChanged?.Invoke(_stepIndex, activeRecipe.Steps.Count);\n    }\n\n    public void ApplyIngredient(string ingredientId, float amount, float currentHeat)\n    {\n        if (activeRecipe == null || _stepIndex >= activeRecipe.Steps.Count)\n            return;\n\n        var step = activeRecipe.Steps[_stepIndex];\n\n        if (!string.Equals(step.IngredientId, ingredientId, StringComparison.OrdinalIgnoreCase))\n        {\n            OnRecipeFailed?.Invoke($\"Wrong ingredient: {ingredientId}\");\n            return;\n        }\n\n        if (amount < step.MinAmount || amount > step.MaxAmount)\n        {\n            OnRecipeFailed?.Invoke($\"Wrong amount: {amount:0.00}\");\n            return;\n        }\n\n        if (currentHeat > step.MaxAllowedHeat)\n        {\n            OnRecipeFailed?.Invoke($\"Too hot: {currentHeat:0.0}\");\n            return;\n        }\n\n        _stepIndex++;\n        OnStepChanged?.Invoke(_stepIndex, activeRecipe.Steps.Count);\n\n        if (_stepIndex >= activeRecipe.Steps.Count)\n            OnRecipeCompleted?.Invoke();\n    }\n}\n"
+      "filePath": "assets/projects/Beans-and-Rats/Scripts/Couldron.cs"
     },
     {
       "id": "example2",
-      "title": "Angle-driven VR pouring (lightweight & tunable)",
+      "title": "Potion Recipe Manager",
       "language": "csharp",
-      "code": "using UnityEngine;\n\npublic sealed class PouringController : MonoBehaviour\n{\n    [Header(\"References\")]\n    [SerializeField] private Transform container;\n    [SerializeField] private ParticleSystem pourVfx;\n\n    [Header(\"Tuning\")]\n    [SerializeField, Range(0f, 90f)] private float startAngle = 35f;\n    [SerializeField, Range(0f, 90f)] private float fullAngle = 75f;\n    [SerializeField] private AnimationCurve flowCurve = AnimationCurve.Linear(0, 0, 1, 1);\n\n    public float Flow01 { get; private set; }\n\n    private ParticleSystem.EmissionModule _emission;\n\n    private void Awake()\n    {\n        if (pourVfx != null)\n            _emission = pourVfx.emission;\n    }\n\n    private void Update()\n    {\n        if (container == null) return;\n\n        // 0° = upright, 90° = sideways\n        float angle = Vector3.Angle(container.up, Vector3.up);\n\n        float t = Mathf.InverseLerp(startAngle, fullAngle, angle);\n        t = Mathf.Clamp01(t);\n\n        Flow01 = flowCurve.Evaluate(t);\n\n        if (pourVfx != null)\n        {\n            bool shouldPour = Flow01 > 0.01f;\n            if (shouldPour && !pourVfx.isPlaying) pourVfx.Play();\n            if (!shouldPour && pourVfx.isPlaying) pourVfx.Stop();\n\n            _emission.rateOverTime = 60f * Flow01;\n        }\n    }\n}\n"
+      "filePath": "assets/projects/Beans-and-Rats/Scripts/PotionRecipeManager.cs"
     },
     {
       "id": "example3",
-      "title": "Book page flip control via MaterialPropertyBlock",
+      "title": "Lever Controller",
       "language": "csharp",
-      "code": "using System.Collections;\nusing UnityEngine;\n\npublic sealed class BookPageFlip : MonoBehaviour\n{\n    [SerializeField] private Renderer pageRenderer;\n    [SerializeField] private string flipProperty = \"_Flip\";\n    [SerializeField] private float flipDuration = 0.35f;\n    [SerializeField] private AnimationCurve flipCurve = AnimationCurve.EaseInOut(0, 0, 1, 1);\n\n    private MaterialPropertyBlock _mpb;\n    private Coroutine _routine;\n\n    private void Awake()\n    {\n        _mpb = new MaterialPropertyBlock();\n        SetFlip(0f);\n    }\n\n    public void FlipForward()\n    {\n        StartFlip(1f);\n    }\n\n    public void FlipBackward()\n    {\n        StartFlip(0f);\n    }\n\n    private void StartFlip(float target)\n    {\n        if (_routine != null) StopCoroutine(_routine);\n        _routine = StartCoroutine(FlipRoutine(target));\n    }\n\n    private IEnumerator FlipRoutine(float target)\n    {\n        float start = GetFlip();\n        float time = 0f;\n\n        while (time < flipDuration)\n        {\n            time += Time.deltaTime;\n            float t = Mathf.Clamp01(time / flipDuration);\n            float v = Mathf.Lerp(start, target, flipCurve.Evaluate(t));\n            SetFlip(v);\n            yield return null;\n        }\n\n        SetFlip(target);\n        _routine = null;\n    }\n\n    private float GetFlip()\n    {\n        if (pageRenderer == null) return 0f;\n        pageRenderer.GetPropertyBlock(_mpb);\n        return _mpb.GetFloat(flipProperty);\n    }\n\n    private void SetFlip(float value)\n    {\n        if (pageRenderer == null) return;\n        pageRenderer.GetPropertyBlock(_mpb);\n        _mpb.SetFloat(flipProperty, value);\n        pageRenderer.SetPropertyBlock(_mpb);\n    }\n}\n"
+      "filePath": "assets/projects/Beans-and-Rats/Scripts/LeverController.cs"
+    },
+    {
+      "id": "example4",
+      "title": "Hue Match Settings",
+      "language": "csharp",
+      "filePath": "assets/projects/Beans-and-Rats/Scripts/HueMatchSettings.cs"
     }
   ],
 
