@@ -1,8 +1,4 @@
 (() => {
-    const galleryLinks = document.querySelectorAll('[data-lightbox]');
-    
-    if (galleryLinks.length === 0) return;
-
     // Create lightbox element
     const lightbox = document.createElement('div');
     lightbox.className = 'lightbox';
@@ -32,15 +28,16 @@
         }, 300);
     };
 
-    // Add click handlers to gallery images
-    galleryLinks.forEach(link => {
-        link.addEventListener('click', (e) => {
+    // Use event delegation to handle dynamically added gallery images
+    document.addEventListener('click', (e) => {
+        const link = e.target.closest('[data-lightbox]');
+        if (link) {
             e.preventDefault();
             const img = link.querySelector('img');
             const src = link.href;
-            const alt = img.alt;
+            const alt = img ? img.alt : '';
             openLightbox(src, alt);
-        });
+        }
     });
 
     // Close lightbox on click outside image or close button
