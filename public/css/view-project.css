@@ -561,6 +561,52 @@ body.project-bg-active::before { opacity: 0.22; transform: scale(1.03); }
   animation: zoomIn 0.3s ease forwards;
 }
 
+.lightbox-nav {
+  position: absolute;
+  top: 50%;
+  transform: translateY(-50%);
+  width: 56px;
+  height: 56px;
+  border-radius: var(--radius-full);
+  border: 1px solid rgba(255, 255, 255, 0.2);
+  background-color: rgba(255, 255, 255, 0.1);
+  backdrop-filter: blur(10px);
+  cursor: pointer;
+  transition: background var(--transition-fast), opacity var(--transition-fast);
+  z-index: 2;
+  background-image: url("../assets/icons/arrow.png");
+  background-size: 22px 22px;
+  background-repeat: no-repeat;
+  background-position: center;
+}
+
+.lightbox-nav:hover {
+  background-color: rgba(255, 255, 255, 0.2);
+}
+
+.lightbox-prev {
+  left: var(--spacing-lg);
+  transform: translateY(-50%) rotate(180deg);
+}
+
+.lightbox-prev:hover {
+}
+
+.lightbox-next {
+  right: var(--spacing-lg);
+}
+
+.lightbox-nav:disabled,
+.lightbox-nav[aria-disabled="true"] {
+  opacity: 0.35;
+  cursor: not-allowed;
+  pointer-events: none;
+}
+
+.lightbox img.is-switching {
+  animation: lightboxSwap 0.25s ease;
+}
+
 .lightbox-close {
   position: absolute;
   top: var(--spacing-lg);
@@ -605,6 +651,15 @@ body.project-bg-active::before { opacity: 0.22; transform: scale(1.03); }
   }
 }
 
+@keyframes lightboxSwap {
+  from {
+    opacity: 0.2;
+  }
+  to {
+    opacity: 1;
+  }
+}
+
 /* Responsive gallery */
 @media (max-width: 900px) {
   .vp-gallery {
@@ -643,6 +698,12 @@ body.project-bg-active::before { opacity: 0.22; transform: scale(1.03); }
   .lightbox img {
     max-width: 95vw;
     max-height: 85vh;
+  }
+
+  .lightbox-nav {
+    width: 44px;
+    height: 44px;
+    background-size: 18px 18px;
   }
 
   .lightbox-close {
