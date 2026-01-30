@@ -1,21 +1,25 @@
 [
     {
         "slug": "slay-the-nightmares",
-        "dataPath": "assets/projects/Slay-The-Nightmares/slay-the-nightmares.json"
+        "dataPath": "assets/projects/Slay-The-Nightmares/slay-the-nightmares.json",
+        "featured": true
     },
 
     {
         "slug": "beans-and-rats",
-        "dataPath": "assets/projects/Beans-and-Rats/beans-and-rats.json"
+        "dataPath": "assets/projects/Beans-and-Rats/beans-and-rats.json",
+        "featured": true
     },
     
     {
         "slug": "purrrifiers-cleaning-chaos-demo",
-        "dataPath": "assets/projects/Purrrifiers-Cleaning-Chaos/purrrifiers-cleaning-chaos.json"
+        "dataPath": "assets/projects/Purrrifiers-Cleaning-Chaos/purrrifiers-cleaning-chaos.json",
+        "featured": true
     },
 
     {
         "slug": "turbo-tire",
-        "dataPath": "assets/projects/Turbo-Tire/turbo-tire.json"
+        "dataPath": "assets/projects/Turbo-Tire/turbo-tire.json",
+        "featured": false
     }
 ]

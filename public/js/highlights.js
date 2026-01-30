@@ -21,7 +21,7 @@
                 const res = await fetch(item.dataPath);
                 if (!res.ok) throw new Error(`Bad status ${res.status}`);
                 const data = await res.json();
-                return { ...data, dataPath: item.dataPath };
+                return { ...data, dataPath: item.dataPath, featured: item.featured };
             } catch (err) {
                 console.error(`Error loading project data from ${item?.dataPath}:`, err);
                 return null;

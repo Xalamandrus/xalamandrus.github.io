@@ -90,7 +90,7 @@
                 const data = await res.json();
                 const slug = data.slug || item.slug || '';
                 const dateFromFile = await fetchDateForSlug(slug);
-                return { ...data, slug, date: dateFromFile || data.date || '', dataPath: item.dataPath };
+                return { ...data, slug, date: dateFromFile || data.date || '', dataPath: item.dataPath, featured: item.featured };
             } catch (err) {
                 console.error(`Error loading project data from ${item?.dataPath}:`, err);
                 return null;
