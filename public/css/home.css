@@ -490,7 +490,7 @@
     transform: translateX(0) scale(1) rotate(0deg);
     opacity: 1;
     filter: none;
-    cursor: default;
+    cursor: pointer;
 }
 
 /* Two side cards (overlap) */

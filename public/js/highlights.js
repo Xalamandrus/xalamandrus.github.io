@@ -21,7 +21,7 @@
                 const res = await fetch(item.dataPath);
                 if (!res.ok) throw new Error(`Bad status ${res.status}`);
                 const data = await res.json();
-                return { ...data, dataPath: item.dataPath, featured: item.featured };
+                return { ...data, slug: data.slug || item.slug || '', dataPath: item.dataPath, featured: item.featured };
             } catch (err) {
                 console.error(`Error loading project data from ${item?.dataPath}:`, err);
                 return null;
@@ -50,6 +50,9 @@
                 const article = document.createElement('article');
                 article.className = `highlight-card ${isActive ? 'active' : ''} ${idx === 1 ? 'behind behind-1' : ''} ${idx === 2 ? 'behind behind-2' : ''}`;
                 article.setAttribute('aria-hidden', isActive ? 'false' : 'true');
+                article.setAttribute('role', 'button');
+                article.setAttribute('tabindex', '0');
+                article.dataset.slug = project.slug || '';
                 article.innerHTML = `
                     <img src="${getHeroImagePath(project.dataPath)}" alt="${project.title}">
                     <div class="card-info">
@@ -146,11 +149,31 @@
             intervalId = window.setInterval(step, durationMs);
         };
 
+        const navigateToProject = (card) => {
+            const slug = card.dataset.slug || '';
+            if (!slug) return;
+            window.location.href = `view-project.html?slug=${encodeURIComponent(slug)}`;
+        };
+
         cards.forEach((card, idx) => {
-            card.addEventListener('click', (e) => {
-                if (e.target.closest('a')) return;
-                current = idx;
-                start();
+            card.addEventListener('click', () => {
+                if (card.classList.contains('active')) {
+                    navigateToProject(card);
+                } else {
+                    current = idx;
+                    start();
+                }
+            });
+
+            card.addEventListener('keydown', (e) => {
+                if (e.key !== 'Enter' && e.key !== ' ') return;
+                e.preventDefault();
+                if (card.classList.contains('active')) {
+                    navigateToProject(card);
+                } else {
+                    current = idx;
+                    start();
+                }
             });
         });
 
