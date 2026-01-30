@@ -39,15 +39,9 @@
   "description": "A VR alchemy crafting project where the player follows a magical recipe book to pour, stir, and control heat to create correct potions.",
 
   "timelineDates": [
-    "02.2024",
-    "03.2024",
-    "04.2024"
-  ],
-
-  "timelineCaptions": [
-    "Early prototype: basic VR interactions, first recipe flow, and initial cauldron logic for step tracking.",
-    "Core systems phase: dynamic pouring, recipe validation, FMOD event structure, and first pass on VFX/post-process for feedback.",
-    "Final polish: Shader Graph page flip, readability tuning, level layout improvements, and full gameplay loop stabilization."
+    "U: 0.0.8v - 23.04.2025",
+    "U: 0.2.6v - 13.05.2025",
+    "U: 0.3.6v - 24.05.2025"
   ],
 
   "codeExamples": [

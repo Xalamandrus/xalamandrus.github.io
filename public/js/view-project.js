@@ -96,11 +96,8 @@
         if (!container) return;
         container.innerHTML = (items || []).map((item, idx) => `
             <a class="timeline-item" href="${item.src}" role="listitem" data-lightbox>
+              <span class="timeline-date">${item.date || ''}</span>
               <img class="timeline-img" src="${item.src}" alt="${item.alt || `Timeline ${idx + 1}`}" loading="lazy" decoding="async" />
-              <div class="timeline-meta">
-                <span class="timeline-date">${item.date || ''}</span>
-                <p class="timeline-caption">${item.caption || ''}</p>
-              </div>
             </a>
         `).join('');
     };
