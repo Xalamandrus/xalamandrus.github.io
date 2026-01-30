@@ -4,8 +4,6 @@
   "kicker": "PROJECT TYPE (np. ACADEMIC VR PROJECT, INTERNSHIP 3D PROJECT, GAMEJAM PROJECT)",
   "subtitle": "Krótki opis projektu w 1-2 zdaniach.",
   
-  "heroImage": "assets/projects/Project-Name/image.png",
-  
   "type": "Academic VR Project / Internship 3D Project / GameJam / itp.",
   "featured": true,
   

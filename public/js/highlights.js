@@ -1,6 +1,19 @@
 (() => {
     const projectsIndexUrl = 'assets/data/projects.json';
     
+    // Extract folder path from dataPath
+    const getFolderFromDataPath = (dataPath) => {
+        if (!dataPath) return '';
+        const lastSlash = dataPath.lastIndexOf('/');
+        return lastSlash > 0 ? dataPath.substring(0, lastSlash) : '';
+    };
+
+    // Generate hero image path from dataPath
+    const getHeroImagePath = (dataPath) => {
+        const folder = getFolderFromDataPath(dataPath);
+        return folder ? `${folder}/Gallery/hero.png` : 'assets/projects/default.png';
+    };
+    
     const fetchProjectDetails = async (indexItems) => {
         const tasks = (indexItems || []).map(async item => {
             if (!item?.dataPath) return null;
@@ -8,7 +21,7 @@
                 const res = await fetch(item.dataPath);
                 if (!res.ok) throw new Error(`Bad status ${res.status}`);
                 const data = await res.json();
-                return data;
+                return { ...data, dataPath: item.dataPath };
             } catch (err) {
                 console.error(`Error loading project data from ${item?.dataPath}:`, err);
                 return null;
@@ -38,7 +51,7 @@
                 article.className = `highlight-card ${isActive ? 'active' : ''} ${idx === 1 ? 'behind behind-1' : ''} ${idx === 2 ? 'behind behind-2' : ''}`;
                 article.setAttribute('aria-hidden', isActive ? 'false' : 'true');
                 article.innerHTML = `
-                    <img src="${project.heroImage || 'assets/projects/default.png'}" alt="${project.title}">
+                    <img src="${getHeroImagePath(project.dataPath)}" alt="${project.title}">
                     <div class="card-info">
                         <h3>${project.title || ''}</h3>
                         <p>${project.description || ''}</p>

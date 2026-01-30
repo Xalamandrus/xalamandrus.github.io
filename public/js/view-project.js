@@ -10,6 +10,19 @@
         if (el) el.textContent = text || '';
     };
 
+    // Extract folder path from dataPath (e.g., "assets/projects/Project-Name/project.json" -> "assets/projects/Project-Name")
+    const getFolderFromDataPath = (dataPath) => {
+        if (!dataPath) return '';
+        const lastSlash = dataPath.lastIndexOf('/');
+        return lastSlash > 0 ? dataPath.substring(0, lastSlash) : '';
+    };
+
+    // Generate hero image path from dataPath
+    const getHeroImagePath = (dataPath) => {
+        const folder = getFolderFromDataPath(dataPath);
+        return folder ? `${folder}/Gallery/hero.png` : '';
+    };
+
     // Fetch date from date.txt in project folder
     const fetchDateForSlug = async (slug) => {
         try {
@@ -27,8 +40,10 @@
         const extensions = ['png', 'jpg', 'jpeg'];
         const found = [];
         
-        // Try common numbering patterns: 1-20, 01-20, image1-image20
+        // Try common numbering patterns: 1-20
         for (let i = 1; i <= 20; i++) {
+            let foundForThisNumber = false;
+            
             for (const ext of extensions) {
                 const candidates = [
                     `${folderPath}/${i}.${ext}`,
@@ -42,12 +57,20 @@
                         const res = await fetch(url, { method: 'HEAD' });
                         if (res.ok) {
                             found.push(url);
+                            foundForThisNumber = true;
                             break; // Found this number, try next
                         }
                     } catch (err) {
                         // File doesn't exist, continue
                     }
                 }
+                
+                if (foundForThisNumber) break; // Found file with this number, no need to try other extensions
+            }
+            
+            // Stop scanning if we didn't find this number (assume no more files after gap)
+            if (!foundForThisNumber && found.length > 0) {
+                break;
             }
         }
         
@@ -136,9 +159,10 @@
     };
 
     const applyHero = (data) => {
+        const heroImagePath = getHeroImagePath(data.dataPath);
         const heroImg = document.querySelector('.project-hero-media img');
-        if (heroImg && data.heroImage) {
-            heroImg.src = data.heroImage;
+        if (heroImg && heroImagePath) {
+            heroImg.src = heroImagePath;
             heroImg.alt = data.title ? `${data.title} header` : 'Project header';
         }
 
@@ -146,8 +170,10 @@
         setText('.project-title', data.title || '');
         setText('.project-subtitle', data.subtitle || '');
 
-        if (data.heroImage) {
-            document.body.style.setProperty('--project-bg-image', `url("${data.heroImage}")`);
+        if (heroImagePath) {
+            // Convert path to be relative from CSS folder (../assets/... instead of assets/...)
+            const bgPath = heroImagePath.replace('assets/', '../assets/');
+            document.body.style.setProperty('--project-bg-image', `url("${bgPath}")`);
         }
     };
 
@@ -165,8 +191,9 @@
         buildChallenges($('[data-bind="challenges-list"]'), data.challenges);
 
         // Auto-scan gallery and timeline folders
-        const galleryImages = await scanFolder(`assets/projects/${data.slug}/gallery`);
-        const timelineImages = await scanFolder(`assets/projects/${data.slug}/timeline`);
+        const projectFolder = getFolderFromDataPath(data.dataPath);
+        const galleryImages = await scanFolder(`${projectFolder}/Gallery`);
+        const timelineImages = await scanFolder(`${projectFolder}/Timeline`);
 
         const galleryData = galleryImages.map((src, idx) => ({
             src,
@@ -220,6 +247,7 @@
             const dateFromFile = await fetchDateForSlug(slug);
             data.date = dateFromFile || data.date || '';
             data.slug = slug;
+            data.dataPath = match.dataPath; // Add dataPath for gallery generation
 
             await render(data);
         } catch (err) {

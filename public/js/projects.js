@@ -4,6 +4,19 @@
     const fadeDuration = 100; // ms; sparowane z CSS transition w body::before
     let fadeTimeout;
 
+    // Extract folder path from dataPath
+    const getFolderFromDataPath = (dataPath) => {
+        if (!dataPath) return '';
+        const lastSlash = dataPath.lastIndexOf('/');
+        return lastSlash > 0 ? dataPath.substring(0, lastSlash) : '';
+    };
+
+    // Generate hero image path from dataPath
+    const getHeroImagePath = (dataPath) => {
+        const folder = getFolderFromDataPath(dataPath);
+        return folder ? `${folder}/Gallery/hero.png` : 'assets/projects/default.png';
+    };
+
     // ====== BLUR TŁA ======
     const showBackground = (bg) => {
         clearTimeout(fadeTimeout);
@@ -100,7 +113,7 @@
     const sortByDate = (projects) => projects.sort((a, b) => parseDate(b.date) - parseDate(a.date));
 
     const createCard = (project, isCompact) => {
-        const imageSrc = project.heroImage || 'assets/projects/default.png';
+        const imageSrc = getHeroImagePath(project.dataPath);
         const cardClass = isCompact ? 'project-card--compact' : 'project-card--featured';
         const metaText = project.type || 'PROJECT';
         const tagsHtml = (project.technologies || [])
