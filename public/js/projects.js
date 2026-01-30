@@ -119,7 +119,7 @@
         const href = `view-project.html?slug=${encodeURIComponent(project.slug || '')}`;
 
         return `
-            <a href="${href}" class="project-card ${cardClass}" data-bg="${imageSrc}" role="article">
+            <a href="${href}" class="project-card ${cardClass} reveal" data-bg="${imageSrc}" role="article">
                 <div class="project-media">
                     <img src="${imageSrc}" alt="${project.title || 'Project'} preview">
                 </div>
