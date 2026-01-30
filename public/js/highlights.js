@@ -53,9 +53,9 @@
                 article.innerHTML = `
                     <img src="${getHeroImagePath(project.dataPath)}" alt="${project.title}">
                     <div class="card-info">
+                        <p class="project-meta">${project.type || 'PROJECT'}</p>
                         <h3>${project.title || ''}</h3>
                         <p>${project.description || ''}</p>
-                        <a href="view-project.html?slug=${encodeURIComponent(project.slug || '')}" class="btn-highlight">View Project →</a>
                     </div>
                     <div class="progress-bar" aria-hidden="true"><div class="progress-fill"></div></div>
                 `;

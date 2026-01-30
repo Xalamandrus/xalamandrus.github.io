@@ -116,9 +116,6 @@
         const imageSrc = getHeroImagePath(project.dataPath);
         const cardClass = isCompact ? 'project-card--compact' : 'project-card--featured';
         const metaText = project.type || 'PROJECT';
-        const tagsHtml = (project.technologies || [])
-            .map(tech => `<span class="tag" role="listitem">${tech}</span>`)
-            .join('');
         const href = `view-project.html?slug=${encodeURIComponent(project.slug || '')}`;
 
         return `
@@ -131,9 +128,6 @@
                         <p class="project-meta">${metaText}</p>
                         <h3 class="project-title">${project.title || ''}</h3>
                         ${project.description ? `<p class="project-description">${project.description}</p>` : ''}
-                    </div>
-                    <div class="project-footer">
-                        ${tagsHtml ? `<div class="tags" role="list">${tagsHtml}</div>` : ''}
                     </div>
                 </div>
             </a>

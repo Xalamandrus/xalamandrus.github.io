@@ -553,6 +553,16 @@
     margin: 0;
 }
 
+.card-info .project-meta {
+    font-family: var(--font-primary);
+    font-size: var(--text-small-size);
+    line-height: var(--text-small-line);
+    text-transform: uppercase;
+    letter-spacing: 0.18em;
+    color: var(--color-text-muted);
+    margin: 0 0 var(--spacing-xs);
+}
+
 .btn-highlight {
     display: inline-flex;
     align-items: center;

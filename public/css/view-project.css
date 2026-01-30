@@ -88,12 +88,11 @@ body.project-bg-active::before { opacity: 0.22; transform: scale(1.03); }
 
 .project-kicker {
   font-family: var(--font-primary);
-  font-size: var(--text-hero-sub-size);
-  line-height: var(--text-hero-sub-line);
-  font-weight: var(--font-weight-semibold);
+  font-size: var(--text-small-size);
+  line-height: var(--text-small-line);
   letter-spacing: 0.18em;
   text-transform: uppercase;
-  color: rgba(255, 255, 255, 0.55);
+  color: var(--color-text-muted);
   margin-bottom: var(--spacing-xs);
 }
 
