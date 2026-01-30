@@ -405,6 +405,29 @@ body.project-bg-active::before { opacity: 0.22; transform: scale(1.03); }
   background: rgba(255, 255, 255, 0.04);
   border: 1px solid rgba(255, 255, 255, 0.08);
   box-shadow: var(--shadow-md);
+  max-height: 900px;
+  overflow-y: auto;
+  scrollbar-width: thin;
+  scrollbar-color: var(--color-primary) rgba(255, 255, 255, 0.08);
+}
+
+.code-panel pre::-webkit-scrollbar {
+  width: 8px;
+  height: 8px;
+}
+
+.code-panel pre::-webkit-scrollbar-track {
+  background: rgba(255, 255, 255, 0.04);
+  border-radius: var(--radius-sm);
+}
+
+.code-panel pre::-webkit-scrollbar-thumb {
+  background: var(--color-primary);
+  border-radius: var(--radius-sm);
+}
+
+.code-panel pre::-webkit-scrollbar-thumb:hover {
+  background: rgba(88, 166, 255, 0.8);
 }
 
 .code-panel code {
