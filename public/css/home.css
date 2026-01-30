@@ -451,6 +451,17 @@
     isolation: isolate;
 }
 
+.highlight-card::before {
+    content: "";
+    position: absolute;
+    inset: 0;
+    z-index: 1;
+    background: rgba(0, 0, 0, 0.18);
+    opacity: 0;
+    transition: opacity 350ms ease;
+    pointer-events: none;
+}
+
 .highlight-card img {
     position: absolute;
     inset: 0;
@@ -477,6 +488,14 @@
         radial-gradient(900px 520px at 0% 0%, rgba(88, 166, 255, 0.15), transparent 55%),
         radial-gradient(900px 520px at 100% 100%, rgba(0, 255, 170, 0.10), transparent 55%);
     opacity: 0.9;
+}
+
+.highlight-card:hover::before {
+    opacity: 1;
+}
+
+.highlight-card:hover img {
+    filter: brightness(0.85) contrast(1.05) saturate(1.15);
 }
 
 .card-info,

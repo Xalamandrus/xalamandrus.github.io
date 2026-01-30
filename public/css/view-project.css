@@ -506,10 +506,24 @@ body.project-bg-active::before { opacity: 0.22; transform: scale(1.03); }
   min-height: 0;
 }
 
+.vp-shot::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background: rgba(0, 0, 0, 0.18);
+  opacity: 0;
+  transition: opacity var(--transition-base);
+  pointer-events: none;
+}
+
 .vp-shot:hover {
   transform: translateY(-4px);
   border-color: rgba(255, 255, 255, 0.18);
   box-shadow: var(--shadow-xl);
+}
+
+.vp-shot:hover::after {
+  opacity: 1;
 }
 
 .vp-shot img {
@@ -523,7 +537,7 @@ body.project-bg-active::before { opacity: 0.22; transform: scale(1.03); }
 
 .vp-shot:hover img {
   transform: scale(1.05);
-  filter: saturate(1.15);
+  filter: saturate(1.15) brightness(0.9);
 }
 
 /* Wide modifier - spans 2 columns */
@@ -754,8 +768,23 @@ body.project-bg-active::before { opacity: 0.22; transform: scale(1.03); }
   transition: transform var(--transition-base);
 }
 
+.timeline-item::after {
+  content: '';
+  position: absolute;
+  inset: 0;
+  border-radius: var(--radius-sm);
+  background: rgba(0, 0, 0, 0.18);
+  opacity: 0;
+  transition: opacity var(--transition-base);
+  pointer-events: none;
+}
+
 .timeline-item:hover {
   transform: translateY(-6px);
+}
+
+.timeline-item:hover::after {
+  opacity: 1;
 }
 
 .timeline-img {
@@ -770,7 +799,7 @@ body.project-bg-active::before { opacity: 0.22; transform: scale(1.03); }
 }
 
 .timeline-item:hover .timeline-img {
-  filter: saturate(1.15) brightness(1.1);
+  filter: saturate(1.15) brightness(0.95);
   border-color: rgba(255, 255, 255, 0.24);
   box-shadow: var(--shadow-xl);
 }
