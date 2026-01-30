@@ -8,6 +8,14 @@
 
     scrollbar-width: thin;
     scrollbar-color: #444 transparent;
+    user-select: none;
+}
+
+input,
+textarea,
+button,
+select {
+    user-select: text;
 }
 
 html
