@@ -732,7 +732,6 @@ body.project-bg-active::before { opacity: 0.22; transform: scale(1.03); }
 
   .timeline-img {
     width: 100%;
-    max-width: 400px;
     height: auto;
     aspect-ratio: 16 / 9;
   }
