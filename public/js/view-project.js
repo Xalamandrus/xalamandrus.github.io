@@ -39,9 +39,10 @@
     const scanFolder = async (folderPath) => {
         const extensions = ['png', 'jpg', 'jpeg'];
         const found = [];
+
+        const maxImageFilesInGallery = 50;
         
-        // Try common numbering patterns: 1-20
-        for (let i = 1; i <= 20; i++) {
+        for (let i = 1; i <= maxImageFilesInGallery; i++) {
             let foundForThisNumber = false;
             
             for (const ext of extensions) {
