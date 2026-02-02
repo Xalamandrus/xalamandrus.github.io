@@ -37,7 +37,7 @@ body.project-bg-active::before { opacity: 0.22; transform: scale(1.03); }
   position: relative;
   overflow: hidden;
   border-bottom: 1px solid var(--color-border-light);
-  padding-top: calc(var(--spacing-xl) + clamp(44px, 6vw, 86px));
+  padding-top: calc(var(--spacing-xl) + clamp(44px, 6vw, 64px));
   padding-bottom: clamp(44px, 6vw, 86px);
   isolation: isolate;
 }
@@ -113,6 +113,58 @@ body.project-bg-active::before { opacity: 0.22; transform: scale(1.03); }
   margin-bottom: var(--spacing-lg);
 }
 
+.project-hero-actions {
+  margin-top: var(--spacing-lg);
+  padding-top: var(--spacing-lg);
+  border-top: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+.project-hero-action-buttons {
+  display: flex;
+  gap: var(--spacing-md);
+  flex-wrap: wrap;
+}
+
+.project-hero-action-buttons .btn {
+  padding: 14px 28px;
+  font-size: var(--text-body-size);
+  animation: slideInUp 0.6s ease var(--transition-base) both;
+  transition: filter var(--transition-fast), background var(--transition-fast), border-color var(--transition-fast), box-shadow var(--transition-fast);
+}
+
+.project-hero-action-buttons .btn:nth-child(2) {
+  animation-delay: 0.2s;
+}
+
+.btn-icon {
+  width: 18px;
+  height: 18px;
+  flex-shrink: 0;
+}
+
+@keyframes slideInUp {
+  from {
+    opacity: 0;
+    transform: translateY(16px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.btn-secondary {
+  color: var(--color-text-primary);
+  background: rgba(22, 27, 34, 0.45);
+  border: 1px solid rgba(255, 255, 255, 0.10);
+  backdrop-filter: blur(14px) saturate(150%);
+}
+.btn-secondary:hover {
+  background: rgba(22, 27, 34, 0.65);
+  border-color: rgba(255, 255, 255, 0.18);
+  box-shadow: 0 0 20px rgba(88, 166, 255, 0.15);
+}
+
 /* Buttons (aligned with the rest of the site) */
 .project-cta { display: flex; gap: var(--spacing-md); flex-wrap: wrap; margin-bottom: var(--spacing-lg); }
 
@@ -131,9 +183,11 @@ body.project-bg-active::before { opacity: 0.22; transform: scale(1.03); }
   transition: transform var(--transition-fast), filter var(--transition-fast), background var(--transition-fast);
   user-select: none;
 }
-.btn:hover { transform: translateY(-1px); }
 .btn-primary { color: #fff; background: var(--gradient-primary); box-shadow: 0 18px 45px rgba(0, 0, 0, 0.45); }
-.btn-primary:hover { filter: brightness(1.05); }
+.btn-primary:hover {
+  filter: brightness(1.08);
+  box-shadow: 0 20px 50px rgba(0, 0, 0, 0.5), 0 0 25px rgba(88, 166, 255, 0.3);
+}
 .btn-ghost {
   color: var(--color-text-primary);
   background: rgba(22, 27, 34, 0.45);

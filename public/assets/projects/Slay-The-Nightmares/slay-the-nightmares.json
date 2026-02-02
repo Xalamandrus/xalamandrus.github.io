@@ -3,7 +3,8 @@
   "title": "Slay The Nightmares",
   "kicker": "ACADEMIC 2.5D PROJECT",
   "subtitle": "A 2.5D beat ’em up where a unicorn survives ten intense enemy waves using a horn that transforms into different weapon forms with distinct combat mechanics.",
-
+  "downloadBuildUrl": "",
+  "steamUrl": "",
   "type": "Academic 2.5D Project",
 
   "overview": "Slay The Nightmares is a fast-paced 2.5D beat ’em up focused on wave-based survival. The player controls a unicorn facing escalating nightmare enemies across ten intense waves. The core hook is a transforming horn that can take multiple weapon forms, each with its own combat rhythm, attacks, and utility. The experience is built around clear readability (telegraphs, hit feedback, VFX) and a strong sense of progression as waves ramp up in difficulty.",
