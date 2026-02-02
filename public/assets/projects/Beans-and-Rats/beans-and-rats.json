@@ -3,14 +3,10 @@
   "title": "Beans & Rats",
   "kicker": "ACADEMIC VR PROJECT",
   "subtitle": "A VR alchemy game where the player crafts potions by following recipe steps: pouring ingredients, stirring, and controlling the fire to achieve the correct color and effect.",
-
-  "downloadBuildUrl": "",
-  "steamUrl": "",
+  "downloadBuildUrl": "...",
 
   "type": "Academic VR Project",
-
   "overview": "Beans & Rats is a VR potion-crafting experience focused on tactile, step-by-step interaction. The player takes the role of an alchemist and prepares mixtures based on recipes stored in a magical book. Gameplay revolves around performing the correct sequence: pouring ingredients, stirring, and managing the heat under the cauldron to reach the expected potion color and outcome. The project emphasizes readable feedback (visual, audio, and VFX) and a clear learning curve through guided recipes.",
-
   "role": "I built the core gameplay logic: player movement and interactions, and the main cauldron system responsible for processing recipes and validating potion correctness. I implemented a dynamic liquid pouring system designed for VR readability and responsiveness. I created a page-flip shader in Shader Graph for the interactive recipe book, and integrated sound using FMOD to reinforce every step of the crafting process. Additionally, I prepared VFX, post-processing, and designed the level layout to support smooth player flow and clear visual focus.",
 
   "tools": [

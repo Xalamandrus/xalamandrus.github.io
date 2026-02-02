@@ -3,14 +3,10 @@
   "title": "Purrrifiers: Cleaning Chaos DEMO",
   "kicker": "INTERNSHIP 3D PROJECT",
   "subtitle": "A co-op cleaning game demo where players work together to clean messy locations and explore a weird, quirky town.",
-
-  "downloadBuildUrl": "https://store.steampowered.com/app/2934390/Purrrifiers_Cleaning_Chaos/",
-  "steamUrl": "https://store.steampowered.com/app/2934390/Purrrifiers_Cleaning_Chaos/",
+  "steamUrl": "https://store.steampowered.com/app/2235870/Purrrifiers_Cleaning_Chaos_Demo/",
 
   "type": "Internship 3D Project",
-
   "overview": "Purrrifiers: Cleaning Chaos DEMO is a co-op cleaning experience available on Steam. Players team up to restore dirty environments while exploring an unusual town filled with playful interactions and mission-driven objectives. The demo focuses on the core loop: identify stains, use tools to clean them, and progress through a compact slice of the game that highlights teamwork, readability, and satisfying visual feedback.",
-
   "role": "I delivered the DEMO version and built the core cleaning system based on a decal-driven dirt workflow powered by shaders and compute shaders (GPU-accelerated stamping/removal and scalable stain variation). I also created and integrated VFX and post-processing to improve readability and feel (foam, bubbles, dust particles, stain highlighting, and stylized room effects). Additionally, I authored level content by placing stains across the environment, configuring their parameters, and tuning them for consistent gameplay flow and visual clarity.",
 
   "tools": [

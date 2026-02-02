@@ -114,7 +114,7 @@ document.addEventListener('DOMContentLoaded', autoInject);
             }
         });
         
-        // Fallback: fade out after 3 seconds max
+        // Fallback: fade out after 2 seconds max
         setTimeout(hideLoadingScreen, 2000);
     };
 
