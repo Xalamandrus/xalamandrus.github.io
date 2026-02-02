@@ -219,12 +219,28 @@
         }));
 
         buildGallery($('[data-bind="gallery-list"]'), galleryData);
-        buildTimeline($('[data-bind="timeline-list"]'), timelineData);
-        await buildCodeTabs(
-            $('[data-bind="code-tabs"]'),
-            $('[data-bind="code-panels"]'),
-            data.codeExamples
-        );
+        
+        // Show Timeline section only if there's timeline data
+        const timelineSection = document.querySelector('[data-section="timeline"]');
+        if (timelineSection && timelineImages.length > 0) {
+            timelineSection.style.display = '';
+            buildTimeline($('[data-bind="timeline-list"]'), timelineData);
+        } else if (timelineSection) {
+            timelineSection.style.display = 'none';
+        }
+        
+        // Show Code Examples section only if there are code examples
+        const codeSection = document.querySelector('[data-section="code"]');
+        if (codeSection && data.codeExamples && data.codeExamples.length > 0) {
+            codeSection.style.display = '';
+            await buildCodeTabs(
+                $('[data-bind="code-tabs"]'),
+                $('[data-bind="code-panels"]'),
+                data.codeExamples
+            );
+        } else if (codeSection) {
+            codeSection.style.display = 'none';
+        }
 
         // Reattach lightbox
         const lightboxScript = document.createElement('script');

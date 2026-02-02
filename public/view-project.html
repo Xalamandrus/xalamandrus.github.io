@@ -92,13 +92,16 @@
             <!-- dynamic gallery -->
           </div>
 
-          <div class="vp-timeline" role="list" data-bind="timeline-list">
-            <!-- dynamic timeline -->
+          <div class="vp-timeline-section" data-section="timeline" style="display: none;">
+            <h3 class="vp-subheading">Timeline</h3>
+            <div class="vp-timeline" role="list" data-bind="timeline-list">
+              <!-- dynamic timeline -->
+            </div>
           </div>
         </div>
       </section>
 
-      <section class="vp-block reveal" id="code">
+      <section class="vp-block reveal" id="code" data-section="code" style="display: none;">
         <div class="container">
           <h2 class="vp-heading text-heading">Code Examples</h2>
 
