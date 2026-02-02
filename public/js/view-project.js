@@ -78,6 +78,37 @@
         return found;
     };
 
+    const buildCtaButtons = (container, data) => {
+        if (!container) return;
+        const buttons = [];
+
+        // Build download button if buildUrl exists
+        if (data.buildUrl) {
+            buttons.push(`
+                <a href="${data.buildUrl}" class="cta-button cta-button--primary" target="_blank" rel="noopener noreferrer">
+                    Download Build
+                </a>
+            `);
+        }
+
+        // Build Steam button if steamUrl exists
+        if (data.steamUrl) {
+            buttons.push(`
+                <a href="${data.steamUrl}" class="cta-button cta-button--secondary" target="_blank" rel="noopener noreferrer">
+                    🔗 View on Steam
+                </a>
+            `);
+        }
+
+        // Only show container if there are buttons
+        if (buttons.length > 0) {
+            container.innerHTML = buttons.join('');
+            container.style.display = 'flex';
+        } else {
+            container.style.display = 'none';
+        }
+    };
+
     const buildTags = (container, items) => {
         if (!container) return;
         container.innerHTML = (items || []).map(t => `<span class="tag" role="listitem">${t}</span>`).join('');
@@ -220,6 +251,9 @@
 
         buildGallery($('[data-bind="gallery-list"]'), galleryData);
         
+        // Build CTA buttons in hero
+        buildCtaButtons($('[data-bind="hero-cta-buttons"]'), data);
+        
         // Show Timeline section only if there's timeline data
         const timelineSection = document.querySelector('[data-section="timeline"]');
         if (timelineSection && timelineImages.length > 0) {
@@ -276,6 +310,14 @@
             data.dataPath = match.dataPath; // Add dataPath for gallery generation
 
             await render(data);
+            
+            // Signal that content is loaded and fade out loading screen after 1s delay
+            setTimeout(() => {
+                const loadingScreen = document.getElementById('loadingScreen');
+                if (loadingScreen) {
+                    loadingScreen.classList.add('hide');
+                }
+            }, 1000);
         } catch (err) {
             console.error(err);
         }

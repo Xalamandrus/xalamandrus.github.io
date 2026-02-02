@@ -111,6 +111,13 @@ document.addEventListener('DOMContentLoaded', autoInject);
         setTimeout(() => {
             loadingScreen.classList.add('hide');
         }, 5000);
+        
+        // Additional 1s delay for dynamic content loaded by frameworks
+        const additionalDelay = setTimeout(() => {
+            if (!loadingScreen.classList.contains('hide')) {
+                loadingScreen.classList.add('hide');
+            }
+        }, 6000);
     };
 
     // Wait for all injections to complete (with delay)

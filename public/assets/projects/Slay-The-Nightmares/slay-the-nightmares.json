@@ -93,5 +93,7 @@
   "headings": {
     "overview": "Project Overview",
     "role": "My Role"
-  }
+  },
+
+  "buildUrl": "https://example.com/builds/slay-the-nightmares.zip"
 }
