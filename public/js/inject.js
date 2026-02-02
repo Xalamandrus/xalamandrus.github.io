@@ -64,16 +64,23 @@ document.addEventListener('DOMContentLoaded', autoInject);
         
         if (!loadingScreen) return;
         
+        // Block scrolling while loading
+        document.body.style.overflow = 'hidden';
+        
+        const hideLoadingScreen = () => {
+            loadingScreen.classList.add('hide');
+            // Re-enable scrolling
+            document.body.style.overflow = '';
+        };
+        
         // Get all images and videos
         const images = Array.from(document.querySelectorAll('img'));
         const videos = Array.from(document.querySelectorAll('video'));
         const allMedia = [...images, ...videos];
         
         if (allMedia.length === 0) {
-            // No media, fade out immediately after a short delay
-            setTimeout(() => {
-                loadingScreen.classList.add('hide');
-            }, 300);
+            // No media, fade out after a short delay
+            setTimeout(hideLoadingScreen, 400);
             return;
         }
         
@@ -83,7 +90,7 @@ document.addEventListener('DOMContentLoaded', autoInject);
             loadedCount++;
             if (loadedCount >= allMedia.length) {
                 // All media loaded, fade out loading screen
-                loadingScreen.classList.add('hide');
+                hideLoadingScreen();
             }
         };
         
@@ -107,12 +114,16 @@ document.addEventListener('DOMContentLoaded', autoInject);
             }
         });
         
-        // Fallback: fade out after 5 seconds max
-        setTimeout(() => {
-            loadingScreen.classList.add('hide');
-        }, 5000);
+        // Fallback: fade out after 3 seconds max
+        setTimeout(hideLoadingScreen, 2000);
     };
 
-    // Wait for all injections to complete (with delay)
-    setTimeout(initLoadingScreen, 100);
+    // Wait for window load event (all resources)
+    if (document.readyState === 'complete') {
+        setTimeout(initLoadingScreen, 100);
+    } else {
+        window.addEventListener('load', () => {
+            setTimeout(initLoadingScreen, 100);
+        });
+    }
 })();
