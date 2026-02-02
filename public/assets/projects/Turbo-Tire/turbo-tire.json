@@ -4,6 +4,9 @@
   "kicker": "INTERNSHIP 3D PROJECT",
   "subtitle": "A fast arcade destruction game where you drive a giant tire through a city, chaining boosts, ramps, and jumps to smash props and rack up score.",
 
+  "downloadBuildUrl": "",
+  "steamUrl": "",
+
   "type": "Internship 3D Project",
 
   "overview": "Turbo Tire is an arcade-style score attack experience where the player controls a tire rolling through a city and causing as much destruction as possible. The core loop is built around momentum and spectacle: using boosters, ramps, and big jumps to crash into objects like billboards, poles, and other breakable props while maintaining speed and building points. The focus is on satisfying feedback, a strong sense of velocity, and readable visual effects during fast traversal.",

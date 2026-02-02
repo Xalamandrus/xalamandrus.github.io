@@ -212,12 +212,35 @@
         setText('.project-title', data.title || '');
         setText('.project-subtitle', data.subtitle || '');
 
+        // Handle action buttons
+        const downloadBtn = document.querySelector('[data-bind="download-build-btn"]');
+        const steamBtn = document.querySelector('[data-bind="steam-link-btn"]');
+
+        if (downloadBtn) {
+            if (data.downloadBuildUrl) {
+                downloadBtn.href = data.downloadBuildUrl;
+                downloadBtn.style.display = 'inline-flex';
+            } else {
+                downloadBtn.style.display = 'none';
+            }
+        }
+
+        if (steamBtn) {
+            if (data.steamUrl) {
+                steamBtn.href = data.steamUrl;
+                steamBtn.style.display = 'inline-flex';
+            } else {
+                steamBtn.style.display = 'none';
+            }
+        }
+
         if (heroImagePath) {
             // Convert path to be relative from CSS folder (../assets/... instead of assets/...)
             const bgPath = heroImagePath.replace('assets/', '../assets/');
             document.body.style.setProperty('--project-bg-image', `url("${bgPath}")`);
         }
     };
+
 
     const render = async (data) => {
         applyHero(data);

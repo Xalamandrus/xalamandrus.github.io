@@ -3,11 +3,10 @@
   "title": "Slay The Nightmares",
   "kicker": "ACADEMIC 2.5D PROJECT",
   "subtitle": "A 2.5D beat ’em up where a unicorn survives ten intense enemy waves using a horn that transforms into different weapon forms with distinct combat mechanics.",
-
+  "downloadBuildUrl": "https://drive.google.com/file/d/1l3MenLzGk-uRcAHtDR4FoLd5JQhvmLb3/view?usp=sharing",
+  
   "type": "Academic 2.5D Project",
-
   "overview": "Slay The Nightmares is a fast-paced 2.5D beat ’em up focused on wave-based survival. The player controls a unicorn facing escalating nightmare enemies across ten intense waves. The core hook is a transforming horn that can take multiple weapon forms, each with its own combat rhythm, attacks, and utility. The experience is built around clear readability (telegraphs, hit feedback, VFX) and a strong sense of progression as waves ramp up in difficulty.",
-
   "role": "I owned the full technical side of the project: engine setup and implementation of key gameplay systems including movement, combat, enemies, horn transformations, and UI logic. I prepared scenes for the 2.5D visual style by building shaders, post-processing, lighting, and weapon VFX, plus nightmare visual overlays using Shader Graph. My goal was to keep combat responsive and readable while maintaining a cohesive stylized look.",
 
   "tools": [
