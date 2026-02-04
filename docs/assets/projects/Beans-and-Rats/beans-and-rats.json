@@ -37,6 +37,21 @@
 
   "description": "A VR alchemy crafting project where the player follows a magical recipe book to pour, stir, and control heat to create correct potions.",
 
+  "gallery": [
+    "assets/projects/Beans-and-Rats/Gallery/1.png",
+    "assets/projects/Beans-and-Rats/Gallery/2.png",
+    "assets/projects/Beans-and-Rats/Gallery/3.png",
+    "assets/projects/Beans-and-Rats/Gallery/4.png",
+    "assets/projects/Beans-and-Rats/Gallery/5.png",
+    "assets/projects/Beans-and-Rats/Gallery/6.png",
+    "assets/projects/Beans-and-Rats/Gallery/7.png",
+    "assets/projects/Beans-and-Rats/Gallery/8.png",
+    "assets/projects/Beans-and-Rats/Gallery/9.png",
+    "assets/projects/Beans-and-Rats/Gallery/10.png",
+    "assets/projects/Beans-and-Rats/Gallery/11.png",
+    "assets/projects/Beans-and-Rats/Gallery/12.png"
+  ],
+
   "timelineDates": [
     "0.0.8v - 23.04.2025",
     "0.2.6v - 13.05.2025",

@@ -36,7 +36,31 @@
   ],
 
   "description": "A 2.5D beat ’em up where a unicorn survives ten escalating waves using a transforming horn with unique weapon forms.",
-
+  "gallery": [
+    "assets/projects/Slay-The-Nightmares/Gallery/1.png",
+    "assets/projects/Slay-The-Nightmares/Gallery/2.png",
+    "assets/projects/Slay-The-Nightmares/Gallery/3.png",
+    "assets/projects/Slay-The-Nightmares/Gallery/4.png",
+    "assets/projects/Slay-The-Nightmares/Gallery/5.png",
+    "assets/projects/Slay-The-Nightmares/Gallery/6.png",
+    "assets/projects/Slay-The-Nightmares/Gallery/7.png",
+    "assets/projects/Slay-The-Nightmares/Gallery/8.png",
+    "assets/projects/Slay-The-Nightmares/Gallery/9.png",
+    "assets/projects/Slay-The-Nightmares/Gallery/10.png",
+    "assets/projects/Slay-The-Nightmares/Gallery/11.png",
+    "assets/projects/Slay-The-Nightmares/Gallery/12.png",
+    "assets/projects/Slay-The-Nightmares/Gallery/13.png",
+    "assets/projects/Slay-The-Nightmares/Gallery/14.png",
+    "assets/projects/Slay-The-Nightmares/Gallery/15.png",
+    "assets/projects/Slay-The-Nightmares/Gallery/16.png",
+    "assets/projects/Slay-The-Nightmares/Gallery/17.png",
+    "assets/projects/Slay-The-Nightmares/Gallery/18.png",
+    "assets/projects/Slay-The-Nightmares/Gallery/19.png",
+    "assets/projects/Slay-The-Nightmares/Gallery/20.png",
+    "assets/projects/Slay-The-Nightmares/Gallery/21.png",
+    "assets/projects/Slay-The-Nightmares/Gallery/22.png",
+    "assets/projects/Slay-The-Nightmares/Gallery/23.png"
+  ],
   "timelineDates": [
     "0.0.8v - 05.02.2025",
     "0.1.5v - 15.03.2025",

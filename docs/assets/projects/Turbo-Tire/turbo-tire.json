@@ -39,6 +39,25 @@
 
   "description": "An arcade city-destruction prototype where you drive a tire, hit boosters and ramps, and smash props to score points.",
 
+  "gallery": [
+    "assets/projects/Turbo-Tire/Gallery/1.png",
+    "assets/projects/Turbo-Tire/Gallery/2.png",
+    "assets/projects/Turbo-Tire/Gallery/3.png",
+    "assets/projects/Turbo-Tire/Gallery/4.png",
+    "assets/projects/Turbo-Tire/Gallery/5.png",
+    "assets/projects/Turbo-Tire/Gallery/6.png",
+    "assets/projects/Turbo-Tire/Gallery/7.png",
+    "assets/projects/Turbo-Tire/Gallery/8.png",
+    "assets/projects/Turbo-Tire/Gallery/9.png",
+    "assets/projects/Turbo-Tire/Gallery/10.png",
+    "assets/projects/Turbo-Tire/Gallery/11.png",
+    "assets/projects/Turbo-Tire/Gallery/12.png",
+    "assets/projects/Turbo-Tire/Gallery/13.png",
+    "assets/projects/Turbo-Tire/Gallery/14.png",
+    "assets/projects/Turbo-Tire/Gallery/15.png",
+    "assets/projects/Turbo-Tire/Gallery/16.png"
+  ],
+
   "timelineDates": [
     "0.0.5v - 15.07.2024",
     "0.1.1v - 17.07.2024",

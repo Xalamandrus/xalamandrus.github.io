@@ -35,49 +35,6 @@
         }
     };
 
-    // Scan folder for .png and .jpg files
-    const scanFolder = async (folderPath) => {
-        const extensions = ['png', 'jpg', 'jpeg'];
-        const found = [];
-
-        const maxImageFilesInGallery = 50;
-        
-        for (let i = 1; i <= maxImageFilesInGallery; i++) {
-            let foundForThisNumber = false;
-            
-            for (const ext of extensions) {
-                const candidates = [
-                    `${folderPath}/${i}.${ext}`,
-                    `${folderPath}/${String(i).padStart(2, '0')}.${ext}`,
-                    `${folderPath}/image${i}.${ext}`,
-                    `${folderPath}/image${String(i).padStart(2, '0')}.${ext}`
-                ];
-                
-                for (const url of candidates) {
-                    try {
-                        const res = await fetch(url, { method: 'HEAD' });
-                        if (res.ok) {
-                            found.push(url);
-                            foundForThisNumber = true;
-                            break; // Found this number, try next
-                        }
-                    } catch (err) {
-                        // File doesn't exist, continue
-                    }
-                }
-                
-                if (foundForThisNumber) break; // Found file with this number, no need to try other extensions
-            }
-            
-            // Stop scanning if we didn't find this number (assume no more files after gap)
-            if (!foundForThisNumber && found.length > 0) {
-                break;
-            }
-        }
-        
-        return found;
-    };
-
     const buildCtaButtons = (container, data) => {
         if (!container) return;
         const buttons = [];
@@ -254,10 +211,9 @@
         buildTags($('[data-bind="tools-list"]'), data.tools);
         buildTags($('[data-bind="tags-list"]'), data.tags);
 
-        // Auto-scan gallery and timeline folders
-        const projectFolder = getFolderFromDataPath(data.dataPath);
-        const galleryImages = await scanFolder(`${projectFolder}/Gallery`);
-        const timelineImages = await scanFolder(`${projectFolder}/Timeline`);
+        // Use gallery array from JSON data instead of scanning folder
+        const galleryImages = data.gallery || [];
+        const timelineImages = data.timeline || [];
 
         const galleryData = galleryImages.map((src, idx) => ({
             src,

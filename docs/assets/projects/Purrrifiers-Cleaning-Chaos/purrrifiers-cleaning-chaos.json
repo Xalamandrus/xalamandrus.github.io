@@ -36,6 +36,21 @@
 
   "description": "A Steam co-op cleaning demo featuring a GPU-driven decal cleaning system, strong VFX feedback, and tuned stain placement across a full mission slice.",
 
+  "gallery": [
+    "assets/projects/Purrrifiers-Cleaning-Chaos/Gallery/1.png",
+    "assets/projects/Purrrifiers-Cleaning-Chaos/Gallery/2.png",
+    "assets/projects/Purrrifiers-Cleaning-Chaos/Gallery/3.png",
+    "assets/projects/Purrrifiers-Cleaning-Chaos/Gallery/4.png",
+    "assets/projects/Purrrifiers-Cleaning-Chaos/Gallery/5.png",
+    "assets/projects/Purrrifiers-Cleaning-Chaos/Gallery/6.png",
+    "assets/projects/Purrrifiers-Cleaning-Chaos/Gallery/7.png",
+    "assets/projects/Purrrifiers-Cleaning-Chaos/Gallery/8.png",
+    "assets/projects/Purrrifiers-Cleaning-Chaos/Gallery/9.png",
+    "assets/projects/Purrrifiers-Cleaning-Chaos/Gallery/10.png",
+    "assets/projects/Purrrifiers-Cleaning-Chaos/Gallery/11.png",
+    "assets/projects/Purrrifiers-Cleaning-Chaos/Gallery/12.png"
+  ],
+
   "timelineDates": [
     "07.2024",
     "08.2024",
