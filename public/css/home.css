@@ -1,3 +1,59 @@
+/* === SCREEN FLASH EFFECT === */
+
+.screen-flash {
+    position: fixed;
+    top: 0;
+    left: -150%;
+    width: 200%;
+    height: 300vh;
+    pointer-events: none;
+    z-index: 9998;
+    opacity: 0;
+    background: linear-gradient(
+        55deg,
+        transparent 0%,
+        transparent 35%,
+        rgba(255, 255, 255, 0.01) 40%,
+        rgba(255, 255, 255, 0.04) 45%,
+        rgba(255, 255, 255, 0.08) 48%,
+        rgba(255, 255, 255, 0.12) 50%,
+        rgba(255, 255, 255, 0.08) 52%,
+        rgba(255, 255, 255, 0.04) 55%,
+        rgba(255, 255, 255, 0.01) 60%,
+        transparent 65%,
+        transparent 100%
+    );
+    animation: screenFlashSlide 12s ease-in-out infinite;
+}
+
+@keyframes screenFlashSlide {
+    0% {
+        left: -150%;
+        opacity: 0;
+    }
+    2% {
+        opacity: 1;
+    }
+    15% {
+        left: 150%;
+        opacity: 1;
+    }
+    16% {
+        opacity: 0;
+    }
+    100% {
+        left: 150%;
+        opacity: 0;
+    }
+}
+
+/* Mobile optimization */
+@media (max-width: 768px) {
+    .screen-flash {
+        display: none;
+    }
+}
+
 /* === SHOWCASE: pełnoekranowe okno z video === */
 
 .showcase {
