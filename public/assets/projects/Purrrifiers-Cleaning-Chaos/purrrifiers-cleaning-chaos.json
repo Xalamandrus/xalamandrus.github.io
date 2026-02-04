@@ -48,31 +48,8 @@
     "Content pass & polish: stain placement across the level, parameter tuning, and final demo stabilization."
   ],
 
-  "codeExamples": [
-    {
-      "id": "example1",
-      "title": "Compute-driven decal stamping (concept)",
-      "language": "csharp",
-      "code": "// Portfolio placeholder.\n// Demonstrate how cleaning requests are batched and dispatched to a compute shader.\n"
-    },
-    {
-      "id": "example2",
-      "title": "Stain highlight & readability hooks (concept)",
-      "language": "csharp",
-      "code": "// Portfolio placeholder.\n// Demonstrate how stain highlighting/intensity is driven for gameplay readability.\n"
-    },
-    {
-      "id": "example3",
-      "title": "Cleaning VFX triggers (concept)",
-      "language": "csharp",
-      "code": "// Portfolio placeholder.\n// Demonstrate how foam/bubbles/dust VFX scale with cleaning intensity.\n"
-    }
-  ],
-
   "headings": {
     "overview": "Project Overview",
     "role": "My Role"
-  },
-
-  "steamUrl": "https://store.steampowered.com/app/2235870/Purrrifiers_Cleaning_Chaos_Demo/"
+  }
 }
