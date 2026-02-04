@@ -12,19 +12,30 @@ content
 
 content .tag
 {
-    display: inline-block;
+    display: block;
 
     padding: 10px 10px 10px 20px;
+    width: 100%;
 }
 
 name
 {
-    display: block;
+    display: flex;
+    align-items: center;
+    gap: 10px;
 
     padding: 5px 0;
 
     font-size: 18px;
     font-weight: 500;
+}
+
+name::after
+{
+    content: '';
+    flex: 1;
+    height: 1px;
+    background-color: #ffffff1a;
 }
 
 .hard
