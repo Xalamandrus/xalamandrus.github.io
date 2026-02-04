@@ -23,17 +23,7 @@
         return folder ? `${folder}/Gallery/hero.png` : '';
     };
 
-    // Fetch date from date.txt in project folder
-    const fetchDateForSlug = async (slug) => {
-        try {
-            const res = await fetch(`assets/projects/${slug}/date.txt`);
-            if (!res.ok) throw new Error(`Bad status ${res.status}`);
-            return (await res.text()).trim();
-        } catch (err) {
-            console.warn(`Date not found for slug '${slug}':`, err);
-            return '';
-        }
-    };
+
 
     const buildCtaButtons = (container, data) => {
         if (!container) return;
@@ -282,11 +272,8 @@
             if (!dataRes.ok) throw new Error(`Failed to load project data (${dataRes.status})`);
             const data = await dataRes.json();
             
-            // Fetch date from file
-            const dateFromFile = await fetchDateForSlug(slug);
-            data.date = dateFromFile || data.date || '';
             data.slug = slug;
-            data.dataPath = match.dataPath; // Add dataPath for gallery generation
+            data.dataPath = match.dataPath;
 
             await render(data);
             
