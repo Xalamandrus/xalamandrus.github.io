@@ -1,0 +1,94 @@
+@import url(root.css);
+
+.profil-image
+{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    
+    padding: 15px;
+    width: 100%;
+
+    font-size: 128px;
+}
+
+.profil-image img
+{
+    width: 160px;
+    height: 160px;
+
+    border: 2px solid #fff;
+    border-radius: 50%;
+
+    object-fit: cover;
+}
+
+.profil-image .box-img
+{
+    width: 160px;
+    height: 160px;
+
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
+    background-color: #919eff;
+    border: 2px solid #fff;
+    border-radius: 50%;
+
+    font-size: 16px;
+    font-weight: 500;
+
+    object-fit: cover;
+}
+
+.abount-me
+{
+    width: 100%;
+}
+
+sidebar .tag
+{
+    width: 100%;
+    padding: 5px 0 0px 20px;
+}
+
+.tag .omnie
+{
+    padding: 6px 0;
+
+    font-size: 16px;
+    font-weight: 500;
+
+    text-transform: capitalize;
+}
+
+.tag .line
+{
+    border-bottom: 3px solid #fff;
+    border-radius: 5px 0 0 5px;
+}
+
+.info
+{
+    padding: 6px 0;
+    display: flex;
+    align-items: center;
+    gap: 5px;
+    flex-wrap: wrap;
+}
+
+.info i
+{
+    padding-right: 0;
+    flex-shrink: 0;
+}
+
+.abount-content
+{
+    display: flex;
+    flex-direction: column;
+    align-items: start;
+
+    padding: 6px 20px 10px 20px;
+}
