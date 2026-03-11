@@ -23,6 +23,11 @@
     visibility: hidden;
 }
 
+html,
+body {
+    overflow-x: hidden;
+}
+
 /* <========== NAVBAR ==========> */
 
 .navbar {
@@ -121,6 +126,11 @@
 }
 
 @media (max-width: 900px) {
+    .navbar,
+    .nav-inner {
+        overflow: visible;
+    }
+
     .nav-btn {
         display: flex;
         margin-left: auto;
@@ -139,6 +149,7 @@
         order: 3;
         flex-basis: 100%;
         width: 100%;
+        max-width: 100%;
 
         display: flex;
         flex-direction: column;
@@ -171,7 +182,7 @@
     }
 
     .nav-links.open {
-        max-height: calc(100vh - 110px);
+        max-height: min(70vh, calc(100dvh - 96px));
         overflow-y: auto;
 
         opacity: 1;

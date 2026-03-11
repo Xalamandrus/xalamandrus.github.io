@@ -58,6 +58,13 @@
     "assets/projects/Turbo-Tire/Gallery/16.png"
   ],
 
+  "timeline": [
+    "assets/projects/Turbo-Tire/Timeline/1.png",
+    "assets/projects/Turbo-Tire/Timeline/2.png",
+    "assets/projects/Turbo-Tire/Timeline/3.png",
+    "assets/projects/Turbo-Tire/Timeline/4.png"
+  ],
+
   "timelineDates": [
     "0.0.5v - 15.07.2024",
     "0.1.1v - 17.07.2024",

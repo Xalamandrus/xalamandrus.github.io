@@ -29,6 +29,11 @@
                          "Compute Shader"
                      ],
     "description":  "Krótki opis do karty projektu na liście (1-2 zdania max).",
+    "timeline":  [
+                     "assets/projects/Project-Name/Timeline/1.png",
+                     "assets/projects/Project-Name/Timeline/2.png",
+                     "assets/projects/Project-Name/Timeline/3.png"
+                 ],
     "timelineDates":  [
                           "01.2023",
                           "06.2023",

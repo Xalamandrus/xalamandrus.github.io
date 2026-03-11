@@ -81,36 +81,6 @@
         `).join('');
     };
 
-    const fileExists = async (path) => {
-        try {
-            const res = await fetch(path, { method: 'HEAD' });
-            return res.ok;
-        } catch {
-            return false;
-        }
-    };
-
-    const resolveTimelineImages = async (folder, count) => {
-        if (!folder || count < 1) return [];
-        const extensions = ['png', 'jpg', 'jpeg', 'webp'];
-        const images = [];
-
-        for (let index = 1; index <= count; index++) {
-            let found = '';
-            for (const ext of extensions) {
-                const candidate = `${folder}/Timeline/${index}.${ext}`;
-                if (await fileExists(candidate)) {
-                    found = candidate;
-                    break;
-                }
-            }
-            if (!found) break;
-            images.push(found);
-        }
-
-        return images;
-    };
-
     const buildCodeTabs = async (tabsContainer, panelsContainer, examples) => {
         if (!tabsContainer || !panelsContainer) return;
         tabsContainer.innerHTML = '';
@@ -233,12 +203,7 @@
 
         // Use gallery array from JSON data instead of scanning folder
         const galleryImages = data.gallery || [];
-        let timelineImages = data.timeline || [];
-
-        if (!timelineImages.length && Array.isArray(data.timelineDates) && data.timelineDates.length) {
-            const folder = getFolderFromDataPath(data.dataPath);
-            timelineImages = await resolveTimelineImages(folder, data.timelineDates.length);
-        }
+        const timelineImages = data.timeline || [];
 
         const galleryData = galleryImages.map((src, idx) => ({
             src,

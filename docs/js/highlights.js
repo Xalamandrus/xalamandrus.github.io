@@ -94,6 +94,14 @@
         let current = Math.max(0, cards.findIndex(c => c.classList.contains('active')));
         let intervalId = null;
         let exitTimeoutId = null;
+        let touchStartX = 0;
+        let touchStartY = 0;
+        let touchCurrentX = 0;
+        let horizontalSwipeDetected = false;
+        let swipeInProgress = false;
+        let suppressClickUntil = 0;
+        const mobileOffsetRight = 54;
+        const mobileOffsetLeft = -54;
 
         const restartProgress = (card) => {
             const fill = card.querySelector('.progress-fill');
@@ -143,10 +151,17 @@
 
         const start = () => {
             stop();
+            clearSwipePreview(false);
             durationMs = getDurationMs();
             applyState(current);
             if (prefersReducedMotion || durationMs <= 0) return;
             intervalId = window.setInterval(step, durationMs);
+        };
+
+        const shiftBy = (delta) => {
+            if (!delta) return;
+            current = (current + delta + cards.length) % cards.length;
+            start();
         };
 
         const navigateToProject = (card) => {
@@ -157,6 +172,8 @@
 
         cards.forEach((card, idx) => {
             card.addEventListener('click', () => {
+                if (Date.now() < suppressClickUntil) return;
+
                 if (card.classList.contains('active')) {
                     navigateToProject(card);
                 } else {
@@ -175,6 +192,117 @@
                     start();
                 }
             });
+        });
+
+        const isMobileViewport = () => window.matchMedia('(max-width: 900px)').matches;
+
+        const clearSwipePreview = (animateBack = true) => {
+            cards.forEach(card => {
+                card.style.willChange = '';
+                card.style.transition = animateBack ? 'transform 180ms ease' : '';
+                card.style.transform = '';
+            });
+
+            if (animateBack) {
+                window.setTimeout(() => {
+                    cards.forEach(card => {
+                        card.style.transition = '';
+                    });
+                }, 200);
+            }
+        };
+
+        const applySwipePreview = (deltaX) => {
+            const count = cards.length;
+            const i0 = current % count;
+            const i1 = (current + 1) % count;
+            const i2 = (current + 2) % count;
+
+            const clamped = Math.max(-120, Math.min(120, deltaX));
+            const drag = clamped * 0.28;
+
+            cards.forEach((card, idx) => {
+                if (idx !== i0 && idx !== i1 && idx !== i2) return;
+
+                let baseX = 0;
+                let scale = 1;
+                let rotate = 0;
+
+                if (idx === i1) {
+                    baseX = mobileOffsetRight;
+                    scale = 0.96;
+                    rotate = 1;
+                } else if (idx === i2) {
+                    baseX = mobileOffsetLeft;
+                    scale = 0.94;
+                    rotate = -1;
+                }
+
+                card.style.willChange = 'transform';
+                card.style.transition = 'none';
+                card.style.transform = `translateX(${baseX + drag}px) scale(${scale}) rotate(${rotate}deg)`;
+            });
+        };
+
+        stack.style.touchAction = 'pan-y';
+
+        stack.addEventListener('touchstart', (e) => {
+            if (!isMobileViewport()) return;
+            if (!e.touches || e.touches.length !== 1) return;
+
+            const touch = e.touches[0];
+            touchStartX = touch.clientX;
+            touchStartY = touch.clientY;
+            touchCurrentX = touch.clientX;
+            horizontalSwipeDetected = false;
+            swipeInProgress = true;
+            stop();
+        }, { passive: true });
+
+        stack.addEventListener('touchmove', (e) => {
+            if (!swipeInProgress || !isMobileViewport()) return;
+            if (!e.touches || e.touches.length !== 1) return;
+
+            const touch = e.touches[0];
+            touchCurrentX = touch.clientX;
+
+            const deltaX = touch.clientX - touchStartX;
+            const deltaY = touch.clientY - touchStartY;
+
+            if (!horizontalSwipeDetected) {
+                horizontalSwipeDetected = Math.abs(deltaX) > 10 && Math.abs(deltaX) > Math.abs(deltaY);
+            }
+
+            if (horizontalSwipeDetected) {
+                e.preventDefault();
+                applySwipePreview(deltaX);
+            }
+        }, { passive: false });
+
+        stack.addEventListener('touchend', () => {
+            if (!swipeInProgress || !isMobileViewport()) return;
+
+            const deltaX = touchCurrentX - touchStartX;
+            const absDeltaX = Math.abs(deltaX);
+
+            clearSwipePreview(true);
+
+            if (horizontalSwipeDetected && absDeltaX > 42) {
+                shiftBy(deltaX < 0 ? 1 : -1);
+                suppressClickUntil = Date.now() + 280;
+            } else {
+                start();
+            }
+
+            swipeInProgress = false;
+            horizontalSwipeDetected = false;
+        });
+
+        stack.addEventListener('touchcancel', () => {
+            clearSwipePreview(true);
+            start();
+            swipeInProgress = false;
+            horizontalSwipeDetected = false;
         });
 
         document.addEventListener('visibilitychange', () => {

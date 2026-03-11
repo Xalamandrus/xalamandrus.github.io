@@ -61,6 +61,14 @@
     "assets/projects/Slay-The-Nightmares/Gallery/22.png",
     "assets/projects/Slay-The-Nightmares/Gallery/23.png"
   ],
+
+  "timeline": [
+    "assets/projects/Slay-The-Nightmares/Timeline/1.png",
+    "assets/projects/Slay-The-Nightmares/Timeline/2.png",
+    "assets/projects/Slay-The-Nightmares/Timeline/3.png",
+    "assets/projects/Slay-The-Nightmares/Timeline/4.png"
+  ],
+
   "timelineDates": [
     "0.0.8v - 05.02.2025",
     "0.1.5v - 15.03.2025",

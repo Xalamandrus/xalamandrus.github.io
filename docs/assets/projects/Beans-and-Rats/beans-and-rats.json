@@ -52,6 +52,12 @@
     "assets/projects/Beans-and-Rats/Gallery/12.png"
   ],
 
+  "timeline": [
+    "assets/projects/Beans-and-Rats/Timeline/1.png",
+    "assets/projects/Beans-and-Rats/Timeline/2.png",
+    "assets/projects/Beans-and-Rats/Timeline/3.png"
+  ],
+
   "timelineDates": [
     "0.0.8v - 23.04.2025",
     "0.2.6v - 13.05.2025",

@@ -573,4 +573,23 @@ body.projects-bg-active::before {
     .project-card--featured {
         height: 260px;
     }
+
+    .project-card--featured .project-layer,
+    .project-card--compact .project-layer {
+        padding: 14px 14px 16px;
+        gap: var(--spacing-xs);
+    }
+
+    .project-card--featured .project-meta,
+    .project-card--compact .project-meta {
+        letter-spacing: 0.14em;
+    }
+
+    .project-card--featured .project-description,
+    .project-card--compact .project-description {
+        display: -webkit-box;
+        -webkit-line-clamp: 2;
+        -webkit-box-orient: vertical;
+        overflow: hidden;
+    }
 }

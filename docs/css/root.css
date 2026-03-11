@@ -264,3 +264,13 @@ span {
     line-height: var(--text-body-line);
     font-weight: var(--text-body-weight);
 }
+
+@media (max-width: 700px) {
+    :root {
+        --text-hero-size: 2.35rem;
+        --text-hero-sub-size: 0.88rem;
+        --text-heading-size: 1.1rem;
+        --text-body-size: 1.12rem;
+        --text-small-size: 0.8rem;
+    }
+}
